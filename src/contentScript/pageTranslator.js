@@ -517,7 +517,8 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
 
         const placeholdersElements = root.querySelectorAll('input[placeholder], textarea[placeholder]')
         const altElements = root.querySelectorAll('area[alt], img[alt], input[type="image"][alt]')
-        const valueElements = root.querySelectorAll('input[type="button"], input[type="submit"], input[type="reset"]')
+        // const valueElements = root.querySelectorAll('input[type="button"], input[type="submit"], input[type="reset"]')
+        const valueElements = [];
         const titleElements = root.querySelectorAll("body [title]")
 
         function hasNoTranslate(elem) {

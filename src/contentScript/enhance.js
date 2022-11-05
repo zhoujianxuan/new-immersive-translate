@@ -6,6 +6,41 @@ const enhanceHtmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG
 const blockElements = [
     'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'OL',  'P', 'TABLE', 'UL'
   ];
+const inlineElements = [
+  "a",
+  "abbr",
+  "acronym",
+  "b",
+  "bdo",
+  "big",
+  "br",
+  "button",
+  "cite",
+  "code",
+  "dfn",
+  "em",
+  "i",
+  "img",
+  "input",
+  "kbd",
+  "label",
+  "map",
+  "object",
+  "output",
+  "q",
+  "samp",
+  "script",
+  "select",
+  "small",
+  "span",
+  "strong",
+  "sub",
+  "sup",
+  "textarea",
+  "time",
+  "tt",
+  "var",
+];
 const enhancedMap = {
   "twitter.com": function(root){
     // data-testid="tweetText"
@@ -18,7 +53,44 @@ const enhancedMap = {
       }
     }
     return allNodesNeedToTranslate;
+  },
+  "news.ycombinator.com": function(root){
+    const allNodesNeedToTranslate = []
+    const paragraphs = root.querySelectorAll('.titleline > a');
+    const comments = root.querySelectorAll('.comment');
+    for (const paragraph of [...paragraphs, ...comments]) {
+      // copy this node after the original node
+      if(isValidNode(paragraph)){
+       allNodesNeedToTranslate.push(paragraph);
+      }
+    }
+    return allNodesNeedToTranslate;
+  },
+  "www.reddit.com": function(root){
+    const allNodesNeedToTranslate = []
+    const paragraphs = root.querySelectorAll('h3');
+    const descriptions = root.querySelectorAll('p');
+    for (const paragraph of [...paragraphs, ...descriptions]) {
+      // copy this node after the original node
+      if(isValidNode(paragraph)){
+       allNodesNeedToTranslate.push(paragraph);
+      }
+    }
+    return allNodesNeedToTranslate;
+  },
+  "old.reddit.com": function(root){
+    const allNodesNeedToTranslate = []
+    const paragraphs = root.querySelectorAll('a.title');
+    const descriptions = root.querySelectorAll('.usertext-body');
+    for (const paragraph of [...paragraphs, ...descriptions]) {
+      // copy this node after the original node
+      if(isValidNode(paragraph)){
+       allNodesNeedToTranslate.push(paragraph);
+      }
+    }
+    return allNodesNeedToTranslate;
   }
+
 }
 
 function isValidNode(node){
@@ -57,12 +129,28 @@ function showCopyiedNodes(){
 function isBody(el) {
   return document.body === el;
 }
-function getTitleContainer(root){
-  const ele = root.querySelector("h1");
-  if(ele){
-    return ele;
-  }else{
-    return null;
+let isInitedTitle = false;
+function getTitleContainer(root,hostname){
+  if(!isInitedTitle){
+    
+    if(hostname==='news.yahoo.com'){
+    let ele = document.querySelector('h1[data-test-locator="headline"]');
+      if(ele){
+        isInitedTitle = true;
+        return ele;
+      }else{
+        return null;
+      }
+    }else{
+      let ele = document.querySelector('h1');
+      if(ele){
+        isInitedTitle = true;
+        return ele;
+      }else{
+        return null;
+      }
+    }
+  
   }
 }
 function getNodesThatNeedToTranslate(root,hostname,options){
@@ -73,13 +161,12 @@ function getNodesThatNeedToTranslate(root,hostname,options){
     allNodes= enhancedMap[hostname](root,options);
   }else{
 
-    if(isBody(root)){
 
-      const titleContainer = getTitleContainer(root);
-      if(titleContainer){
-        allNodes.push(titleContainer);
-      }
-    }
+  const titleContainer = getTitleContainer(root,hostname);
+  if(titleContainer){
+    allNodes.push(titleContainer);
+  }
+    // }
     const contentContainer = getContainer(root);
     // get all paragraphs
     for(const blockTag of blockElements){
@@ -98,6 +185,12 @@ function getNodesThatNeedToTranslate(root,hostname,options){
     // console.log("previousSibling.hasAttribute(markAttributeName)", previousSibling.hasAttribute(markAttributeName))
     if(!previousSibling || !previousSibling.hasAttribute || !previousSibling.hasAttribute(enhanceMarkAttributeName)){
       const copyNode = node.cloneNode(true);
+      if(inlineElements.includes(copyNode.nodeName.toLowerCase())){
+        // add a space
+        copyNode.style.paddingRight = "8px";
+      }else{
+        copyNode.style.paddingBottom = "8px";
+      }
       copyNode.setAttribute(enhanceMarkAttributeName, "copiedNode");
       // get original display value
       const originalDisplay = node.style.display;
