@@ -8,6 +8,32 @@ Translate your page in real time using Google or Yandex.
 [![GitHub issues](https://img.shields.io/github/issues/FilipePS/Traduzir-paginas-web?color=red)](https://github.com/FilipePS/Traduzir-paginas-web/issues)
 [![GitHub license](https://img.shields.io/github/license/FilipePS/Traduzir-paginas-web?color=lightgrey)](https://github.com/FilipePS/Traduzir-paginas-web/blob/master/LICENSE)
 
+
+说明： 这是我修改的体验增强版，支持双语显示，支持只翻译网页里的文章区域。本来是验证下概念，但是收到了不少关注，所以我最近会完善下相关功能，多多测试后，看下[上游](https://github.com/FilipePS/Traduzir-paginas-web)作者是否愿意合并, 如果这个方向不是上游作者乐见的，那么我会单独发布到商店里。
+
+目前的版本还没准备好发布到商店，但是欢迎[下载体验](https://github.com/theowenyoung/Traduzir-paginas-web/releases/tag/v0.0.1),你需要在浏览器中手动安装：
+
+1. 在[这里](https://github.com/theowenyoung/Traduzir-paginas-web/releases/tag/v0.0.1)下载对应浏览器的压缩包，chrome或firefox
+2. 解压到以后不删除的文件夹
+
+如果是谷歌浏览器：
+
+3. 打开扩展管理窗口
+4. 激活开发者模式
+5. 选择 "Load unpacked",选择刚解压的文件夹
+6. 安装后，target语言可以选中文，然后再翻译页面即可有双语显示（现在还没有任何选项可以设置）
+
+火狐浏览器
+
+3. 打开`about:debugging`页面
+4. 点击火狐图标
+5. 加载临时扩展，选中 `manifest.json` 文件
+6. 安装后，target语言可以选中文，然后再翻译页面即可有双语显示（现在还没有任何选项可以设置）
+
+
+---
+
+
 ## Install
 
 #### Firefox

@@ -89,6 +89,20 @@ const enhancedMap = {
       }
     }
     return allNodesNeedToTranslate;
+  },
+  "www.youtube.com":function(root){
+    const allNodesNeedToTranslate = []
+    console.log("ttttt", )
+    const paragraphs = root.querySelectorAll('h1');
+    const descriptions = root.querySelectorAll("ytd-comment-thread-renderer yt-formatted-string[slot='content']");
+    for (const paragraph of [...paragraphs, ...descriptions]) {
+      // copy this node after the original node
+      if(isValidNode(paragraph)){
+       allNodesNeedToTranslate.push(paragraph);
+      }
+    }
+    console.log("allNodesNeedToTranslate", allNodesNeedToTranslate)
+    return allNodesNeedToTranslate;
   }
 
 }
