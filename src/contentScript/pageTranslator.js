@@ -803,6 +803,8 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
           return acc.concat(getPiecesToTranslate(node))
         }, [])
         attributesToTranslate = getAttributesToTranslate()
+        // TODO
+        // attributesToTranslate = [];
 
         pageLanguageState = "translated"
         chrome.runtime.sendMessage({
@@ -838,6 +840,8 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
             document.title = originalPageTitle
         }
         originalPageTitle = null
+        // remove copyied nodes
+        removeCopyiedNodes();
 
 
         for (const ntr of nodesToRestore) {

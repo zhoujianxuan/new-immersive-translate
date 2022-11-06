@@ -41,71 +41,38 @@ const inlineElements = [
   "tt",
   "var",
 ];
-const enhancedMap = {
-  "twitter.com": function(root){
-    // data-testid="tweetText"
-    const allNodesNeedToTranslate = []
-    const paragraphs = root.querySelectorAll('[data-testid="tweetText"]');
-    for (const paragraph of paragraphs) {
-      // copy this node after the original node
-      if(isValidNode(paragraph)){
-       allNodesNeedToTranslate.push(paragraph);
-      }
-    }
-    return allNodesNeedToTranslate;
-  },
-  "news.ycombinator.com": function(root){
-    const allNodesNeedToTranslate = []
-    const paragraphs = root.querySelectorAll('.titleline > a');
-    const comments = root.querySelectorAll('.comment');
-    for (const paragraph of [...paragraphs, ...comments]) {
-      // copy this node after the original node
-      if(isValidNode(paragraph)){
-       allNodesNeedToTranslate.push(paragraph);
-      }
-    }
-    return allNodesNeedToTranslate;
-  },
-  "www.reddit.com": function(root){
-    const allNodesNeedToTranslate = []
-    const paragraphs = root.querySelectorAll('h3');
-    const descriptions = root.querySelectorAll('p');
-    for (const paragraph of [...paragraphs, ...descriptions]) {
-      // copy this node after the original node
-      if(isValidNode(paragraph)){
-       allNodesNeedToTranslate.push(paragraph);
-      }
-    }
-    return allNodesNeedToTranslate;
-  },
-  "old.reddit.com": function(root){
-    const allNodesNeedToTranslate = []
-    const paragraphs = root.querySelectorAll('a.title');
-    const descriptions = root.querySelectorAll('.usertext-body');
-    for (const paragraph of [...paragraphs, ...descriptions]) {
-      // copy this node after the original node
-      if(isValidNode(paragraph)){
-       allNodesNeedToTranslate.push(paragraph);
-      }
-    }
-    return allNodesNeedToTranslate;
-  },
-  "www.youtube.com":function(root){
-    const allNodesNeedToTranslate = []
-    console.log("ttttt", )
-    const paragraphs = root.querySelectorAll('h1');
-    const descriptions = root.querySelectorAll("ytd-comment-thread-renderer yt-formatted-string[slot='content']");
-    for (const paragraph of [...paragraphs, ...descriptions]) {
-      // copy this node after the original node
-      if(isValidNode(paragraph)){
-       allNodesNeedToTranslate.push(paragraph);
-      }
-    }
-    console.log("allNodesNeedToTranslate", allNodesNeedToTranslate)
-    return allNodesNeedToTranslate;
-  }
 
-}
+const enhances = [
+  {
+    hostname:"twitter.com",
+    selectors:[
+     '[data-testid="tweetText"]' 
+    ]
+  },
+  {
+    hostname:"news.ycombinator.com",
+    selectors:[
+      ".titleline >a",
+      '.comment',
+      '.toptext'
+
+    ]
+  },
+  {
+    hostname:"www.reddit.com",
+    selectors:[
+      "h3",
+      "p"
+    ]
+  },
+  {
+    hostname:"old.reddit.com",
+    selectors:[
+      "a.title",
+      ".usertext-body"
+    ]
+  }
+]
 
 function isValidNode(node){
   if(node.hasAttribute && node.hasAttribute(enhanceMarkAttributeName)){
@@ -140,6 +107,14 @@ function showCopyiedNodes(){
   }
 
 }
+function removeCopyiedNodes(){
+  const copiedNodes = document.querySelectorAll(`[${enhanceMarkAttributeName}="copiedNode"]`);
+  for(const node of copiedNodes){
+    node.remove()
+  }
+}
+
+
 function isBody(el) {
   return document.body === el;
 }
@@ -170,17 +145,40 @@ function getTitleContainer(root,hostname){
 function getNodesThatNeedToTranslate(root,hostname,options){
 
   options = options || {};
+  // all block nodes, nodes should have a order from top to bottom
   let allNodes = [];
-  // check sites
-  if(enhancedMap[hostname]){
-    allNodes= enhancedMap[hostname](root,options);
-  }else{
+  const currentUrl = window.location.href;
+  const currentUrlObj = new URL(currentUrl);
+  const currentHostname = currentUrlObj.hostname;
 
+  let allNodesSelectors = [];
 
-  const titleContainer = getTitleContainer(root,hostname);
-  if(titleContainer){
-    allNodes.push(titleContainer);
+  for(const enhance of enhances){
+    if(enhance.hostname && enhance.hostname === currentHostname){
+      allNodesSelectors = enhance.selectors;
+      break;
+    }else if(enhance.regex && new RegExp(enhance.regex).test(currentUrl)){
+      allNodesSelectors = enhance.selectors;
+      break;
+    }
   }
+
+
+  // check sites
+  if(allNodesSelectors.length>0){
+    for(const selector of allNodesSelectors){
+      const nodes = root.querySelectorAll(selector);
+      for(const node of nodes){
+        if(isValidNode(node)){
+          allNodes.push(node);
+        }
+      }
+    }
+  }else{
+    const titleContainer = getTitleContainer(root,hostname);
+    if(titleContainer){
+      allNodes.push(titleContainer);
+    }
     // }
     const contentContainer = getContainer(root);
     // get all paragraphs
@@ -193,6 +191,10 @@ function getNodesThatNeedToTranslate(root,hostname,options){
       }
     }
   }
+  // sort allNodes, from top to bottom
+  allNodes.sort(function(a, b) {
+    return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+  })
 
   for(const node of allNodes){
     // check if there is a copy already
@@ -228,7 +230,6 @@ function getNodesThatNeedToTranslate(root,hostname,options){
 
 function getContainer(root) {
     let selectedContainer;
-
         const numWordsOnPage = root.innerText.match(/\S+/g).length;
         let ps = root.querySelectorAll("p");
 
