@@ -38,8 +38,10 @@ jobs:
           mv dist/firefox dist/firefox-${{ github.ref_name }}
       - name: zip release assets
         run: |
-          zip -r dist/chrome-${{ github.ref_name }}.zip dist/chrome-${{ github.ref_name }}
-          zip -r dist/firefox-${{ github.ref_name }}.zip dist/firefox-${{ github.ref_name }}
+          pushd dist
+          zip -r chrome-${{ github.ref_name }}.zip chrome-${{ github.ref_name }}
+          zip -r firefox-${{ github.ref_name }}.zip firefox-${{ github.ref_name }}
+          popd
       - name: release assets
         uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
