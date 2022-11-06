@@ -18,6 +18,14 @@ Translate your page in real time using Google or Yandex.
 - Hacker News
 - 其他大多数强内容网站
 
+![twitter](assets/twitter.png)
+
+![reddit](assets/reddit.png)
+
+![hackernews](assets/hackernews.png)
+
+![ft](assets/ft.png)
+
 正在适配：
 
 - Youtube 评论区
