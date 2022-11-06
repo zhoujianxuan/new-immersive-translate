@@ -168,6 +168,7 @@ function getTitleContainer(root,hostname){
   }
 }
 function getNodesThatNeedToTranslate(root,hostname,options){
+
   options = options || {};
   let allNodes = [];
   // check sites
