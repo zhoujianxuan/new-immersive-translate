@@ -227,11 +227,26 @@ function getNodesThatNeedToTranslate(root,hostname,options){
   // all block nodes, nodes should have a order from top to bottom
   let allNodes = [];
 
+  let currentTargetLanguage = twpConfig.get("targetLanguage")
+
   // check sites
   if(allBlocksSelectors.length>0){
     for(const selector of allBlocksSelectors){
       const nodes = root.querySelectorAll(selector);
       for(const node of nodes){
+        if(hostname==="twitter.com"){
+          // check language
+          try{
+            const lang = node.getAttribute("lang");
+            if(lang &&  currentTargetLanguage.startsWith(lang)){
+              continue;
+            }
+          }catch(e){
+            // ignore
+            // console.log("e", e)
+          }
+        }
+
         if(isValidNode(node)){
           allNodes.push(node);
         }
