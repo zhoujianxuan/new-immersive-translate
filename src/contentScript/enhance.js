@@ -42,7 +42,7 @@ const inlineElements = [
   "var",
 ];
 
-const enhances = [
+const translateSelectors = [
   {
     hostname:"twitter.com",
     selectors:[
@@ -71,8 +71,88 @@ const enhances = [
       "a.title",
       ".usertext-body"
     ]
+  },
+  {
+    regex:"finance\.yahoo\.com\/$",
+    selectors:[
+      "h3"
+    ]
+
+  },
+  {
+    regex:["www\.bloomberg\.com\/[A-Za-z0-9]+$","www\.bloomberg\.com\/$"],
+    selectors:[
+      "article h3",
+      "article .single-story-module__headline-link",
+      "article [data-tracking-type=Story]",
+      "article .story-list-story__info__headline"
+
+    ]
   }
 ]
+
+const containerSelectorConfigs = [
+  {
+    regex:"finance\.yahoo\.com/news",
+    selector:"[role=article]"
+  }
+]
+
+function getAllBlocksSelectors(){
+  const currentUrl = window.location.href;
+  const currentUrlObj = new URL(currentUrl);
+  const currentHostname = currentUrlObj.hostname;
+
+    let allNodesSelectors = [];
+
+  for(const enhance of translateSelectors){
+    if(enhance.hostname){
+      if(!Array.isArray(enhance.hostname)){
+        enhance.hostname = [enhance.hostname];
+      }
+      if(enhance.hostname.indexOf(currentHostname) !== -1){
+        allNodesSelectors = enhance.selectors;
+        break;
+      }
+    }else if(enhance.regex){
+      if(!Array.isArray(enhance.regex)){
+        enhance.regex = [enhance.regex];
+      }
+      let isMatched = false;
+      for(const regex of enhance.regex){
+        const reg = new RegExp(regex);
+        if(reg.test(currentUrl)){
+            allNodesSelectors = enhance.selectors;
+            isMatched = true;
+            break;
+        }
+      }
+      if(isMatched){
+        break;
+      }
+    }
+  }
+  return allNodesSelectors;
+}
+const allBlocksSelectors = getAllBlocksSelectors();
+
+function getContainerSelector(){
+    const currentUrl = window.location.href;
+    const currentUrlObj = new URL(currentUrl);
+    const currentHostname = currentUrlObj.hostname;
+    for(const containerSelector of containerSelectorConfigs){
+      if(containerSelector.hostname && containerSelector.hostname === currentHostname){
+        const container = document.querySelector(containerSelector.selector);
+        return container;
+      }else if(containerSelector.regex && new RegExp(containerSelector.regex).test(window.location.href)){
+        const container = document.querySelector(containerSelector.selector);
+        if(container){
+          return container;
+        }
+      }
+    }
+}
+const containerSelector = getContainerSelector();
 
 function isValidNode(node){
   if(node.hasAttribute && node.hasAttribute(enhanceMarkAttributeName)){
@@ -143,30 +223,13 @@ function getTitleContainer(root,hostname){
   }
 }
 function getNodesThatNeedToTranslate(root,hostname,options){
-
   options = options || {};
   // all block nodes, nodes should have a order from top to bottom
   let allNodes = [];
-  const currentUrl = window.location.href;
-  const currentUrlObj = new URL(currentUrl);
-  const currentHostname = currentUrlObj.hostname;
-
-  let allNodesSelectors = [];
-
-  for(const enhance of enhances){
-    if(enhance.hostname && enhance.hostname === currentHostname){
-      allNodesSelectors = enhance.selectors;
-      break;
-    }else if(enhance.regex && new RegExp(enhance.regex).test(currentUrl)){
-      allNodesSelectors = enhance.selectors;
-      break;
-    }
-  }
-
 
   // check sites
-  if(allNodesSelectors.length>0){
-    for(const selector of allNodesSelectors){
+  if(allBlocksSelectors.length>0){
+    for(const selector of allBlocksSelectors){
       const nodes = root.querySelectorAll(selector);
       for(const node of nodes){
         if(isValidNode(node)){
@@ -181,12 +244,23 @@ function getNodesThatNeedToTranslate(root,hostname,options){
     }
     // }
     const contentContainer = getContainer(root);
-    // get all paragraphs
-    for(const blockTag of blockElements){
-      const paragraphs = contentContainer.querySelectorAll(blockTag.toLowerCase());
-      for (const paragraph of paragraphs) {
-        if(isValidNode(paragraph)){
-          allNodes.push(paragraph);
+    if(contentContainer){
+      // get all paragraphs
+      for(const blockTag of blockElements){
+        const paragraphs = contentContainer.querySelectorAll(blockTag.toLowerCase());
+        for (const paragraph of paragraphs) {
+          if(isValidNode(paragraph)){
+            allNodes.push(paragraph);
+          }
+        }
+      }
+    }else{
+      for(const blockTag of blockElements){
+        const paragraphs = root.querySelectorAll(blockTag.toLowerCase());
+        for (const paragraph of paragraphs) {
+          if(isValidNode(paragraph)){
+            allNodes.push(paragraph);
+          }
         }
       }
     }
@@ -229,48 +303,59 @@ function getNodesThatNeedToTranslate(root,hostname,options){
 // get the main container, copy from: https://github.com/ZachSaucier/Just-Read/blob/master/content_script.js
 
 function getContainer(root) {
+    
+    if(containerSelector){
+      const container = root.querySelector(containerSelector);
+      if(container){
+        return container;
+      }
+    }
+
+    if(!(root && root.innerText)){
+      return null
+    }
     let selectedContainer;
-        const numWordsOnPage = root.innerText.match(/\S+/g).length;
-        let ps = root.querySelectorAll("p");
+    const numWordsOnPage = root.innerText.match(/\S+/g).length;
+    let ps = root.querySelectorAll("p");
 
-        // Find the paragraphs with the most words in it
-        let pWithMostWords = root,
-            highestWordCount = 0;
+    // Find the paragraphs with the most words in it
+    let pWithMostWords = root,
+        highestWordCount = 0;
 
-        if(ps.length === 0) {
-            ps = root.querySelectorAll("div");
-        }
+    if(ps.length === 0) {
+        ps = root.querySelectorAll("div");
+    }
 
-        ps.forEach(p => {
-            if(checkAgainstBlacklist(p, 3) // Make sure it's not in our blacklist
-            && p.offsetHeight !== 0) { //  Make sure it's visible on the regular page
-                const myInnerText = p.innerText.match(/\S+/g);
-                if(myInnerText) {
-                    const wordCount = myInnerText.length;
-                    if(wordCount > highestWordCount) {
-                        highestWordCount = wordCount;
-                        pWithMostWords = p;
-                    }
+    ps.forEach(p => {
+        if(checkAgainstBlacklist(p, 3) // Make sure it's not in our blacklist
+        && p.offsetHeight !== 0) { //  Make sure it's visible on the regular page
+            const myInnerText = p.innerText.match(/\S+/g);
+            if(myInnerText) {
+                const wordCount = myInnerText.length;
+                if(wordCount > highestWordCount) {
+                    highestWordCount = wordCount;
+                    pWithMostWords = p;
                 }
             }
-
-        });
-
-        // Keep selecting more generally until over 2/5th of the words on the page have been selected
-        selectedContainer = pWithMostWords;
-        let wordCountSelected = highestWordCount;
-
-        while(wordCountSelected / numWordsOnPage < 0.4
-        && selectedContainer != root
-        && selectedContainer.parentElement.innerText) {
-            selectedContainer = selectedContainer.parentElement;
-            wordCountSelected = selectedContainer.innerText.match(/\S+/g).length;
         }
 
-        // Make sure a single p tag is not selected
-        if(selectedContainer.tagName === "P") {
-            selectedContainer = selectedContainer.parentElement;
-        }
+    });
+
+    // Keep selecting more generally until over 2/5th of the words on the page have been selected
+    selectedContainer = pWithMostWords;
+    let wordCountSelected = highestWordCount;
+
+    while(wordCountSelected / numWordsOnPage < 0.4
+    && selectedContainer != root
+    && selectedContainer.parentElement.innerText) {
+        selectedContainer = selectedContainer.parentElement;
+        wordCountSelected = selectedContainer.innerText.match(/\S+/g).length;
+    }
+
+    // Make sure a single p tag is not selected
+    if(selectedContainer.tagName === "P") {
+        selectedContainer = selectedContainer.parentElement;
+    }
 
     return selectedContainer;
 }
