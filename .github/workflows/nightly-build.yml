@@ -40,7 +40,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "nightly-${{ env.NOW }}"
           prerelease: true
-          title: "Development Build"
+          title: "Development Build ${{ env.NOW }}"
           files: |
             dist/chrome.zip
             dist/firefox.zip
