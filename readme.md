@@ -46,7 +46,7 @@ Translate your page in real time using Google or Yandex.
 
 3. 打开`about:debugging`页面
 4. 点击火狐图标
-5. 加载临时扩展，选中 `manifest.json` 文件
+5. 加载临时扩展，直接选中压缩包即可
 6. 安装后，target语言可以选中文，然后再翻译页面即可有双语显示（现在还没有任何选项可以设置）
 
 
