@@ -53,11 +53,12 @@
         "storage",
         "activeTab",
         "contextMenus",
-        "webRequest",
-        "webNavigation"
+        "webRequest"
     ],
 
-
+    "optional_permissions": [
+        "webNavigation"
+    ],
     "web_accessible_resources": [
         "/icons/icon-32.png",
         "/icons/google-translate-32.png",
