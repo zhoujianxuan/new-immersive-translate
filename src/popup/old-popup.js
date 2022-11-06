@@ -35,7 +35,7 @@ twpConfig.onReady(function () {
     const btnOptions = document.getElementById("btnOptions")
 
     $("#btnPatreon").onclick = e => {
-        window.open("https://www.patreon.com/filipeps", "_blank")
+        window.open("https://www.patreon.com/theowenyoung", "_blank")
     }
 
 

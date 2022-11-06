@@ -32,7 +32,7 @@ Translate your page in real time using Google or Yandex.
 
 目前的版本还没准备好发布到商店，但是欢迎[下载体验](https://github.com/theowenyoung/Traduzir-paginas-web/releases),你需要在浏览器中手动安装：
 
-1. 在[这里](https://github.com/theowenyoung/Traduzir-paginas-web/releases/tag/v0.0.1)下载对应浏览器的压缩包，chrome或firefox
+1. 在[这里](https://github.com/theowenyoung/Traduzir-paginas-web/releases)下载对应浏览器的压缩包，chrome或firefox
 2. 解压到以后不删除的文件夹
 
 如果是谷歌浏览器：

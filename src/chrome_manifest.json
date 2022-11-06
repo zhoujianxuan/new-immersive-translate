@@ -1,10 +1,10 @@
 {
     "manifest_version": 2,
     "default_locale": "en",
-    "name": "TWP - Translate Web Pages",
-    "description": "__MSG_extensionDescription__",
-    "version": "9.6.1",
-    "homepage_url": "https://github.com/FilipePS/Traduzir-paginas-web",
+    "name": "沉浸式翻译",
+    "description": "支持双语显示，布局全面优化，和浏览器阅读模式类似，对Twitter, Reddit等网站做了定制优化",
+    "version": "0.0.4",
+    "homepage_url": "https://github.com/theowenyoung/Traduzir-paginas-web",
 
     "commands": {
         "hotkey-toggle-translation": {

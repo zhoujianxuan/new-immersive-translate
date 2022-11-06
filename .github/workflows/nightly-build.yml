@@ -34,6 +34,14 @@ jobs:
         run: npm i
       - name: Build
         run: npm run build
+      - name: Add Version to folders
+        run: |
+          mv dist/chrome dist/chrome-${{ env.NOW }}
+          mv dist/firefox dist/firefox-${{ env.NOW }}
+      - name: zip release assets
+        run: |
+          zip -r dist/chrome-${{ env.NOW }}.zip dist/chrome-${{ env.NOW }}
+          zip -r dist/firefox-${{ env.NOW }}.zip dist/firefox-${{ env.NOW }}
       - name: release assets
         uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
@@ -42,5 +50,5 @@ jobs:
           prerelease: true
           title: "Development Build ${{ env.NOW }}"
           files: |
-            dist/chrome.zip
-            dist/firefox.zip
+            dist/chrome-${{ env.NOW }}.zip
+            dist/firefox-${{ env.NOW }}.zip

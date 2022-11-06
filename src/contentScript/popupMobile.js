@@ -30,7 +30,7 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
                     <a id="btnNeverTranslate" data-i18n="btnNeverTranslate">Never translate this site</a>
                     <a id="neverTranslateThisLanguage" data-i18n="btnNeverTranslateThisLanguage" display="none">Never translate this language</a>
                     <a id="btnMoreOptions" data-i18n="btnMoreOptions">More options</a>
-                    <a id="btnDonate" data-i18n="btnDonate" href="https://www.patreon.com/filipeps" target="_blank" rel="noopener noreferrer">Donate</a>
+                    <a id="btnDonate" data-i18n="btnDonate" href="https://www.patreon.com/theowenyoung" target="_blank" rel="noopener noreferrer">Donate</a>
                 </div>
             </div>
             <div class="dropup">

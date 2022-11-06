@@ -1,14 +1,14 @@
 {
     "manifest_version": 2,
     "default_locale": "en",
-    "name": "TWP - Translate Web Pages",
-    "description": "__MSG_extensionDescription__",
-    "version": "9.6.1",
-    "homepage_url": "https://github.com/FilipePS/Traduzir-paginas-web",
+    "name": "沉浸式翻译 - 整页翻译·双语显示·只翻译正文",
+    "description": "支持双语显示，布局全面优化，和浏览器阅读模式类似，对Twitter, Reddit等网站做了定制优化",
+    "version": "0.0.4",
+    "homepage_url": "https://github.com/theowenyoung/Traduzir-paginas-web",
 
     "browser_specific_settings": {
         "gecko": {
-            "id": "{036a55b4-5e72-4d05-a06c-cba2dfcc134a}",
+            "id": "{5efceaa7-f3a2-4e59-a54b-85319448e305}",
             "strict_min_version": "63.0"
         }
     },
