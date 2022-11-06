@@ -11,6 +11,17 @@ Translate your page in real time using Google or Yandex.
 
 说明： 这是我修改的体验增强版，支持双语显示，支持只翻译网页里的文章区域。本来是验证下概念，但是收到了不少关注，所以我最近会完善下相关功能，多多测试后，看下[上游](https://github.com/FilipePS/Traduzir-paginas-web)作者是否愿意合并, 如果这个方向不是上游作者乐见的，那么我会单独发布到商店里。
 
+目前已适配：
+
+- Twitter
+- Reddit,(包括old.reddit.com)
+- Hacker News
+- 其他大多数强内容网站
+
+正在适配：
+
+- Youtube 评论区
+
 目前的版本还没准备好发布到商店，但是欢迎[下载体验](https://github.com/theowenyoung/Traduzir-paginas-web/releases/tag/v0.0.1),你需要在浏览器中手动安装：
 
 1. 在[这里](https://github.com/theowenyoung/Traduzir-paginas-web/releases/tag/v0.0.1)下载对应浏览器的压缩包，chrome或firefox
