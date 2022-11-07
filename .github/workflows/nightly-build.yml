@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - "master"
-    paths-ignore:
-      - "**.md"
+    paths:
+      - "src/manifest.json"
+      - "src/chrome_manifest.json"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,43 +35,57 @@ jobs:
         run: npm i
       - name: Build
         run: npm run build
-      - name: Add Version to folders
+  #https://stackoverflow.com/questions/61919141/read-json-file-in-github-actions
+      - id: set_var
         run: |
-          mv dist/chrome.zip dist/chrome-${{ env.NOW }}.zip
-          mv dist/firefox.zip dist/firefox-${{ env.NOW }}.zip
-      # - uses: trmcnvn/firefox-addon@v1
+          content=`cat ./src/manifest_version.json`
+          # the following lines are only required for multi line json
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          # end of optional handling for multi line json
+          echo "::set-output name=packageJson::$content"
+          echo "::set-output name=version::$(echo $content | jq -r '.version')"
+      - run: |
+          echo "${{steps.set_var.version}}"
+      #
+      # - name: Add Version to folders
+      #   run: |
+      #     mv dist/chrome.zip dist/chrome-${{ env.NOW }}.zip
+      # # - uses: trmcnvn/firefox-addon@v1
+      # #   with:
+      # #     # uuid is only necessary when updating an existing addon,
+      # #     # omitting it will create a new addon
+      # #     uuid: '{5efceaa7-f3a2-4e59-a54b-85319448e305}'
+      # #     xpi: dist/firefox-${{ env.NOW }}.zip
+      # #     manifest: manifest.json
+      # #     api-key: ${{ secrets.FIREFOX_API_KEY }}
+      # #     api-secret: ${{ secrets.FIREFOX_API_SECRET }}
+      # - name: "web-ext build"
+      #   id: web-ext-build
+      #   uses: kewisch/action-web-ext@v1
       #   with:
-      #     # uuid is only necessary when updating an existing addon,
-      #     # omitting it will create a new addon
-      #     uuid: '{5efceaa7-f3a2-4e59-a54b-85319448e305}'
-      #     xpi: dist/firefox-${{ env.NOW }}.zip
-      #     manifest: manifest.json
-      #     api-key: ${{ secrets.FIREFOX_API_KEY }}
-      #     api-secret: ${{ secrets.FIREFOX_API_SECRET }}
-      - name: "web-ext build"
-        id: web-ext-build
-        uses: kewisch/action-web-ext@v1
-        with:
-          cmd: build
-          source: dist/firefox  
-      - name: "web-ext sign"
-        id: web-ext-sign
-        uses: kewisch/action-web-ext@v1
-        with:
-          cmd: sign
-          source: ${{ steps.web-ext-build.outputs.target }} 
-          channel: unlisted
-          apiKey: ${{ secrets.FIREFOX_API_KEY }}
-          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
-          timeout: 900000
-
-      - name: release assets
-        uses: "marvinpinto/action-automatic-releases@v1.2.1"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "nightly-${{ env.NOW }}"
-          prerelease: true
-          title: "Development Build ${{ env.NOW }}"
-          files: |
-            dist/chrome-${{ env.NOW }}.zip
-            ${{ steps.web-ext-sign.outputs.target }}
+      #     cmd: build
+      #     source: dist/firefox  
+      #     filename: "firefox-{name}-{version}.xpi"
+      # - name: "web-ext sign"
+      #   id: web-ext-sign
+      #   uses: kewisch/action-web-ext@v1
+      #   with:
+      #     cmd: sign
+      #     source: ${{ steps.web-ext-build.outputs.target }} 
+      #     channel: unlisted
+      #     apiKey: ${{ secrets.FIREFOX_API_KEY }}
+      #     apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
+      #     timeout: 900000
+      #
+      # - name: release assets
+      #   uses: "marvinpinto/action-automatic-releases@v1.2.1"
+      #   with:
+      #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
+      #     automatic_release_tag: "nightly-${{ env.NOW }}"
+      #     prerelease: true
+      #     title: "Development Build ${{ env.NOW }}"
+      #     files: |
+      #       dist/chrome-${{ env.NOW }}.zip
+      #       ${{ steps.web-ext-sign.outputs.target }}
