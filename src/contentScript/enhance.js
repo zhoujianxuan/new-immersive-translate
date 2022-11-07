@@ -235,30 +235,6 @@ function removeCopyiedNodes(){
 function isBody(el) {
   return document.body === el;
 }
-let isInitedTitle = false;
-function getTitleContainer(root,hostname){
-  if(!isInitedTitle){
-    
-    if(hostname==='news.yahoo.com'){
-    let ele = document.querySelector('h1[data-test-locator="headline"]');
-      if(ele){
-        isInitedTitle = true;
-        return ele;
-      }else{
-        return null;
-      }
-    }else{
-      let ele = document.querySelector('h1');
-      if(ele){
-        isInitedTitle = true;
-        return ele;
-      }else{
-        return null;
-      }
-    }
-  
-  }
-}
 function isDuplicatedChild(array,child){
   for(const item of array){
     if(item.contains(child)){

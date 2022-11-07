@@ -162,6 +162,7 @@ function removeExtraDelimiter(textContext) {
 
 
 function backgroundTranslateHTML(translationService, targetLanguage, sourceArray2d, dontSortResults) {
+    console.log('sourceArray2d', sourceArray2d)
     return new Promise((resolve, reject) => {
         chrome.runtime.sendMessage({
             action: "translateHTML",
@@ -823,6 +824,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         piecesToTranslate = getNodesThatNeedToTranslate(document.body,ctx).reduce((acc, node) => {
           return acc.concat(getPiecesToTranslate(node))
         }, [])
+      console.log("test")
         attributesToTranslate = getAttributesToTranslate()
         // TODO
         // attributesToTranslate = [];
