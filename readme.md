@@ -13,6 +13,7 @@ Translate your page in real time using Google or Yandex.
 
 目前已适配：
 
+- pdf文件双语对照翻译
 - Twitter
 - Reddit,(包括old.reddit.com)
 - Hacker News
@@ -30,7 +31,11 @@ Translate your page in real time using Google or Yandex.
 
 - Youtube 评论区
 
-目前的版本还没准备好发布到商店，但是欢迎[下载体验](https://github.com/theowenyoung/Traduzir-paginas-web/releases),你需要在浏览器中手动安装：
+
+Firefox商店[沉浸式翻译](https://addons.mozilla.org/en-US/firefox/addon/immersive-translate/)已上架, chrome 商店还在计划中.
+
+
+目前正在完善开发中，更推荐手动安装[最新版本](https://github.com/theowenyoung/Traduzir-paginas-web/releases)：
 
 1. 在[这里](https://github.com/theowenyoung/Traduzir-paginas-web/releases)下载对应浏览器的压缩包，chrome或firefox
 2. 解压到以后不删除的文件夹
