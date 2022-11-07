@@ -30,7 +30,7 @@ Translate your page in real time using Google or Yandex.
 正在适配：
 
 - Youtube 评论区
-
+- Github
 
 Firefox商店[沉浸式翻译](https://addons.mozilla.org/en-US/firefox/addon/immersive-translate/)已上架, chrome 商店还在计划中.
 
@@ -60,6 +60,7 @@ Firefox商店[沉浸式翻译](https://addons.mozilla.org/en-US/firefox/addon/im
 ## Todo
 
 
+- [ ] - adapt for Github
 - [ ] - backup默认文件名还是TWP
 - [ ] - option页面从extension中打开的显示问题 
 - [ ] - 版本号自动添加
