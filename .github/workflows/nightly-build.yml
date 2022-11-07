@@ -38,6 +38,26 @@ jobs:
         run: |
           mv dist/chrome.zip dist/chrome-${{ env.NOW }}.zip
           mv dist/firefox.zip dist/firefox-${{ env.NOW }}.zip
+      # - uses: trmcnvn/firefox-addon@v1
+      #   with:
+      #     # uuid is only necessary when updating an existing addon,
+      #     # omitting it will create a new addon
+      #     uuid: '{5efceaa7-f3a2-4e59-a54b-85319448e305}'
+      #     xpi: dist/firefox-${{ env.NOW }}.zip
+      #     manifest: manifest.json
+      #     api-key: ${{ secrets.FIREFOX_API_KEY }}
+      #     api-secret: ${{ secrets.FIREFOX_API_SECRET }}
+      - name: "web-ext sign"
+        id: web-ext-sign
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: sign
+          source: dist/firefox-${{ env.NOW }}.zip
+          channel: unlisted
+          apiKey: ${{ secrets.FIREFOX_API_KEY }}
+          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
+          timeout: 900000
+
       - name: release assets
         uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
@@ -47,4 +67,4 @@ jobs:
           title: "Development Build ${{ env.NOW }}"
           files: |
             dist/chrome-${{ env.NOW }}.zip
-            dist/firefox-${{ env.NOW }}.zip
+            ${{ steps.web-ext-sign.outputs.target }}

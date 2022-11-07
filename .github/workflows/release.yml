@@ -36,6 +36,16 @@ jobs:
         run: |
           mv dist/chrome.zip dist/chrome-${{ github.ref_name }}.zip
           mv dist/firefox.zip dist/firefox-${{ github.ref_name }}.zip
+      - name: "web-ext sign"
+        id: web-ext-sign
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: sign
+          source: dist/firefox-${{ github.ref_name }}.zip
+          channel: unlisted
+          apiKey: ${{ secrets.FIREFOX_API_KEY }}
+          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
+          timeout: 900000
       - name: release assets
         uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:

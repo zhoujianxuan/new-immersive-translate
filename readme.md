@@ -62,7 +62,7 @@ Firefox商店[沉浸式翻译](https://addons.mozilla.org/en-US/firefox/addon/im
 
 - [ ] - backup默认文件名还是TWP
 - [ ] - option页面从extension中打开的显示问题 
-
+- [ ] - 版本号自动添加
 
 ---
 
