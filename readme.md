@@ -26,7 +26,7 @@ Let's experience immersive web translation, with Google and Yandex under the hoo
 - 希望同时显示双语，以平衡部分机器翻译的不知所云
 - 希望尽快摆脱这个扩展，直接习惯看原文的用户的过度助手
 
-该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行文本选中翻译，插件完全免费，希望我们都能尽可能平等的获取知识，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
+该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行文本选中翻译，插件完全免费，希望我们都能尽可能平等的获取知识，不要让语言成为障碍，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
 
 ## 安装说明
 
@@ -99,6 +99,26 @@ chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 3. Open your browser's extension manager
 4. Activate developer mode
 5. Load the extension with the option "Load unpacked"
+
+This extension Forks from the [TWP](https://github.com/FilipePS/Traduzir-paginas-web) plugin, to which I have added the following features.
+
+- Bilingual display, split by paragraph
+- Translation of only the content area of the page, which greatly enhances the reading experience of the translation, instead of the previous one where all elements of the page are translated, similar to the browser reading mode, so the plugin was renamed "Immersive Translation"
+- I hope this plugin is universal enough that it does not need to be customized for most websites, but there are often some websites that are not standardized, or non-content websites, and these websites are better after separate optimization, so we will do separate adaptations for such websites, and the downside is that the website may not work at any time. The bad thing is that the website may fail at any time with the update of the website, so here I will continue to optimize. If you have a commonly used website that does not translate well, please feel free to ask in [Isuee](https://github.com/theowenyoung/Traduzir-paginas-web/issues) or [Telegram group](https://t.me/+rq848Z09nehlOTgx ).
+- Support bilingual translation of PDF files
+- Cooperate with epub online reading website <https://1paragraph.app/> to realize bilingual reading of foreign e-books
+
+Immersive translation is not quite the same as the goal of [original plugin](https://github.com/FilipePS/Traduzir-paginas-web), the original plugin is more as a very good general translation extension, a good alternative to browser-built translation, and a great help in browsers without browser-built translation . But this plugin is more concerned about users who often need to read foreign languages to have a good experience when reading foreign language pages (I want to do this plugin because I often need to browse a lot of foreign media articles on [Buzzing](https://www.buzzing.cc/)), so the target group of this plugin is
+
+- often read long articles, papers from abroad
+- Read foreign language PDF, foreign language e-books
+- want to quickly browse Twitter, Reddit, Hacker News, Github Issue and other foreign forum sites
+- Want to display both languages to learn the target language
+- I hope to display bilingualism at the same time to balance the unknowingness of some machine translation
+- I hope to get rid of this extension as soon as possible, which is an excessive assistant for users who are directly used to reading the original language
+
+The extension also supports (relies on) Google translation engine or Yandex translation engine, while supporting the use of Bing, Deepl for text selection translation, the plug-in is completely free, I hope we can all get knowledge as equally as possible, thanks to [original author](https://github.com/FilipePS/Traduzir-paginas-web) for the great effort he put into this project.
+
 
 ## Screenshots
 | Menu 1 | Menu 2 | Translated |
