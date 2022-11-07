@@ -1,5 +1,5 @@
 
-# Immersive Translate - 沉浸式翻译
+# Immersive Translate - 沉浸式翻译扩展
 
 Let's experience immersive web translation, with Google and Yandex under the hood, with support for both firefox and chrome 
 
