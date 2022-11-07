@@ -57,6 +57,14 @@ Firefox商店[沉浸式翻译](https://addons.mozilla.org/en-US/firefox/addon/im
 
 ---
 
+## Todo
+
+
+- [ ] - backup默认文件名还是TWP
+- [ ] - option页面从extension中打开的显示问题 
+
+
+---
 
 ## Install
 

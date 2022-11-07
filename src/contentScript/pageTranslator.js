@@ -207,9 +207,20 @@ function getTabHostName() {
     return new Promise(resolve => chrome.runtime.sendMessage({action: "getTabHostName"}, result => resolve(result)))
 }
 
-Promise.all([twpConfig.onReady(), getTabHostName()])
+function getTabUrl() {
+    return new Promise(resolve => chrome.runtime.sendMessage({action: "getTabUrl"}, result => resolve(result)))
+}
+Promise.all([twpConfig.onReady(), getTabUrl()])
 .then(function (_) {
-    const tabHostName = _[1]
+    const tabUrl = _[1];
+    const tabUrlObj = new URL(tabUrl);
+    const tabHostName = tabUrlObj.hostname;
+    const tabUrlWithoutSearch = tabUrlObj.origin + tabUrlObj.pathname;
+    const ctx = {
+      tabUrl,
+      tabHostName,
+      tabUrlWithoutSearch,
+    }
     const htmlTagsInlineText = ['#text', 'A', 'ABBR', 'ACRONYM', 'B', 'BDO', 'BIG', 'CITE', 'DFN', 'EM', 'I', 'LABEL', 'Q', 'S', 'SMALL', 'SPAN', 'STRONG', 'SUB', 'SUP', 'U', 'TT', 'VAR']
     const htmlTagsInlineIgnore = ['BR', 'CODE', 'KBD', 'WBR'] // and input if type is submit or button, and pre depending on settings
     const htmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG', 'svg'] //TODO verificar porque 'svg' é com letras minúsculas
@@ -262,7 +273,7 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
                 if (removedNodes.indexOf(nn) != -1) return;
 
                 // let newPiecesToTranslate = getPiecesToTranslate(nn)
-                let newPiecesToTranslate = getNodesThatNeedToTranslate(nn,tabHostName).reduce((acc, node) => {
+                let newPiecesToTranslate = getNodesThatNeedToTranslate(nn,ctx).reduce((acc, node) => {
                   return acc.concat(getPiecesToTranslate(node))
                 }, [])
 
@@ -808,7 +819,7 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
         }
 
         // piecesToTranslate = getPiecesToTranslate()
-        piecesToTranslate = getNodesThatNeedToTranslate(document.body,tabHostName).reduce((acc, node) => {
+        piecesToTranslate = getNodesThatNeedToTranslate(document.body,ctx).reduce((acc, node) => {
           return acc.concat(getPiecesToTranslate(node))
         }, [])
         attributesToTranslate = getAttributesToTranslate()

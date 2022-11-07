@@ -4,8 +4,9 @@ const enhanceOriginalDisplayValueAttributeName = "data-translationoriginaldispla
 const enhanceHtmlTagsInlineIgnore = ['BR', 'CODE', 'KBD', 'WBR'] // and input if type is submit or button, and pre depending on settings
 const enhanceHtmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG', 'svg'] //TODO verificar porque 'svg' é com letras minúsculas
 const blockElements = [
-    'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'OL',  'P', 'TABLE', 'UL'
+    'H1', 'H2', 'H3', 'H4', 'H5', 'H6','TABLE',  'OL',  'UL', 'P',
   ];
+const headingElements = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
 const pdfSelectorsConfig =   {
     regex:
@@ -98,7 +99,18 @@ const translateSelectors = [
 
     ]
   },
-  pdfSelectorsConfig
+  pdfSelectorsConfig,
+  {
+    hostname:"www.cell.com",
+    selectors:[
+      "div.section-paragraph > div.section-paragraph > div.section-paragraph",
+      "section > div.section-paragraph",
+      "h4","h3","h2"
+    ],
+    blockSelectors:[
+      "div"
+    ]
+  }
 
 ]
 
@@ -109,8 +121,8 @@ const containerSelectorConfigs = [
   }
 ]
 
-function getAllBlocksSelectors(){
-  const currentUrl = window.location.href;
+function getAllBlocksSelectors(ctx){
+  const currentUrl = ctx.tabUrl;
   const currentUrlObj = new URL(currentUrl);
   const currentHostname = currentUrlObj.hostname;
   const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
@@ -145,10 +157,10 @@ function getAllBlocksSelectors(){
   }
   return allNodesSelectors;
 }
-const allBlocksSelectors = getAllBlocksSelectors();
 
-function getContainerSelector(){
-    const currentUrl = window.location.href;
+
+function getContainerSelector(ctx){
+    const currentUrl = ctx.tabUrl;
     const currentUrlObj = new URL(currentUrl);
     const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
     const currentHostname = currentUrlObj.hostname;
@@ -164,7 +176,6 @@ function getContainerSelector(){
       }
     }
 }
-const containerSelector = getContainerSelector();
 
 function isValidNode(node){
   if(node.hasAttribute && node.hasAttribute(enhanceMarkAttributeName)){
@@ -177,6 +188,16 @@ function isValidNode(node){
   node.isContentEditable) {
     return false
   }
+  
+  // check is parent has enhanceMarkAttributeName
+  if(node.parentNode && node.parentNode.hasAttribute && node.parentNode.hasAttribute(enhanceMarkAttributeName)){
+    return false;
+  }
+  // check ancestors
+  if(node.closest && node.closest(`[${enhanceMarkAttributeName}=copiedNode]`)){
+    return false;
+  }
+
   // check is there is notranslate class
   return true;
 }
@@ -234,23 +255,33 @@ function getTitleContainer(root,hostname){
   
   }
 }
-function getNodesThatNeedToTranslate(root,hostname,options){
+function isDuplicatedChild(array,child){
+  for(const item of array){
+    if(item.contains(child)){
+      return true;
+    }
+  }
+  return false;
+}
+function getNodesThatNeedToTranslate(root,ctx,options){
   options = options || {};
+  const allBlocksSelectors = getAllBlocksSelectors(ctx);
   // all block nodes, nodes should have a order from top to bottom
   let allNodes = [];
 
-  const currentUrl = window.location.href;
+  const currentUrl = ctx.tabUrl;
   const currentUrlObj = new URL(currentUrl);
   const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
   const currentHostname = currentUrlObj.hostname;
   let currentTargetLanguage = twpConfig.get("targetLanguage")
 
   // check sites
+  // console.log("allBlocksSelectors",root, allBlocksSelectors)
   if(allBlocksSelectors.length>0){
     for(const selector of allBlocksSelectors){
       const nodes = root.querySelectorAll(selector);
       for(const node of nodes){
-        if(hostname==="twitter.com"){
+        if(currentHostname==="twitter.com"){
           // check language
           try{
             const lang = node.getAttribute("lang");
@@ -263,39 +294,54 @@ function getNodesThatNeedToTranslate(root,hostname,options){
           }
         }
 
-        if(isValidNode(node)){
+        if(isValidNode(node) && !isDuplicatedChild(allNodes,node)){
           allNodes.push(node);
         }
       }
     }
   }else{
-    const titleContainer = getTitleContainer(root,hostname);
-    if(titleContainer){
-      allNodes.push(titleContainer);
-    }
+    // const titleContainer = getTitleContainer(root,hostname);
+    // if(titleContainer){
+    //   allNodes.push(titleContainer);
     // }
-    const contentContainer = getContainer(root);
+    // }
+    const contentContainer = getContainer(root,ctx);
+    console.log("contentContainer", contentContainer)
     if(contentContainer){
-      // get all paragraphs
-      for(const blockTag of blockElements){
-        const paragraphs = contentContainer.querySelectorAll(blockTag.toLowerCase());
-        for (const paragraph of paragraphs) {
-          if(isValidNode(paragraph)){
-            allNodes.push(paragraph);
-          }
-        }
-      }
-    }else{
-      for(const blockTag of blockElements){
-        const paragraphs = root.querySelectorAll(blockTag.toLowerCase());
-        for (const paragraph of paragraphs) {
-          if(isValidNode(paragraph)){
-            allNodes.push(paragraph);
-          }
+      root = contentContainer;
+
+    }  
+
+    for(const blockTag of blockElements){
+      const paragraphs = root.querySelectorAll(blockTag.toLowerCase());
+      for (const paragraph of paragraphs) {
+        if(isValidNode(paragraph) && !isDuplicatedChild(allNodes,paragraph)){
+          allNodes.push(paragraph);
         }
       }
     }
   }
+  // add addition heading nodes
+  // for(const headingTag of headingElements){
+  //   const headings = root.querySelectorAll(headingTag.toLowerCase());
+  //   for (const heading of headings) {
+  //     if(isValidNode(heading)){
+  //       // check if there is already exist in allNodes
+  //       let isExist = false;
+  //       for(const node of allNodes){
+  //         if(node === heading){
+  //           isExist = true;
+  //           break;
+  //         }
+  //       }
+  //       if(!isExist){
+  //        allNodes.push(heading);
+  //       }
+  //     }
+  //   }
+  // }
+
+
   // sort allNodes, from top to bottom
   allNodes.sort(function(a, b) {
     return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
@@ -348,7 +394,9 @@ function getNodesThatNeedToTranslate(root,hostname,options){
 
 // get the main container, copy from: https://github.com/ZachSaucier/Just-Read/blob/master/content_script.js
 
-function getContainer(root) {
+function getContainer(root,ctx) {
+
+    const containerSelector = getContainerSelector(ctx);
     
     if(containerSelector){
       const container = root.querySelector(containerSelector);
