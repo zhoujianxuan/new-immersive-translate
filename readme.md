@@ -1,5 +1,5 @@
 
-# Immersive Translate
+# Immersive Translate - 沉浸式翻译
 
 Let's experience immersive web translation, with Google and Yandex under the hood, with support for both firefox and chrome 
 
@@ -9,7 +9,7 @@ Let's experience immersive web translation, with Google and Yandex under the hoo
 [![GitHub license](https://img.shields.io/github/license/immersive-translate/immersive-translate?color=lightgrey)](https://github.com/immersive-translate/immersive-translate/blob/master/LICENSE)
 
 
-说明： 该扩展Fork自[TWP](https://github.com/immersive-translate/immersive-translate)插件，我为其添加了以下功能：
+说明： 该扩展Fork自[TWP](https://github.com/FilipePS/Traduzir-paginas-web)插件，我为其添加了以下功能：
 
 - 双语显示，按照段落分割
 - 只翻译网页里的内容区域，这极大的增强了翻译的阅读体验，而不是像之前那样网页的所有元素都被翻译，类似浏览器的阅读模式，所以该插件被重新命名为“沉浸式翻译”
@@ -17,17 +17,16 @@ Let's experience immersive web translation, with Google and Yandex under the hoo
 - 支持PDF文件双语对照翻译
 - 配合epub在线阅读网站<https://1paragraph.app/> 即可实现双语阅读国外电子书
 
-沉浸式翻译插件和原插件的目标不太一样，原插件更多的是作为一个非常好用的通用翻译扩展，是浏览器自带翻译的良好替代品，但是本插件更关注用户在阅读翻译页面的体验，目标群体是：
+沉浸式翻译和[原插件](https://github.com/FilipePS/Traduzir-paginas-web)的目标不太一样，原插件更多的是作为一个非常好用的通用翻译扩展，是浏览器自带翻译的良好替代品，在没有浏览器自带翻译的浏览器里提供了巨大的帮助。但是本插件更关注经常需要看外文的用户在阅读外文页面时能有一个良好的体验（我想做这个插件就是因为我经常需要在[Buzzing](https://www.buzzing.cc/)上浏览大量的外媒文章），所以该插件的目标群体是：
 
-- 经常需要阅读国外长篇文章，论文
-- PDF，外语电子书
-- 需要快速浏览推特，Reddit，Hacker News等国外论坛网站
+- 经常阅读国外长篇文章，论文
+- 阅读外文PDF，外语电子书
+- 希望快速浏览推特，Reddit，Hacker News，Github Issue等国外论坛网站
 - 希望同时显示双语来学习目标语言
-- 希望显示双语，以平衡部分机器翻译的不知所云
+- 希望同时显示双语，以平衡部分机器翻译的不知所云
+- 希望尽快摆脱这个扩展，直接习惯看原文的用户的过度助手
 
-也希望我们最终能摆脱这个扩展，直接习惯看原文！
-
-该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行选中文本翻译，插件本身完全免费，希望我们都能尽可能平等的获取知识，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
+该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行文本选中翻译，插件完全免费，希望我们都能尽可能平等的获取知识，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
 
 ## 安装说明
 
@@ -60,15 +59,30 @@ chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 
 ## 截图
 
+### Twitter
+
 ![twitter](assets/twitter.png)
+
+### Reddit
 
 ![reddit](assets/reddit.png)
 
+### PDF文件
+
 ![pdf](assets/pdf.png)
+
+
+### Epub文件
 
 ![epub](assets/epub.jpg)
 
+
+### Hacker News
+
 ![hackernews](assets/hackernews.png)
+
+
+### FT金融时报
 
 ![ft](assets/ft.png)
 
