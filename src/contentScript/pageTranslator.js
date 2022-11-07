@@ -595,8 +595,17 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
     }
 
     function encapsulateTextNode(node) {
+        const currentUrl = window.location.href;
+        const currentUrlObj = new URL(currentUrl);
+        const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
+        const currentHostname = currentUrlObj.hostname;
+        const isPdf = new RegExp(pdfSelectorsConfig.regex).test(currentUrlWithoutSearch);
         const fontNode = document.createElement("font")
-        fontNode.setAttribute("style", "vertical-align: inherit;border-bottom: 2px solid #72ECE9;")
+        let style = 'vertical-align: inherit;'
+        if (!isPdf) {
+          style+='border-bottom: 2px solid #72ECE9;'
+        }
+        fontNode.setAttribute("style", style)
         fontNode.textContent = node.textContent
 
         node.replaceWith(fontNode)

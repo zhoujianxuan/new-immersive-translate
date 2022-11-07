@@ -6,6 +6,15 @@ const enhanceHtmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG
 const blockElements = [
     'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'OL',  'P', 'TABLE', 'UL'
   ];
+
+const pdfSelectorsConfig =   {
+    regex:
+      "translatewebpages.org/result/.+$",
+    selectors:[
+      'div'
+    ]
+  };
+
 const inlineElements = [
   "a",
   "abbr",
@@ -89,14 +98,8 @@ const translateSelectors = [
 
     ]
   },
-  {
-    regex:[
-      "translatewebpages.org/result/.+$",
-    ],
-    selectors:[
-      'div'
-    ]
-  }
+  pdfSelectorsConfig
+
 ]
 
 const containerSelectorConfigs = [
@@ -110,7 +113,7 @@ function getAllBlocksSelectors(){
   const currentUrl = window.location.href;
   const currentUrlObj = new URL(currentUrl);
   const currentHostname = currentUrlObj.hostname;
-
+  const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
     let allNodesSelectors = [];
 
   for(const enhance of translateSelectors){
@@ -129,7 +132,7 @@ function getAllBlocksSelectors(){
       let isMatched = false;
       for(const regex of enhance.regex){
         const reg = new RegExp(regex);
-        if(reg.test(currentUrl)){
+        if(reg.test(currentUrlWithoutSearch)){
             allNodesSelectors = enhance.selectors;
             isMatched = true;
             break;
@@ -147,12 +150,13 @@ const allBlocksSelectors = getAllBlocksSelectors();
 function getContainerSelector(){
     const currentUrl = window.location.href;
     const currentUrlObj = new URL(currentUrl);
+    const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
     const currentHostname = currentUrlObj.hostname;
     for(const containerSelector of containerSelectorConfigs){
       if(containerSelector.hostname && containerSelector.hostname === currentHostname){
         const container = document.querySelector(containerSelector.selector);
         return container;
-      }else if(containerSelector.regex && new RegExp(containerSelector.regex).test(window.location.href)){
+      }else if(containerSelector.regex && new RegExp(containerSelector.regex).test(currentUrlWithoutSearch)){
         const container = document.querySelector(containerSelector.selector);
         if(container){
           return container;
@@ -235,6 +239,10 @@ function getNodesThatNeedToTranslate(root,hostname,options){
   // all block nodes, nodes should have a order from top to bottom
   let allNodes = [];
 
+  const currentUrl = window.location.href;
+  const currentUrlObj = new URL(currentUrl);
+  const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
+  const currentHostname = currentUrlObj.hostname;
   let currentTargetLanguage = twpConfig.get("targetLanguage")
 
   // check sites
@@ -292,6 +300,21 @@ function getNodesThatNeedToTranslate(root,hostname,options){
   allNodes.sort(function(a, b) {
     return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
   })
+
+  // is pdf, if pdf, then treat it as a special case
+  const isPdf = new RegExp(pdfSelectorsConfig.regex).test(currentUrlWithoutSearch);
+  if(isPdf){
+    // add flex container to div
+    for(const node of allNodes){
+      const parent = node.parentNode;
+      const pdfContainer = document.createElement("div");
+      pdfContainer.style.display = "flex";
+      // set the wrapper as child (instead of the element)
+      parent.replaceChild(pdfContainer, node);
+      // set element as child of wrapper
+      pdfContainer.appendChild(node);
+    }
+  }
 
   for(const node of allNodes){
     // check if there is a copy already
