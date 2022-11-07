@@ -36,16 +36,12 @@ jobs:
         run: |
           content=`cat ./src/manifest.json`
           echo "::set-output name=version::$(echo $content | jq -r '.version')"
-      - name: Add Version to folders
-        run: |
-          mv dist/chrome.zip dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
       - name: "web-ext build"
         id: web-ext-build
         uses: kewisch/action-web-ext@v1
         with:
           cmd: build
           source: dist/firefox  
-          filename: "firefox-{name}-{version}.xpi"
       # - uses: trmcnvn/firefox-addon@v1
       #   with:
       #     # uuid is only necessary when updating an existing addon,
@@ -66,6 +62,10 @@ jobs:
           apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
           timeout: 900000
 
+      - name: move dist file to release
+        run: |
+          mv dist/chrome.zip dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
+          mv ${{ steps.web-ext-build.outputs.target }} dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
       - name: release assets
         uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
@@ -73,4 +73,4 @@ jobs:
           prerelease: false
           files: |
             dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
-            ${{ steps.web-ext-sign.outputs.target }}
+            dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
