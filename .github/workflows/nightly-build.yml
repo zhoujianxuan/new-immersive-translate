@@ -60,6 +60,7 @@ jobs:
       # check version is 4 digits x.x.x.x
       - name: Check version
         id: check_version
+        continue-on-error: true
         run: |
           if [[ ${{ steps.set_var.outputs.version }} =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Version is nightly"
