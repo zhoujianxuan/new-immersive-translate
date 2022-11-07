@@ -47,12 +47,18 @@ jobs:
       #     manifest: manifest.json
       #     api-key: ${{ secrets.FIREFOX_API_KEY }}
       #     api-secret: ${{ secrets.FIREFOX_API_SECRET }}
+      - name: "web-ext build"
+        id: web-ext-build
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: build
+          source: dist/firefox  
       - name: "web-ext sign"
         id: web-ext-sign
         uses: kewisch/action-web-ext@v1
         with:
           cmd: sign
-          source: dist/firefox-${{ env.NOW }}.zip
+          source: ${{ steps.web-ext-build.outputs.target }} 
           channel: unlisted
           apiKey: ${{ secrets.FIREFOX_API_KEY }}
           apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
