@@ -126,6 +126,10 @@ const translateSelectors = [
   {
     hostname:"www.whatsonweibo.com",
     containerSelector:"#mvp-post-main"
+  },
+  {
+    hostname:["www.wsj.com","www.economist.com"],
+    containerSelector:"main"
   }
 
 ]
@@ -328,21 +332,23 @@ function getNodesThatNeedToTranslate(root,ctx,options){
         }
       }
     }
-   // add addition heading nodes
-    for(const headingTag of headingElements){
-      const headings = originalRoot.querySelectorAll(headingTag.toLowerCase());
-      for (const heading of headings) {
-        if(isValidNode(heading)){
-          // check if there is already exist in allNodes
-          let isExist = false;
-          for(const node of allNodes){
-            if(node === heading){
-              isExist = true;
-              break;
+    if(!pageSpecialConfig.containerSelector){
+     // add addition heading nodes
+      for(const headingTag of headingElements){
+        const headings = originalRoot.querySelectorAll(headingTag.toLowerCase());
+        for (const heading of headings) {
+          if(isValidNode(heading)){
+            // check if there is already exist in allNodes
+            let isExist = false;
+            for(const node of allNodes){
+              if(node === heading){
+                isExist = true;
+                break;
+              }
             }
-          }
-          if(!isExist){
-           allNodes.push(heading);
+            if(!isExist){
+             allNodes.push(heading);
+            }
           }
         }
       }
@@ -412,6 +418,11 @@ function getContainer(root,pageSpecialConfig){
     if(!(root && root.innerText)){
       return null
     }
+    // role=main
+    // const main = root.querySelector("[role=main]");
+    // if(main){
+    //   return main;
+    // }
     let selectedContainer;
     const numWordsOnPage = root.innerText.match(/\S+/g).length;
     let ps = root.querySelectorAll("p");
