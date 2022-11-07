@@ -46,31 +46,31 @@ jobs:
           cmd: build
           source: dist/firefox  
           filename: "firefox-{name}-{version}.xpi"
-      - uses: trmcnvn/firefox-addon@v1
+      # - uses: trmcnvn/firefox-addon@v1
+      #   with:
+      #     # uuid is only necessary when updating an existing addon,
+      #     # omitting it will create a new addon
+      #     uuid: '{5efceaa7-f3a2-4e59-a54b-85319448e305}'
+      #     xpi: ${{ steps.web-ext-build.outputs.target }}
+      #     manifest: ./src/manifest.json
+      #     api-key: ${{ secrets.FIREFOX_API_KEY }}
+      #     api-secret: ${{ secrets.FIREFOX_API_SECRET }}
+      - name: "web-ext sign"
+        id: web-ext-sign
+        uses: kewisch/action-web-ext@v1
         with:
-          # uuid is only necessary when updating an existing addon,
-          # omitting it will create a new addon
-          uuid: '{5efceaa7-f3a2-4e59-a54b-85319448e305}'
-          xpi: ${{ steps.web-ext-build.outputs.target }}
-          manifest: ./src/manifest.json
-          api-key: ${{ secrets.FIREFOX_API_KEY }}
-          api-secret: ${{ secrets.FIREFOX_API_SECRET }}
-      # - name: "web-ext sign"
-      #   id: web-ext-sign
-      #   uses: kewisch/action-web-ext@v1
-      #   with:
-      #     cmd: sign
-      #     source: ${{ steps.web-ext-build.outputs.target }} 
-      #     channel: unlisted
-      #     apiKey: ${{ secrets.FIREFOX_API_KEY }}
-      #     apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
-      #     timeout: 900000
-      #
-      # - name: release assets
-      #   uses: "marvinpinto/action-automatic-releases@v1.2.1"
-      #   with:
-      #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
-      #     prerelease: false
-      #     files: |
-      #       dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
-      #       ${{ steps.web-ext-sign.outputs.target }}
+          cmd: sign
+          source: ${{ steps.web-ext-build.outputs.target }} 
+          channel: listed
+          apiKey: ${{ secrets.FIREFOX_API_KEY }}
+          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
+          timeout: 900000
+
+      - name: release assets
+        uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
+            ${{ steps.web-ext-sign.outputs.target }}
