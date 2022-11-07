@@ -88,6 +88,14 @@ const translateSelectors = [
       "article .story-list-story__info__headline"
 
     ]
+  },
+  {
+    regex:[
+      "translatewebpages.org/result/.+$",
+    ],
+    selectors:[
+      'div'
+    ]
   }
 ]
 
