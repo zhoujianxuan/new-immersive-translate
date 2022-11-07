@@ -130,7 +130,7 @@ const translateSelectors = [
   {
     hostname:["www.wsj.com","www.economist.com"],
     containerSelector:"main"
-  }
+  },
 
 ]
 
@@ -174,6 +174,18 @@ function getPageSpecialConfig(ctx){
         if(reg.test(currentUrlWithoutSearch)){
             return enhance;
         }
+      }
+    }
+  }
+  // handle nitter, there are too many domains, so we detect it by meta, and element
+  // if og:sitename is "Nitter", and there is class name tweet-content, then it is nitter
+  const nitterMeta = document.querySelector('meta[property="og:site_name"]');
+  if(nitterMeta && nitterMeta.getAttribute('content') === 'Nitter'){
+    const nitterTweetContent = document.querySelector('.tweet-content');
+    if(nitterTweetContent){
+      return {
+        name:"nitter",
+        selectors:['.tweet-content','.quote-text']
       }
     }
   }
@@ -360,9 +372,15 @@ function getNodesThatNeedToTranslate(root,ctx,options){
       }else{
         copyNode.style.paddingBottom = "8px";
       }
-      copyNode.setAttribute(enhanceMarkAttributeName, "copiedNode");
       // get original display value
-      const originalDisplay = node.style.display;
+      let originalDisplay = node.style.display;
+      // if nitter
+      console.log("pageSpecialConfig", pageSpecialConfig)
+      if(pageSpecialConfig && pageSpecialConfig.name && pageSpecialConfig.name === "nitter"){
+        // display to block
+        originalDisplay = "block";
+      }
+      copyNode.setAttribute(enhanceMarkAttributeName, "copiedNode");
       // add data-translationoriginaldisplay
       if(originalDisplay){
         copyNode.setAttribute(enhanceOriginalDisplayValueAttributeName, originalDisplay);
