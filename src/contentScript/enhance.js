@@ -107,26 +107,49 @@ const translateSelectors = [
       "section > div.section-paragraph",
       "h4","h3","h2"
     ],
-    blockSelectors:[
-      "div"
+  },
+  {
+    // TODO
+    hostname:["www.msdmanuals.com","localhost"],
+    noTranslateSelectors:[
+      ".d-none"
     ]
-  }
-
-]
-
-const containerSelectorConfigs = [
+  },
+  {
+    hostname:"www.reuters.com",
+    containerSelector:'main',
+  },
   {
     regex:"finance\.yahoo\.com/news",
-    selector:"[role=article]"
+    containerSelector:"[role=article]"
+  },
+  {
+    hostname:"www.whatsonweibo.com",
+    containerSelector:"#mvp-post-main"
   }
+
 ]
 
-function getAllBlocksSelectors(ctx){
+function addWrapperToNode(node, wrapper){
+  try{
+
+    const parent = node.parentNode;
+        // set the wrapper as child (instead of the element)
+    parent.replaceChild(wrapper, node);
+        // set element as child of wrapper
+    wrapper.appendChild(node);
+
+  }catch(e){
+    console.error('add wrapper error',e);
+  }
+}
+
+function getPageSpecialConfig(ctx){
   const currentUrl = ctx.tabUrl;
   const currentUrlObj = new URL(currentUrl);
   const currentHostname = currentUrlObj.hostname;
   const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
-    let allNodesSelectors = [];
+  let specialConfig = null;
 
   for(const enhance of translateSelectors){
     if(enhance.hostname){
@@ -134,7 +157,7 @@ function getAllBlocksSelectors(ctx){
         enhance.hostname = [enhance.hostname];
       }
       if(enhance.hostname.indexOf(currentHostname) !== -1){
-        allNodesSelectors = enhance.selectors;
+        return enhance;
         break;
       }
     }else if(enhance.regex){
@@ -145,37 +168,14 @@ function getAllBlocksSelectors(ctx){
       for(const regex of enhance.regex){
         const reg = new RegExp(regex);
         if(reg.test(currentUrlWithoutSearch)){
-            allNodesSelectors = enhance.selectors;
-            isMatched = true;
-            break;
+            return enhance;
         }
-      }
-      if(isMatched){
-        break;
       }
     }
   }
-  return allNodesSelectors;
 }
 
 
-function getContainerSelector(ctx){
-    const currentUrl = ctx.tabUrl;
-    const currentUrlObj = new URL(currentUrl);
-    const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
-    const currentHostname = currentUrlObj.hostname;
-    for(const containerSelector of containerSelectorConfigs){
-      if(containerSelector.hostname && containerSelector.hostname === currentHostname){
-        const container = document.querySelector(containerSelector.selector);
-        return container;
-      }else if(containerSelector.regex && new RegExp(containerSelector.regex).test(currentUrlWithoutSearch)){
-        const container = document.querySelector(containerSelector.selector);
-        if(container){
-          return container;
-        }
-      }
-    }
-}
 
 function isValidNode(node){
   if(node.hasAttribute && node.hasAttribute(enhanceMarkAttributeName)){
@@ -265,7 +265,20 @@ function isDuplicatedChild(array,child){
 }
 function getNodesThatNeedToTranslate(root,ctx,options){
   options = options || {};
-  const allBlocksSelectors = getAllBlocksSelectors(ctx);
+  const pageSpecialConfig = getPageSpecialConfig(ctx);
+  const allBlocksSelectors = pageSpecialConfig && pageSpecialConfig.selectors || []
+  const noTranslateSelectors = pageSpecialConfig && pageSpecialConfig.noTranslateSelectors || []
+  if(noTranslateSelectors.length > 0){
+    const noTranslateNodes = root.querySelectorAll(noTranslateSelectors.join(","));
+    for(const node of noTranslateNodes){
+      // add class notranslate
+      // node.classList.add("notranslate");
+      // add parent placeholder for position
+      const placeholder = document.createElement("span");
+      placeholder.classList.add("notranslate");
+      addWrapperToNode(node,placeholder);
+    }
+  }
   // all block nodes, nodes should have a order from top to bottom
   let allNodes = [];
 
@@ -300,13 +313,8 @@ function getNodesThatNeedToTranslate(root,ctx,options){
       }
     }
   }else{
-    // const titleContainer = getTitleContainer(root,hostname);
-    // if(titleContainer){
-    //   allNodes.push(titleContainer);
-    // }
-    // }
    const originalRoot = root;
-    const contentContainer = getContainer(root,ctx);
+    const contentContainer = getContainer(root,pageSpecialConfig);
     if(contentContainer){
       root = contentContainer;
 
@@ -355,10 +363,7 @@ function getNodesThatNeedToTranslate(root,ctx,options){
       const parent = node.parentNode;
       const pdfContainer = document.createElement("div");
       pdfContainer.style.display = "flex";
-      // set the wrapper as child (instead of the element)
-      parent.replaceChild(pdfContainer, node);
-      // set element as child of wrapper
-      pdfContainer.appendChild(node);
+      addWrapperToNode(node,pdfContainer);
     }
   }
 
@@ -394,12 +399,11 @@ function getNodesThatNeedToTranslate(root,ctx,options){
 
 // get the main container, copy from: https://github.com/ZachSaucier/Just-Read/blob/master/content_script.js
 
-function getContainer(root,ctx) {
-
-    const containerSelector = getContainerSelector(ctx);
+function getContainer(root,pageSpecialConfig){ 
     
-    if(containerSelector){
-      const container = root.querySelector(containerSelector);
+    
+    if(pageSpecialConfig && pageSpecialConfig.containerSelector){
+      const container = root.querySelector(pageSpecialConfig.containerSelector);
       if(container){
         return container;
       }

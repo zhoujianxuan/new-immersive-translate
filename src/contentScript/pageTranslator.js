@@ -727,6 +727,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                     const piecesToTranslateNow = []
                     piecesToTranslate.forEach(ptt => {
                         if (!ptt.isTranslated) {
+                            
                             if (bottomIsInScreen(ptt.topElement) || topIsInScreen(ptt.bottomElement)) {
                                 ptt.isTranslated = true
                                 piecesToTranslateNow.push(ptt)
