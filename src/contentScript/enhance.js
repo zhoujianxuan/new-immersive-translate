@@ -297,7 +297,6 @@ function getNodesThatNeedToTranslate(root,ctx,options){
     const contentContainer = getContainer(root,pageSpecialConfig);
     if(contentContainer){
       root = contentContainer;
-
     }  
 
     for(const blockTag of blockElements){
@@ -308,7 +307,7 @@ function getNodesThatNeedToTranslate(root,ctx,options){
         }
       }
     }
-    if(!pageSpecialConfig.containerSelector){
+    if(!pageSpecialConfig || !pageSpecialConfig.containerSelector){
      // add addition heading nodes
       for(const headingTag of headingElements){
         const headings = originalRoot.querySelectorAll(headingTag.toLowerCase());
