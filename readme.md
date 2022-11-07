@@ -81,12 +81,8 @@ chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 
 ### Hacker News
 
-![hackernews](assets/hackernews.png)
+![hackernews](assets/hn-details.png)
 
-
-### FT金融时报
-
-![ft](assets/ft.png)
 
 ---
 
