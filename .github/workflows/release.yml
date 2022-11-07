@@ -34,14 +34,8 @@ jobs:
         run: npm run build
       - name: Add Version to folders
         run: |
-          mv dist/chrome dist/chrome-${{ github.ref_name }}
-          mv dist/firefox dist/firefox-${{ github.ref_name }}
-      - name: zip release assets
-        run: |
-          pushd dist
-          zip -r chrome-${{ github.ref_name }}.zip chrome-${{ github.ref_name }}
-          zip -r firefox-${{ github.ref_name }}.zip firefox-${{ github.ref_name }}
-          popd
+          mv dist/chrome.zip dist/chrome-${{ github.ref_name }}.zip
+          mv dist/firefox.zip dist/firefox-${{ github.ref_name }}.zip
       - name: release assets
         uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
