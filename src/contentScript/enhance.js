@@ -6,7 +6,7 @@ const enhanceHtmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG
 const blockElements = [
     'H1', 'H2', 'H3', 'H4', 'H5', 'H6','TABLE',  'OL',  'UL', 'P',
   ];
-const headingElements = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+const headingElements = ['h1', 'h2','h3' ];
 
 const pdfSelectorsConfig =   {
     regex:
@@ -305,8 +305,8 @@ function getNodesThatNeedToTranslate(root,ctx,options){
     //   allNodes.push(titleContainer);
     // }
     // }
+   const originalRoot = root;
     const contentContainer = getContainer(root,ctx);
-    console.log("contentContainer", contentContainer)
     if(contentContainer){
       root = contentContainer;
 
@@ -320,26 +320,26 @@ function getNodesThatNeedToTranslate(root,ctx,options){
         }
       }
     }
+   // add addition heading nodes
+    for(const headingTag of headingElements){
+      const headings = originalRoot.querySelectorAll(headingTag.toLowerCase());
+      for (const heading of headings) {
+        if(isValidNode(heading)){
+          // check if there is already exist in allNodes
+          let isExist = false;
+          for(const node of allNodes){
+            if(node === heading){
+              isExist = true;
+              break;
+            }
+          }
+          if(!isExist){
+           allNodes.push(heading);
+          }
+        }
+      }
+    }
   }
-  // add addition heading nodes
-  // for(const headingTag of headingElements){
-  //   const headings = root.querySelectorAll(headingTag.toLowerCase());
-  //   for (const heading of headings) {
-  //     if(isValidNode(heading)){
-  //       // check if there is already exist in allNodes
-  //       let isExist = false;
-  //       for(const node of allNodes){
-  //         if(node === heading){
-  //           isExist = true;
-  //           break;
-  //         }
-  //       }
-  //       if(!isExist){
-  //        allNodes.push(heading);
-  //       }
-  //     }
-  //   }
-  // }
 
 
   // sort allNodes, from top to bottom
