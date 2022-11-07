@@ -11,25 +11,35 @@ Let's experience immersive web translation, with Google and Yandex under the hoo
 
 说明： 该扩展Fork自[TWP](https://github.com/immersive-translate/immersive-translate)插件，我为其添加了以下功能：
 
-- 双语显示
+- 双语显示，按照段落分割
 - 只翻译网页里的内容区域，这极大的增强了翻译的阅读体验，而不是像之前那样网页的所有元素都被翻译，类似浏览器的阅读模式，所以该插件被重新命名为“沉浸式翻译”
-- 为常用网站做了定制优化，比如推特，Reddit，Hacker News等，我希望这个插件足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站单独优化后体验更好，这里应该会持续优化，如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/theowenyoung/Traduzir-paginas-web/issues)中提出
+- 为常用网站做了定制优化，比如推特，Reddit，Hacker News等，我希望这个插件足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站在单独优化后体验更好，所以我们会对这类网站做单独适配，同时坏处就是可能随时网站的更新而失效，所以这里我会持续优化。如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/theowenyoung/Traduzir-paginas-web/issues)或[Telegram群组](https://t.me/+rq848Z09nehlOTgx)中提出。
 - 支持PDF文件双语对照翻译
 - 配合epub在线阅读网站<https://1paragraph.app/> 即可实现双语阅读国外电子书
 
-该扩展支持选择谷歌翻译引擎或Yandex翻译引擎，完全免费使用。同时使用Bing，Deepl进行选中文本翻译。
+沉浸式翻译插件和原插件的目标不太一样，原插件更多的是作为一个非常好用的通用翻译扩展，是浏览器自带翻译的良好替代品，但是本插件更关注用户在阅读翻译页面的体验，目标群体是：
 
-Firefox 已发布到商店，可以[直接下载](https://addons.mozilla.org/en-US/firefox/addon/immersive-translate/)使用，其他chrome类平台目前需要手动安装该扩展（正在加速发布商店中）。
+- 经常需要阅读国外长篇文章，论文
+- PDF，外语电子书
+- 需要快速浏览推特，Reddit，Hacker News等国外论坛网站
+- 希望同时显示双语来学习目标语言
+- 希望显示双语，以平衡部分机器翻译的不知所云
+
+也希望我们最终能摆脱这个扩展，直接习惯看原文！
+
+该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行选中文本翻译，插件本身完全免费，希望我们都能尽可能平等的获取知识，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
+
+## 安装说明
+
+### Firefox 
+
+已发布到商店，可以[直接下载](https://addons.mozilla.org/en-US/firefox/addon/immersive-translate/)。如果你想最快体验到新版，也可以直接在[Release页面](https://github.com/theowenyoung/Traduzir-paginas-web/releases)下载最新构建的版本，已签名，可以直接安装。
 
 
 
-Firefox商店[沉浸式翻译](https://addons.mozilla.org/en-US/firefox/addon/immersive-translate/)已上架, chrome,edge商店正在进行中。
+### Chrome/Edge
 
-目前依然处于Alpha阶段，但是常用内容网站使用上已经没有问题～在[Telegram 沉浸式插件讨论组](https://t.me/+rq848Z09nehlOTgx)中经常得到有用都反馈，如果你有反馈，也可以在[群里](https://t.me/+rq848Z09nehlOTgx)提出。
-
-在[Release页面](https://github.com/theowenyoung/Traduzir-paginas-web/releases)会有一个nightly版本频繁的被构建，所以建议喜欢体验最新版的同学可以手动安装nightly版本，其中firefox的扩展包已签名，可以直接下载后作为扩展文件安装。
-
-Chrome/Edge用户目前请手动安装：
+chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 
 1. 在[这里](https://github.com/theowenyoung/Traduzir-paginas-web/releases)下载chrome的压缩包
 2. 解压到一个以后不会删除的文件夹
@@ -39,8 +49,14 @@ Chrome/Edge用户目前请手动安装：
 6. 安装后，target语言可以选中文
 7. 接下来可以设置为always自动翻译英文，或者右键手动点击翻译本页面，即可有双语显示，打开推特试试看！
 
+## 项目状态
 
-> 现在还没有任何选项可以设置
+目前依然处于Alpha阶段，但是常用内容网站在使用上已经没有问题，同时在[Telegram 沉浸式插件讨论组](https://t.me/+rq848Z09nehlOTgx)中经常得到很多有用的反馈，如果你有反馈，也可以在[群里](https://t.me/+rq848Z09nehlOTgx)提出。
+
+在[Release页面](https://github.com/theowenyoung/Traduzir-paginas-web/releases)会有一个nightly版本被频繁的构建，建议喜欢体验最新版/或者想帮忙测试的同学，可以手动安装nightly版本，firefox的扩展包已签名，可以直接下载后作为扩展文件安装。
+
+
+> 现在还没有任何选项可以设置,欢迎加入一起开发呀～
 
 ## 截图
 
