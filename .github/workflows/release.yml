@@ -51,7 +51,7 @@ jobs:
           # omitting it will create a new addon
           uuid: '{5efceaa7-f3a2-4e59-a54b-85319448e305}'
           xpi: ${{ steps.web-ext-build.outputs.target }}
-          manifest: manifest.json
+          manifest: ./src/manifest.json
           api-key: ${{ secrets.FIREFOX_API_KEY }}
           api-secret: ${{ secrets.FIREFOX_API_SECRET }}
       - name: "web-ext sign"
