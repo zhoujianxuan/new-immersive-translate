@@ -10,7 +10,7 @@ if (twpConfig.get('translateTag_pre') !== 'yes') {
     blockElements.push('PRE')
 }
 
-const headingElements = ['h1', 'h2','h3' ];
+const headingElements = ['h1' ];
 
 const pdfSelectorsConfig =   {
     regex:
