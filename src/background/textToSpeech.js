@@ -84,24 +84,20 @@ const textToSpeech = (function () {
      * @returns {Promise<any>} Promise\<blob\>
      */
     async makeRequest(text, targetLanguage) {
-      return await new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.onload = (e) => {
+      return await new Promise(async (resolve, reject) => {
+
+
+
+
+        const response = await fetch(this.baseURL + this.cbGetExtraParameters(text, targetLanguage), {
+          method: this.xhrMethod,
+        });
+        const blob = await response.blob();
+
           const reader = new FileReader();
           reader.onloadend = () => resolve(reader.result);
           reader.onerror = () => reject();
-          reader.readAsDataURL(xhr.response);
-        };
-        xhr.onerror = (e) => {
-          console.error(e);
-          reject();
-        };
-        xhr.open(
-          this.xhrMethod,
-          this.baseURL + this.cbGetExtraParameters(text, targetLanguage)
-        );
-        xhr.responseType = "blob";
-        xhr.send();
+          reader.readAsDataURL(blob);
       });
     }
 

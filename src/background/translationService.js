@@ -163,7 +163,7 @@ const translationService = (function () {
      */
     static async findSID() {
       if (YandexHelper.#findPromise) return await YandexHelper.#findPromise;
-      YandexHelper.#findPromise = new Promise((resolve) => {
+      YandexHelper.#findPromise = new Promise(async (resolve) => {
         let updateYandexSid = false;
         if (YandexHelper.#lastRequestSidTime) {
           const date = new Date();
@@ -183,30 +183,24 @@ const translationService = (function () {
 
         if (updateYandexSid) {
           YandexHelper.#lastRequestSidTime = Date.now();
+          try{
 
-          const http = new XMLHttpRequest();
-          http.open(
-            "GET",
-            "https://translate.yandex.net/website-widget/v1/widget.js?widgetId=ytWidget&pageLang=es&widgetTheme=light&autoMode=false"
-          );
-          http.send();
-          http.onload = (e) => {
-            const result = http.responseText.match(/sid\:\s\'[0-9a-f\.]+/);
+            const response = await fetch("https://translate.yandex.net/website-widget/v1/widget.js?widgetId=ytWidget&pageLang=es&widgetTheme=light&autoMode=false")
+            const text = await response.text()
+            const result = text.match(/sid\:\s\'[0-9a-f\.]+/);
             if (result && result[0] && result[0].length > 7) {
               YandexHelper.#translateSid = result[0].substring(6);
               YandexHelper.#SIDNotFound = false;
             } else {
               YandexHelper.#SIDNotFound = true;
             }
-            resolve();
-          };
-          http.onerror =
-            http.onabort =
-            http.ontimeout =
-              (e) => {
-                console.error(e);
-                resolve();
-              };
+                          resolve();
+
+          }catch(e){
+
+            console.warn('fetch yandex sid failed',e)
+            resolve()
+          }
         } else {
           resolve();
         }
@@ -245,7 +239,7 @@ const translationService = (function () {
      */
     static async findSID() {
       if (BingHelper.#sidPromise) return await BingHelper.#sidPromise;
-      BingHelper.#sidPromise = new Promise((resolve) => {
+      BingHelper.#sidPromise = new Promise(async (resolve) => {
         let updateYandexSid = false;
         if (BingHelper.#lastRequestSidTime) {
           const date = new Date();
@@ -266,17 +260,16 @@ const translationService = (function () {
         if (updateYandexSid) {
           BingHelper.#lastRequestSidTime = Date.now();
 
-          const http = new XMLHttpRequest();
-          http.open("GET", "https://www.bing.com/translator");
-          http.send();
-          http.onload = (e) => {
-            const result = http.responseText.match(
+          try{
+            const response = await fetch("https://www.bing.com/translator")
+            const text = await response.text()
+            const result = text.match(
               /params_RichTranslateHelper\s=\s\[[^\]]+/
             );
-            const data_iid_r = http.responseText.match(
+            const data_iid_r = text.match(
               /data-iid\=\"[a-zA-Z0-9\.]+/
             );
-            const IG_r = http.responseText.match(/IG\:\"[a-zA-Z0-9\.]+/);
+            const IG_r = text.match(/IG\:\"[a-zA-Z0-9\.]+/);
             if (
               result &&
               result[0] &&
@@ -312,14 +305,11 @@ const translationService = (function () {
               BingHelper.#SIDNotFound = true;
             }
             resolve();
-          };
-          http.onerror =
-            http.onabort =
-            http.ontimeout =
-              (e) => {
-                console.error(e);
-                resolve();
-              };
+          }catch(e){
+            console.warn('fetch bing sid failed',e)
+            resolve()
+          }
+
         } else {
           resolve();
         }
@@ -511,52 +501,40 @@ const translationService = (function () {
     }
 
     /**
-     * Makes a request using the *XMLHttpRequest* API. Returns a promise that will be resolved with the result of the request. If the request fails, the promise will be rejected.
+     * Makes a request using the fetch API. Returns a promise that will be resolved with the result of the request. If the request fails, the promise will be rejected.
      * @param {string} sourceLanguage
      * @param {string} targetLanguage
      * @param {Array<TranslationInfo>} requests
      * @returns {Promise<*>}
      */
+
     async makeRequest(sourceLanguage, targetLanguage, requests) {
-      return await new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open(
-          this.xhrMethod,
-          this.baseURL +
-            (this.cbGetExtraParameters
+
+
+      const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+
+
+      const params = {
+        method: this.xhrMethod,
+        headers
+      }
+      params.body = this.cbGetExtraParameters
+            ? this.cbGetRequestBody(sourceLanguage, targetLanguage, requests)
+            : undefined
+
+
+      const response = await fetch(this.baseURL+(this.cbGetExtraParameters
               ? this.cbGetExtraParameters(
                   sourceLanguage,
                   targetLanguage,
                   requests
                 )
-              : "")
-        );
-        xhr.setRequestHeader(
-          "Content-Type",
-          "application/x-www-form-urlencoded"
-        );
-        xhr.responseType = "json";
+              : ""),params)
+      return response.json()
 
-        xhr.onload = (event) => {
-          resolve(xhr.response);
-        };
-
-        xhr.onerror =
-          xhr.onabort =
-          xhr.ontimeout =
-            (event) => {
-              console.error(event);
-              reject();
-            };
-
-        xhr.send(
-          this.cbGetExtraParameters
-            ? this.cbGetRequestBody(sourceLanguage, targetLanguage, requests)
-            : undefined
-        );
-      });
     }
-
     /**
      * Translates the `sourceArray2d`.
      *

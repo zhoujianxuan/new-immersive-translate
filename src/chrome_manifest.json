@@ -1,10 +1,10 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "default_locale": "en",
     "name": "Immersive Translate",
     "description": "支持整页翻译·双语显示·只翻译正文。布局全面优化，和浏览器阅读模式类似，对Twitter, Reddit等网站做了定制优化",
     "version": "0.0.17",
-    "homepage_url": "https://github.com/theowenyoung/Traduzir-paginas-web",
+    "homepage_url": "https://github.com/immersive-translate/immersive-translate",
 
     "commands": {
         "hotkey-toggle-translation": {
@@ -49,23 +49,27 @@
     },
 
     "permissions": [
-        "<all_urls>",
         "storage",
         "activeTab",
         "contextMenus",
         "webRequest"
     ],
+    "host_permissions":[
+        "<all_urls>"
+    ],
 
     "optional_permissions": [
         "webNavigation"
     ],
-    "web_accessible_resources": [
-        "/icons/icon-32.png",
+    "web_accessible_resources": [{
+    "resources":[    "/icons/icon-32.png",
         "/icons/google-translate-32.png",
         "/icons/yandex-translate-32.png",
         "/icons/swap-32.png",
         "/contentScript/css/*"
-    ],
+        ],
+        "matches":["<all_urls>"]
+    }],
 
     "options_ui": {
         "page": "/options/options.html",
@@ -73,7 +77,7 @@
         "browser_style": false
     },
 
-    "browser_action": {
+    "action": {
         "browser_style": false,
         "default_icon": "/icons/icon-32.png",
         "default_title": "__MSG_pageActionTitle__"
@@ -112,9 +116,8 @@
             "js": ["/contentScript/deepl.js"]
         }
     ],
-
     "background": {
-        "persistent": true,
-        "scripts": ["/lib/languages.js", "/lib/config.js", "/lib/platformInfo.js", "/background/translationCache.js", "/background/translationService.js", "/background/textToSpeech.js", "/background/background.js"]
+      "service_worker": "background/background-entry.js"
     }
 }
+

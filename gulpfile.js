@@ -5,6 +5,7 @@ const babel = require("gulp-babel");
 const sourcemaps = require("gulp-sourcemaps");
 const manifest = require("./src/manifest.json");
 const replace = require('gulp-replace');
+const concat = require('gulp-concat');
 gulp.task("clean", (cb) => {
   fs.rmSync("dist", { recursive: true, force: true });
   cb();
@@ -63,6 +64,12 @@ gulp.task("chrome-babel", () => {
     .pipe(gulp.dest("dist/chrome/background"));
 });
 
+gulp.task("chrome-concat-background",()=>{
+  return gulp.src(["/lib/languages.js", "/lib/config.js", "/lib/platformInfo.js", "/background/translationCache.js", "/background/translationService.js", "/background/textToSpeech.js", "/background/chrome_background.js"].map(item=>"dist/chrome"+item))
+  .pipe(concat('background-entry.js'))
+  .pipe(gulp.dest('dist/chrome/background'));
+})
+
 gulp.task("chrome-zip", () => {
   return gulp
     .src(["dist/chrome/**/**"])
@@ -76,7 +83,6 @@ gulp.task("chrome-replace",()=>{
   .pipe(gulp.dest("dist/chrome/options/"));
 })
 
-console.log("manifest.version", manifest.version)
 gulp.task("firefox-replace",()=>{
   return gulp.src(["dist/firefox/options/options.html"])
   .pipe(replace("__IMMERSIVE_TRANSLATE_VERSION__",manifest.version))
@@ -88,7 +94,7 @@ gulp.task(
 );
 gulp.task(
   "chrome-build",
-  gulp.series("chrome-copy", "chrome-rename", "chrome-babel", "chrome-replace","chrome-zip")
+  gulp.series("chrome-copy", "chrome-rename", "chrome-babel", "chrome-replace","chrome-concat-background","chrome-zip")
 );
 
 gulp.task("default", gulp.series("clean", "firefox-build", "chrome-build"));

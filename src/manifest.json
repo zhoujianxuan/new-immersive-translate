@@ -4,7 +4,7 @@
     "name": "Immersive Translate",
     "description": "支持整页翻译·双语显示·只翻译正文。布局全面优化，和浏览器阅读模式类似，对Twitter, Reddit等网站做了定制优化",
     "version": "0.0.17",
-    "homepage_url": "https://github.com/theowenyoung/Traduzir-paginas-web",
+    "homepage_url": "https://github.com/immersive-translate/immersive-translate",
 
     "browser_specific_settings": {
         "gecko": {
