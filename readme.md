@@ -54,7 +54,6 @@ chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 
 在[Release页面](https://github.com/theowenyoung/Traduzir-paginas-web/releases)会有一个nightly版本被频繁的构建，建议喜欢体验最新版/或者想帮忙测试的同学，可以手动安装nightly版本，firefox的扩展包已签名，可以直接下载后作为扩展文件安装。
 
-
 > 现在还没有任何选项可以设置,欢迎加入一起开发呀～
 
 ## 截图
@@ -82,6 +81,7 @@ chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 ### Hacker News
 
 ![hackernews](assets/hn-details.png)
+
 
 
 ---

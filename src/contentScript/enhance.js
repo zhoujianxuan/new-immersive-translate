@@ -122,26 +122,34 @@ const translateSelectors = [
   },
   {
     hostname:"www.reuters.com",
-    containerSelector:'main',
+    containerSelectors:'main',
   },
   {
     regex:"finance\.yahoo\.com/news",
-    containerSelector:"[role=article]"
+    containerSelectors:"[role=article]"
   },
   {
     hostname:"www.whatsonweibo.com",
-    containerSelector:"#mvp-post-main"
+    containerSelectors:"#mvp-post-main"
   },
   {
     hostname:["www.wsj.com","www.economist.com"],
-    containerSelector:"main"
+    containerSelectors:"main"
   },
 
   {
     hostname:["mail.jabber.org","antirez.com"],
     selectors:["pre"],
-    containerSelector: "pre",
+    containerSelectors: "pre",
     noStyle: true
+  },
+  {
+    hostname:"github.com",
+    containerSelectors:".markdown-body"
+  },
+  {
+    hostname:"www.youtube.com",
+    selectors:["#content-text"]
   }
 
 ]
@@ -319,35 +327,39 @@ function getNodesThatNeedToTranslate(root,ctx,options){
     }
   }else{
    const originalRoot = root;
-    const contentContainer = getContainer(root,pageSpecialConfig);
-    if(contentContainer){
-      root = contentContainer;
+    const contentContainers = getContainers(root,pageSpecialConfig);
+    let containers = [root]
+    if(contentContainers && Array.isArray(contentContainers)){
+      containers = contentContainers;
     }  
 
-    for(const blockTag of blockElements){
-      const paragraphs = root.querySelectorAll(blockTag.toLowerCase());
-      for (const paragraph of paragraphs) {
-        if(isValidNode(paragraph) && !isDuplicatedChild(allNodes,paragraph)){
-          allNodes.push(paragraph);
+    for(const root of containers){
+
+      for(const blockTag of blockElements){
+        const paragraphs = root.querySelectorAll(blockTag.toLowerCase());
+        for (const paragraph of paragraphs) {
+          if(isValidNode(paragraph) && !isDuplicatedChild(allNodes,paragraph)){
+            allNodes.push(paragraph);
+          }
         }
       }
-    }
-    if(!pageSpecialConfig || !pageSpecialConfig.containerSelector){
-     // add addition heading nodes
-      for(const headingTag of headingElements){
-        const headings = originalRoot.querySelectorAll(headingTag.toLowerCase());
-        for (const heading of headings) {
-          if(isValidNode(heading)){
-            // check if there is already exist in allNodes
-            let isExist = false;
-            for(const node of allNodes){
-              if(node === heading){
-                isExist = true;
-                break;
+      if(!pageSpecialConfig || !pageSpecialConfig.containerSelectors){
+       // add addition heading nodes
+        for(const headingTag of headingElements){
+          const headings = originalRoot.querySelectorAll(headingTag.toLowerCase());
+          for (const heading of headings) {
+            if(isValidNode(heading)){
+              // check if there is already exist in allNodes
+              let isExist = false;
+              for(const node of allNodes){
+                if(node === heading){
+                  isExist = true;
+                  break;
+                }
               }
-            }
-            if(!isExist){
-             allNodes.push(heading);
+              if(!isExist){
+               allNodes.push(heading);
+              }
             }
           }
         }
@@ -378,7 +390,7 @@ function getNodesThatNeedToTranslate(root,ctx,options){
     const previousSibling = node.previousSibling;
     // console.log("previousSibling.hasAttribute(markAttributeName)", previousSibling.hasAttribute(markAttributeName))
     if(!previousSibling || !previousSibling.hasAttribute || !previousSibling.hasAttribute(enhanceMarkAttributeName)){
-      const copyNode = node.cloneNode(true);
+      let copyNode = node.cloneNode(true);
       if(inlineElements.includes(copyNode.nodeName.toLowerCase())){
         // add a space
         copyNode.style.paddingRight = "8px";
@@ -392,16 +404,29 @@ function getNodesThatNeedToTranslate(root,ctx,options){
         // display to block
         originalDisplay = "block";
       }
-      copyNode.setAttribute(enhanceMarkAttributeName, "copiedNode");
-      // add data-translationoriginaldisplay
-      if(originalDisplay){
-        copyNode.setAttribute(enhanceOriginalDisplayValueAttributeName, originalDisplay);
+      formatCopiedNode(copyNode,originalDisplay);
+      if(ctx.tabHostName === "www.youtube.com"){
+        // special, we need to insert all children of the copied node to node
+        const copiedChildren = copyNode.childNodes;
+        const firstNode = node.childNodes[0];
+        for(let copiedChild of copiedChildren){
+          // if copiedChildNode is a text node, add span wrapper
+          if(copiedChild.nodeType === Node.TEXT_NODE){
+            const span = document.createElement("span");
+            span.appendChild(copiedChild);
+            copiedChild = span;
+          }
+          formatCopiedNode(copiedChild);
+          node.insertBefore(copiedChild,firstNode);
+        }
+        // new line span node
+        const newLineSpan = document.createElement("span");
+        newLineSpan.innerHTML = "\n";
+        formatCopiedNode(newLineSpan);
+        node.insertBefore(newLineSpan,firstNode);
+      }else{
+        node.parentNode.insertBefore(copyNode, node)
       }
-      // add display none
-      copyNode.style.display = "none";
-      // add notranslate class
-      copyNode.classList.add("notranslate");
-      node.parentNode.insertBefore(copyNode, node)
     }
   }
   // copy 
@@ -410,14 +435,22 @@ function getNodesThatNeedToTranslate(root,ctx,options){
 
 // get the main container, copy from: https://github.com/ZachSaucier/Just-Read/blob/master/content_script.js
 
-function getContainer(root,pageSpecialConfig){ 
-    
-    
-    if(pageSpecialConfig && pageSpecialConfig.containerSelector){
-      const container = root.querySelector(pageSpecialConfig.containerSelector);
-      if(container){
-        return container;
+function getContainers(root,pageSpecialConfig){ 
+    if(pageSpecialConfig && pageSpecialConfig.containerSelectors){
+      // is array
+      if(!Array.isArray(pageSpecialConfig.containerSelectors)){
+        pageSpecialConfig.containerSelectors = [pageSpecialConfig.containerSelectors];
       }
+      let containers =[];
+      for(const selector of pageSpecialConfig.containerSelectors){
+          const allContainer = root.querySelectorAll(pageSpecialConfig.containerSelectors);
+          if(allContainer){
+            for(const container of allContainer){
+              containers.push(container);
+            } 
+          }
+      }
+      return containers.length>0?containers:null;
     }
 
     if(!(root && root.innerText)){
@@ -471,7 +504,7 @@ function getContainer(root,pageSpecialConfig){
         selectedContainer = selectedContainer.parentElement;
     }
 
-    return selectedContainer;
+    return [selectedContainer];
 }
 
 // Check given item against blacklist, return null if in blacklist
@@ -500,4 +533,20 @@ function checkAgainstBlacklist(elem, level) {
     }
 
     return elem;
+}
+function getStyle(el) {
+  return window.getComputedStyle(el)
+}
+
+function formatCopiedNode(copyNode,originalDisplay){
+      copyNode.setAttribute(enhanceMarkAttributeName, "copiedNode");
+      // add data-translationoriginaldisplay
+      if(originalDisplay){
+        copyNode.setAttribute(enhanceOriginalDisplayValueAttributeName, originalDisplay);
+      }
+      // add display none
+      copyNode.style.display = "none";
+      // add notranslate class
+      copyNode.classList.add("notranslate");
+
 }
