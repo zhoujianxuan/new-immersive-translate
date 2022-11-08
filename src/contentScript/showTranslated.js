@@ -116,22 +116,17 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
 
     function playAudio(text, targetLanguage, cbOnEnded=() => {}) {
         isPlayingAudio = true
-        chrome.runtime.sendMessage({
-            action: "textToSpeech",
-            text,
-            targetLanguage
-        }, () => {
-            isPlayingAudio = false
-            cbOnEnded()
+        
+        audioPlayer.textToSpeech(text, targetLanguage).then(()=>{
+          isPlayingAudio = false
+          cbOnEnded()
         })
     }
 
     function stopAudio() {
         if (!isPlayingAudio) return;
         isPlayingAudio = false
-        chrome.runtime.sendMessage({
-            action: "stopAudio"
-        })
+        audioPlayer.stopAll()
     }
 
     window.addEventListener("beforeunload", e => {

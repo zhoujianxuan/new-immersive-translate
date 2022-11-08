@@ -85,10 +85,6 @@ const textToSpeech = (function () {
      */
     async makeRequest(text, targetLanguage) {
       return await new Promise(async (resolve, reject) => {
-
-
-
-
         const response = await fetch(this.baseURL + this.cbGetExtraParameters(text, targetLanguage), {
           method: this.xhrMethod,
         });
@@ -111,6 +107,8 @@ const textToSpeech = (function () {
       const requests = this.getRequests(fullText);
       const promises = [];
 
+      const resultObj = {};
+
       for (const requestText of requests) {
         const audioKey = [targetLanguage, requestText].join(", ");
         if (!this.audios.get(audioKey)) {
@@ -118,7 +116,8 @@ const textToSpeech = (function () {
             this.makeRequest(requestText, targetLanguage)
               .then(
                 /** @type {string} */ (response) => {
-                  this.audios.set(audioKey, new Audio(response));
+                  resultObj[audioKey] = response;
+                  this.audios.set(audioKey,response);
                   return response;
                 }
               )
@@ -127,53 +126,14 @@ const textToSpeech = (function () {
                 return null;
               })
           );
+        }else{
+          resultObj[audioKey] = this.audios.get(audioKey);
         }
       }
-
       await Promise.all(promises);
-      return await this.play(
-        requests.map((text) =>
-          this.audios.get([targetLanguage, text].join(", "))
-        )
-      );
+      return resultObj;
     }
 
-    /**
-     * Play the audio or all the audio in the array.
-     * @param {HTMLAudioElement | HTMLAudioElement[]} audios
-     */
-    async play(audios) {
-      this.stopAll();
-      return await new Promise((resolve) => {
-        try {
-          if (audios instanceof Array) {
-            const playAll = (/** @type {number} */ currentIndex) => {
-              this.stopAll();
-              const audio = audios[currentIndex];
-              if (audio) {
-                audio.playbackRate = this.audioSpeed;
-                audio.play();
-                audio.onended = () => {
-                  playAll(currentIndex + 1);
-                };
-              } else {
-                resolve();
-              }
-            };
-            playAll(0);
-          } else if (audios instanceof HTMLAudioElement) {
-            audios.playbackRate = this.audioSpeed;
-            audios.play();
-            audios.onended = () => {
-              resolve();
-            };
-          }
-        } catch (e) {
-          console.error(e);
-          resolve();
-        }
-      });
-    }
 
     /**
      * Sets the audio speed
@@ -211,18 +171,20 @@ const textToSpeech = (function () {
 
   // Listen for messages coming from contentScript or other scripts.
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "textToSpeech") {
+    if (request.action === "getAudioURLs") {
       googleService
         .textToSpeech(request.text, request.targetLanguage)
-        .finally(() => {
-          sendResponse();
+        .then((response) => {
+          sendResponse(response);
+        }).catch(e=>{
+          console.warn('fetch audios error',e)
+          sendResponse({})
+
         });
+    
 
       return true;
-    } else if (request.action === "stopAudio") {
-      googleService.stopAll();
-    }
-  });
+    }  });
 
   // Listen for changes to the audio speed setting and apply it immediately.
   twpConfig.onReady(async () => {

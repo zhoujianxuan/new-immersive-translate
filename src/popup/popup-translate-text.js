@@ -72,14 +72,18 @@ twpConfig.onReady(function () {
 
 	function playAudio(text, targetLanguage, cbOnEnded=() => {}) {
 		isPlayingAudio = true
-        chrome.runtime.sendMessage({
-            action: "textToSpeech",
-            text,
-            targetLanguage
-        }, () => {
-			isPlayingAudio = false
-			cbOnEnded()
-		})
+    audioPlayer.textToSpeech(text, targetLanguage).then(()=>{
+      isPlayingAudio = false
+      cbOnEnded()
+    })
+  //       chrome.runtime.sendMessage({
+  //           action: "textToSpeech",
+  //           text,
+  //           targetLanguage
+  //       }, () => {
+		// 	isPlayingAudio = false
+		// 	cbOnEnded()
+		// })
     }
 
     function stopAudio() {
@@ -93,9 +97,10 @@ twpConfig.onReady(function () {
 
     function stopAudio() {
         if (isPlayingAudio) {
-            chrome.runtime.sendMessage({
-                action: "stopAudio"
-            })
+            audioPlayer.stopAll()
+            // chrome.runtime.sendMessage({
+            //     action: "stopAudio"
+            // })
         }
         isPlayingAudio = false
     }

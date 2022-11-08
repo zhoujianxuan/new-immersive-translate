@@ -65,22 +65,19 @@ Promise.all([ twpConfig.onReady(), getTabHostName() ]).then(function (_) {
 
 	function playAudio(text, targetLanguage, cbOnEnded=() => {}) {
 		isPlayingAudio = true
-        chrome.runtime.sendMessage({
-            action: "textToSpeech",
-            text,
-            targetLanguage
-        }, () => {
-			isPlayingAudio = false
-			cbOnEnded()
-		})
+    audioPlayer.textToSpeech(text, targetLanguage).then(()=>{
+      isPlayingAudio = false
+      cbOnEnded()
+    })
     }
 
 	function stopAudio() {
 		if (!isPlayingAudio) return;
 		isPlayingAudio = false
-		chrome.runtime.sendMessage({
-			action: "stopAudio"
-		})
+		// chrome.runtime.sendMessage({
+		// 	action: "stopAudio"
+		// })
+    audioPlayer.stopAll()
 	}
 
 	function dragElement(elmnt, elmnt2) {
