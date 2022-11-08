@@ -3,7 +3,8 @@ const zip = require("gulp-zip");
 const fs = require("fs");
 const babel = require("gulp-babel");
 const sourcemaps = require("gulp-sourcemaps");
-
+const manifest = require("./src/manifest.json");
+const replace = require('gulp-replace');
 gulp.task("clean", (cb) => {
   fs.rmSync("dist", { recursive: true, force: true });
   cb();
@@ -69,13 +70,25 @@ gulp.task("chrome-zip", () => {
     .pipe(gulp.dest("dist"));
 });
 
+gulp.task("chrome-replace",()=>{
+  return gulp.src(["dist/chrome/options/options.html"])
+  .pipe(replace("__IMMERSIVE_TRANSLATE_VERSION__",manifest.version))
+  .pipe(gulp.dest("dist/chrome/options/"));
+})
+
+console.log("manifest.version", manifest.version)
+gulp.task("firefox-replace",()=>{
+  return gulp.src(["dist/firefox/options/options.html"])
+  .pipe(replace("__IMMERSIVE_TRANSLATE_VERSION__",manifest.version))
+  .pipe(gulp.dest("dist/firefox/options/"));
+})
 gulp.task(
   "firefox-build",
-  gulp.series("firefox-copy", "firefox-babel", "firefox-zip")
+  gulp.series("firefox-copy", "firefox-babel", "firefox-replace","firefox-zip")
 );
 gulp.task(
   "chrome-build",
-  gulp.series("chrome-copy", "chrome-rename", "chrome-babel", "chrome-zip")
+  gulp.series("chrome-copy", "chrome-rename", "chrome-babel", "chrome-replace","chrome-zip")
 );
 
 gulp.task("default", gulp.series("clean", "firefox-build", "chrome-build"));

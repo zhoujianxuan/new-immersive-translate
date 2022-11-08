@@ -605,15 +605,11 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         return attributesToTranslate
     }
 
-    function encapsulateTextNode(node) {
-        const currentUrl = window.location.href;
-        const currentUrlObj = new URL(currentUrl);
-        const currentUrlWithoutSearch = currentUrlObj.origin + currentUrlObj.pathname;
-        const currentHostname = currentUrlObj.hostname;
-        const isPdf = new RegExp(pdfSelectorsConfig.regex).test(currentUrlWithoutSearch);
+    function encapsulateTextNode(node,ctx) {
+        const pageSpecialConfig = getPageSpecialConfig(ctx);
         const fontNode = document.createElement("font")
         let style = 'vertical-align: inherit;'
-        if (!isPdf) {
+        if (!pageSpecialConfig || !pageSpecialConfig.noStyle) {
           style+='border-bottom: 2px solid #72ECE9;'
         }
         fontNode.setAttribute("style", style)
@@ -624,7 +620,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         return fontNode
     }
 
-    function translateResults(piecesToTranslateNow, results) {
+    function translateResults(piecesToTranslateNow, results,ctx) {
         if (dontSortResults) {
             for (let i = 0; i < results.length; i++) {
                 for (let j = 0; j < results[i].length; j++) {
@@ -638,7 +634,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                             translated += restResults.join(" ");
                         }
 
-                        nodes[j] = encapsulateTextNode(nodes[j])
+                        nodes[j] = encapsulateTextNode(nodes[j],ctx)
 
                         showOriginal.add(nodes[j])
                         nodesToRestore.push({
@@ -659,7 +655,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                         const nodes = piecesToTranslateNow[i].nodes
                         const translated = results[i][j] + " "
 
-                        nodes[j] = encapsulateTextNode(nodes[j])
+                        nodes[j] = encapsulateTextNode(nodes[j],ctx)
 
                         showOriginal.add(nodes[j])
                         nodesToRestore.push({
@@ -754,7 +750,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                             )
                             .then(results => {
                                 if (pageLanguageState === "translated" && currentFooCount === fooCount) {
-                                    translateResults(piecesToTranslateNow, results)
+                                    translateResults(piecesToTranslateNow, results,ctx)
                                      // changed here
                                      showCopyiedNodes()
                                 }

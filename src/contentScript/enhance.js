@@ -6,6 +6,10 @@ const enhanceHtmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG
 const blockElements = [
     'H1', 'H2', 'H3', 'H4', 'H5', 'H6','TABLE',  'OL',  'UL', 'P',
   ];
+if (twpConfig.get('translateTag_pre') !== 'yes') {
+    blockElements.push('PRE')
+}
+
 const headingElements = ['h1', 'h2','h3' ];
 
 const pdfSelectorsConfig =   {
@@ -13,7 +17,8 @@ const pdfSelectorsConfig =   {
       "translatewebpages.org/result/.+$",
     selectors:[
       'div'
-    ]
+    ],
+    noStyle:true,
   };
 
 const inlineElements = [
@@ -131,6 +136,13 @@ const translateSelectors = [
     hostname:["www.wsj.com","www.economist.com"],
     containerSelector:"main"
   },
+
+  {
+    hostname:["mail.jabber.org","antirez.com"],
+    selectors:["pre"],
+    containerSelector: "pre",
+    noStyle: true
+  }
 
 ]
 
@@ -271,6 +283,8 @@ function getNodesThatNeedToTranslate(root,ctx,options){
       addWrapperToNode(node,placeholder);
     }
   }
+
+
   // all block nodes, nodes should have a order from top to bottom
   let allNodes = [];
 
@@ -281,7 +295,6 @@ function getNodesThatNeedToTranslate(root,ctx,options){
   let currentTargetLanguage = twpConfig.get("targetLanguage")
 
   // check sites
-  // console.log("allBlocksSelectors",root, allBlocksSelectors)
   if(allBlocksSelectors.length>0){
     for(const selector of allBlocksSelectors){
       const nodes = root.querySelectorAll(selector);
@@ -375,7 +388,6 @@ function getNodesThatNeedToTranslate(root,ctx,options){
       // get original display value
       let originalDisplay = node.style.display;
       // if nitter
-      console.log("pageSpecialConfig", pageSpecialConfig)
       if(pageSpecialConfig && pageSpecialConfig.name && pageSpecialConfig.name === "nitter"){
         // display to block
         originalDisplay = "block";
@@ -449,7 +461,7 @@ function getContainer(root,pageSpecialConfig){
 
     while(wordCountSelected / numWordsOnPage < 0.4
     && selectedContainer != root
-    && selectedContainer.parentElement.innerText) {
+    && selectedContainer.parentElement && selectedContainer.parentElement.innerText) {
         selectedContainer = selectedContainer.parentElement;
         wordCountSelected = selectedContainer.innerText.match(/\S+/g).length;
     }
