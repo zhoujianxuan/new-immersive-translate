@@ -1,5 +1,13 @@
 # Change Log
 
+
+## 0.0.18
+
+- Better for Reddit and old.reddit.com
+- Suppor manifest v3, get ready to submit to chrome store and edge store
+- Fix some ui issue
+
+
 ## 0.0.16.2
 
 - Support Github

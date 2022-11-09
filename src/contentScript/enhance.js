@@ -76,15 +76,20 @@ const translateSelectors = [
   {
     hostname:"www.reddit.com",
     selectors:[
-      "h3",
-      "p"
+      "[data-adclicklocation=title]",
+    ],
+    containerSelectors:[
+      "[data-testid=comment]",
+      "[data-adclicklocation=media]"
     ]
   },
   {
     hostname:"old.reddit.com",
     selectors:[
       "a.title",
-      ".usertext-body"
+    ],
+    containerSelectors:[
+      "[role=main] .md-container"
     ]
   },
   {
@@ -325,16 +330,17 @@ function getNodesThatNeedToTranslate(root,ctx,options){
         }
       }
     }
-  }else{
-   const originalRoot = root;
+  }
+
+
+  if((pageSpecialConfig && pageSpecialConfig.containerSelectors) || allBlocksSelectors.length === 0){
+    const originalRoot = root;
     const contentContainers = getContainers(root,pageSpecialConfig);
     let containers = [root]
     if(contentContainers && Array.isArray(contentContainers)){
       containers = contentContainers;
     }  
-
     for(const root of containers){
-
       for(const blockTag of blockElements){
         const paragraphs = root.querySelectorAll(blockTag.toLowerCase());
         for (const paragraph of paragraphs) {

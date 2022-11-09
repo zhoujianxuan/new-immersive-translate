@@ -12,7 +12,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 - 双语显示，按照段落分割
 - 只翻译网页里的内容区域，这极大的增强了翻译的阅读体验，而不是像之前那样网页的所有元素都被翻译，类似浏览器的阅读模式，所以该插件被重新命名为“沉浸式翻译”
-- 为常用网站做了定制优化，比如推特，Reddit，Hacker News等，我希望这个插件足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站在单独优化后体验更好，所以我们会对这类网站做单独适配，同时坏处就是可能随时网站的更新而失效，所以这里我会持续优化。如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/theowenyoung/Traduzir-paginas-web/issues)或[Telegram群组](https://t.me/+rq848Z09nehlOTgx)中提出。
+- 为常用网站做了定制优化，比如推特，Reddit，Hacker News等，我希望这个插件足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站在单独优化后体验更好，所以我们会对这类网站做单独适配，同时坏处就是可能随时网站的更新而失效，所以这里我会持续优化。如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/immersive-translate/immersive-translate/issues)或[Telegram群组](https://t.me/+rq848Z09nehlOTgx)中提出。
 - 支持PDF文件双语对照翻译
 - 配合epub在线阅读网站<https://1paragraph.app/> 即可实现双语阅读国外电子书
 
@@ -31,7 +31,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 ### Firefox 
 
-已发布到商店，可以[直接下载](https://addons.mozilla.org/en-US/firefox/addon/immersive-translate/)。如果你想最快体验到新版，也可以直接在[Release页面](https://github.com/theowenyoung/Traduzir-paginas-web/releases)下载最新构建的版本，已签名，可以直接安装。
+已发布到商店，可以[直接下载](https://addons.mozilla.org/en-US/firefox/addon/immersive-translate/)。如果你想最快体验到新版，也可以直接在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)下载最新构建的版本，已签名，可以直接安装。
 
 
 
@@ -39,7 +39,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 
-1. 在[这里](https://github.com/theowenyoung/Traduzir-paginas-web/releases)下载chrome的压缩包
+1. 在[这里](https://github.com/immersive-translate/immersive-translate/releases)下载chrome的压缩包
 2. 解压到一个以后不会删除的文件夹
 3. 打开扩展管理窗口，`chrome://extensions`
 4. 激活开发者模式
@@ -51,7 +51,7 @@ chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 
 目前依然处于Alpha阶段，但是常用内容网站在使用上已经没有问题，同时在[Telegram 沉浸式插件讨论组](https://t.me/+rq848Z09nehlOTgx)中经常得到很多有用的反馈，如果你有反馈，也可以在[群里](https://t.me/+rq848Z09nehlOTgx)提出。
 
-在[Release页面](https://github.com/theowenyoung/Traduzir-paginas-web/releases)会有一个nightly版本被频繁的构建，建议喜欢体验最新版/或者想帮忙测试的同学，可以手动安装nightly版本，firefox的扩展包已签名，可以直接下载后作为扩展文件安装。
+在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)会有一个nightly版本被频繁的构建，建议喜欢体验最新版/或者想帮忙测试的同学，可以手动安装nightly版本，firefox的扩展包已签名，可以直接下载后作为扩展文件安装。
 
 > 现在还没有任何选项可以设置,欢迎加入一起开发呀～
 
@@ -103,7 +103,7 @@ This extension Forks from the [TWP](https://github.com/FilipePS/Traduzir-paginas
 
 - Bilingual display, split by paragraph
 - Translation of only the content area of the page, which greatly enhances the reading experience of the translation, instead of the previous one where all elements of the page are translated, similar to the browser reading mode, so the plugin was renamed "Immersive Translation"
-- I hope this plugin is universal enough that it does not need to be customized for most websites, but there are often some websites that are not standardized, or non-content websites, and these websites are better after separate optimization, so we will do separate adaptations for such websites, and the downside is that the website may not work at any time. The bad thing is that the website may fail at any time with the update of the website, so here I will continue to optimize. If you have a commonly used website that does not translate well, please feel free to ask in [Isuee](https://github.com/theowenyoung/Traduzir-paginas-web/issues) or [Telegram group](https://t.me/+rq848Z09nehlOTgx ).
+- I hope this plugin is universal enough that it does not need to be customized for most websites, but there are often some websites that are not standardized, or non-content websites, and these websites are better after separate optimization, so we will do separate adaptations for such websites, and the downside is that the website may not work at any time. The bad thing is that the website may fail at any time with the update of the website, so here I will continue to optimize. If you have a commonly used website that does not translate well, please feel free to ask in [Isuee](https://github.com/immersive-translate/immersive-translate/issues) or [Telegram group](https://t.me/+rq848Z09nehlOTgx ).
 - Support bilingual translation of PDF files
 - Cooperate with epub online reading website <https://1paragraph.app/> to realize bilingual reading of foreign e-books
 
@@ -146,10 +146,10 @@ Some pages like [support.mozilla.org](https://support.mozilla.org/) and [addons.
 ## Todo
 
 
-- [ ] - adapt for Github
-- [ ] - backup默认文件名还是TWP
+- [x] - adapt for Github
+- [x] - backup默认文件名还是TWP
 - [ ] - option页面从extension中打开的显示问题 
-- [ ] - 版本号自动添加
-- [ ] - youtube comments
-- [ ] - better for github
+- [x] - 版本号自动添加
+- [x] - youtube comments
+- [x] - better for github
 

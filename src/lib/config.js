@@ -3,7 +3,7 @@
 const twpConfig = (function () {
   /** @type {function[]} */
   const observers = [];
-  const defaultTargetLanguages = ["en", "es", "de"];
+  const defaultTargetLanguages = ["zh-CN", "zh-TW",'en'];
   /**
    * all configName available
    * @typedef {"pageTranslatorService" | "textTranslatorService" | "ttsSpeed" | "enableDeepL" | "targetLanguage" | "targetLanguageTextTranslation" | "targetLanguages" | "alwaysTranslateSites" | "neverTranslateSites" | "sitesToTranslateWhenHovering" | "langsToTranslateWhenHovering" | "alwaysTranslateLangs" | "neverTranslateLangs" | "customDictionary" | "showTranslatePageContextMenu" | "showTranslateSelectedContextMenu" | "showButtonInTheAddressBar" | "showOriginalTextWhenHovering" | "showTranslateSelectedButton" | "showPopupMobile" | "useOldPopup" | "darkMode" | "popupBlueWhenSiteIsTranslated" | "popupPanelSection" | "showReleaseNotes" | "dontShowIfPageLangIsTargetLang" | "dontShowIfPageLangIsUnknown" | "dontShowIfSelectedTextIsTargetLang" | "dontShowIfSelectedTextIsUnknown" | "hotkeys" | "expandPanelTranslateSelectedText" | "translateTag_pre" | "dontSortResults" | "translateDynamicallyCreatedContent" | "autoTranslateWhenClickingALink" | "translateSelectedWhenPressTwice" | "translateTextOverMouseWhenPressTwice" | "translateClickingOnce"} DefaultConfigNames
@@ -33,7 +33,7 @@ const twpConfig = (function () {
     darkMode: "auto", // auto yes no
     popupBlueWhenSiteIsTranslated: "yes",
     popupPanelSection: 1,
-    showReleaseNotes: "yes",
+    showReleaseNotes: "no",
     dontShowIfPageLangIsTargetLang: "no",
     dontShowIfPageLangIsUnknown: "no",
     dontShowIfSelectedTextIsTargetLang: "no",
