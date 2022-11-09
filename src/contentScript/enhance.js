@@ -155,6 +155,11 @@ const translateSelectors = [
   {
     hostname:"www.youtube.com",
     selectors:["#content-text"]
+  },
+  {
+    hostname:"www.facebook.com",
+    selectors:["div[data-ad-comet-preview=message] > div > div","div[role=article] > div > div > div > div > div > div > div > div "]
+    
   }
 
 ]

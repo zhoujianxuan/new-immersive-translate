@@ -1,6 +1,11 @@
 # Change Log
 
 
+## 0.0.18.1
+
+- Support www.facebook.com
+
+
 ## 0.0.18
 
 - Better for Reddit and old.reddit.com

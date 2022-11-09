@@ -80,3 +80,19 @@ This plugin is more concerned about users who often need to read foreign languag
 6. You hope to get rid of this extension as soon as possible, which is an excessive assistant for users who are directly used to reading the original language
 
 The extension also supports (relies on) Google translation engine or Yandex translation engine, while supporting the use of Bing, Deepl for text selection translation, the plug-in is completely free, I hope we can all get knowledge as equally as possible, thanks to the original extension: https://github.com/FilipePS/Traduzir-paginas-weboriginal for the great effort he put into this project.
+
+
+## Notes for review
+
+
+This extension is used to translate web pages, as well as selected text. Unlike other translation extensions, this extension supports bilingual display at the same time, and translates only the important content of the web page instead of the whole web page, it is like the browser's reading mode, designed to improve the user experience and help user to learn the target language when reading translated pages. It supports most websites out of the box, but has special adaptations for Twitter, Reddit and other information flow websites to make it a better experience.
+
+For the experience, after installing the plugin, you can select a target language, such as Chinese, and then you can open an English web page, for example
+
+https://mfiano.net/posts/2022-09-04-from-common-lisp-to-julia/index.html
+
+Or the Twitter homepage at
+
+https://twitter.com/spectatorindex/
+
+Then right click and select Translate that page and you can see the translated effect.
