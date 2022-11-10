@@ -59,9 +59,9 @@ const inlineElements = [
 
 const translateSelectors = [
   {
-    hostname:"twitter.com",
+    hostname:["twitter.com","tweetdeck.twitter.com","mobile.twitter.com"],
     selectors:[
-     '[data-testid="tweetText"]' 
+     '[data-testid="tweetText"]',".tweet-text" ,".js-quoted-tweet-text"
     ]
   },
   {
@@ -160,6 +160,16 @@ const translateSelectors = [
     hostname:"www.facebook.com",
     selectors:["div[data-ad-comet-preview=message] > div > div","div[role=article] > div > div > div > div > div > div > div > div "]
     
+  },
+  {
+    regex:'\.substack\.com\/',
+    selectors:[
+      ".post-preview-title",
+      ".post-preview-description"
+    ],
+    containerSelectors:[
+      ".post"
+    ]
   }
 
 ]
@@ -319,7 +329,7 @@ function getNodesThatNeedToTranslate(root,ctx,options){
     for(const selector of allBlocksSelectors){
       const nodes = root.querySelectorAll(selector);
       for(const node of nodes){
-        if(currentHostname==="twitter.com"){
+        if(currentHostname==="twitter.com" || currentHostname==="twitterdesk.twitter.com" || currentHostname==="mobile.twitter.com"){
           // check language
           try{
             const lang = node.getAttribute("lang");

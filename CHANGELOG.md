@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.19.1
+
+- Support substack.com
+- tweetdesk.twitter.com
+
 ## 0.0.19
 
 - Support Is Show Dual Language Option
