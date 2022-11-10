@@ -236,9 +236,19 @@ if (typeof chrome.contextMenus !== "undefined") {
 
     chrome.contextMenus.onClicked.addListener((info, tab) => {
         if (info.menuItemId == "translate-web-page") {
-            chrome.tabs.sendMessage(tab.id, {
-                action: "toggle-translation"
-            }, checkedLastError)
+            // check is pdf
+            const isPdf =  globalIsPdf(tab)
+            if(isPdf) {
+              // show popup
+              resetBrowserAction(true)
+              chrome.browserAction.openPopup()
+              resetBrowserAction()
+
+            }else{
+              chrome.tabs.sendMessage(tab.id, {
+                  action: "toggle-translation"
+              }, checkedLastError)
+            }
         } else if (info.menuItemId == "translate-selected-text") {
             if (chrome.pageAction && chrome.pageAction.openPopup && (!tabHasContentScript[tab.id] || tab.isInReaderMode)) {
                 chrome.pageAction.setPopup({

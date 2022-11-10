@@ -144,6 +144,6 @@
 
     "background": {
         "persistent": true,
-        "scripts": ["/lib/languages.js", "/lib/config.js", "/lib/platformInfo.js", "/background/translationCache.js", "/background/translationService.js", "/background/textToSpeech.js", "/background/background.js"]
+        "scripts": ["/lib/languages.js", "/lib/config.js", "/lib/platformInfo.js", "/lib/util.js","/background/translationCache.js", "/background/translationService.js", "/background/textToSpeech.js", "/background/background.js"]
     }
 }

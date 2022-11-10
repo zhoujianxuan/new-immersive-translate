@@ -54,7 +54,6 @@
         <div data-i18n="msgErrorDownloadingDocument" style="margin: 13px;display: none;" id="cannotDownload">Error downloading document</div>
         <div id="selectService">
             <div class="servicebutton" id="translatewebpages" data-name="translatewebpages">Translate Web Pages</div>
-            <div class="servicebutton"  id="googletranslate" data-name="google">Google Translate</div>
         </div>
         <div style="margin: 13px;display: none;" id="cannotusegoogle"></div>
         <div id="send" style="display: none;" data-i18n="msgOpenTranslated" class="sendbutton">Open translated PDF</div>
@@ -62,17 +61,6 @@
     
     <form action="https://translatewebpages.org/pdftohtml" method="POST" target="_blank" enctype="multipart/form-data" id="form_translatewebpages" style="display: none;">
         <input type="text" name="autotranslate" hidden>
-        <input type="file" name="file">
-        <input type="submit" value="Submit">
-    </form>
-
-    <form action="https://translate.googleusercontent.com/translate_f" method="POST" target="_blank" enctype="multipart/form-data" id="form_google" style="display: none;">
-        <!-- <input type="text" name="hl" value="en-US"> -->
-        <input type="text" name="ie" value="UTF-8">
-        <input type="text" name="js" value="y">
-        <input type="text" name="prev" value="_t">
-        <input type="text" name="sl" value="auto">
-        <input type="text" name="tl" value="en">
         <input type="file" name="file">
         <input type="submit" value="Submit">
     </form>

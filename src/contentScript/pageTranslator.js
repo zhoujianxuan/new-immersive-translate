@@ -923,6 +923,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         } else if (request.action === "swapTranslationService") {
             pageTranslator.swapTranslationService()
         } else if (request.action === "toggle-translation") {
+
             if (pageLanguageState === "translated") {
                 pageTranslator.restorePage()
             } else {
