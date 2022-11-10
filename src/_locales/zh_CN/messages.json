@@ -483,5 +483,39 @@
   },
   "lblHotTranslatedSelectedText": {
     "message": "自动替换选中文本为译文"
+  },
+  "msgUnderline":{
+    "message": "下划线"
+  },
+  "msgIsShowDualLanguage":{
+    "message": "是否同时显示双语"
+  },
+  "msgDualTranslationStyle":{
+    "message": "双语显示效果主题选项"
+  },
+  "msgWeakening":{
+    "message": "弱化"
+  },
+  "msgHighlight":{
+    "message": "高亮"
+  },
+  "msgMask":{
+    "message": "模糊，鼠标悬停显示翻译"
+  },
+  "msgNone":{
+    "message": "不添加额外样式"
+  },
+  "msgCustomTranslationStyle":{
+    "message": "自定义双语显示CSS样式（高级,将会覆盖默认主题）"
+  },
+  "msgSave":{
+    "message": "保存"
+  },
+  "msgMore":{
+    "message": "更多"
+  },
+  "msgOpenOptions":{
+    "message": "选项设置"
   }
+ 
 }

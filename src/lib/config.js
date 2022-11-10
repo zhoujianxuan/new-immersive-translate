@@ -28,6 +28,9 @@ const twpConfig = (function () {
     showButtonInTheAddressBar: "yes",
     showOriginalTextWhenHovering: "no",
     showTranslateSelectedButton: "yes",
+    isShowDualLanguage: "yes",
+    dualStyle:"underline",
+    customDualStyle:"",
     showPopupMobile: "yes", // yes no threeFingersOnTheScreen
     useOldPopup: "yes",
     darkMode: "auto", // auto yes no

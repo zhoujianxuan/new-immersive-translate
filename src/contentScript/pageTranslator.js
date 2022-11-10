@@ -220,6 +220,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
       tabUrl,
       tabHostName,
       tabUrlWithoutSearch,
+      twpConfig
     }
     const htmlTagsInlineText = ['#text', 'A', 'ABBR', 'ACRONYM', 'B', 'BDO', 'BIG', 'CITE', 'DFN', 'EM', 'I', 'LABEL', 'Q', 'S', 'SMALL', 'SPAN', 'STRONG', 'SUB', 'SUP', 'U', 'TT', 'VAR']
     const htmlTagsInlineIgnore = ['BR', 'CODE', 'KBD', 'WBR'] // and input if type is submit or button, and pre depending on settings
@@ -607,12 +608,35 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
 
     function encapsulateTextNode(node,ctx) {
         const pageSpecialConfig = getPageSpecialConfig(ctx);
+        const isShowDualLanguage = twpConfig.get("isShowDualLanguage")==='no'?false:true;
+        
+        
         const fontNode = document.createElement("font")
         let style = 'vertical-align: inherit;'
-        if (!pageSpecialConfig || !pageSpecialConfig.noStyle) {
-          style+='border-bottom: 2px solid #72ECE9;'
+        if (isShowDualLanguage && (!pageSpecialConfig || pageSpecialConfig.style!=="none")) {
+          let customDualStyle = twpConfig.get("customDualStyle");
+          let dualStyle = customDualStyle || twpConfig.get("dualStyle") || 'underline';
+          if(pageSpecialConfig && pageSpecialConfig.style){
+            dualStyle = pageSpecialConfig.style;
+          }
+          if(dualStyle==='underline'){
+            style+='border-bottom: 2px solid #72ECE9;'
+          }else if(dualStyle==='none'){
+            // ignore
+          }else if(dualStyle==="highlight"){
+            style+='background-color: #EAD0B3;padding: 3px 0;'
+          }else if(dualStyle==="weakening"){
+            style+='opacity: 0.4;'
+          }else if(dualStyle==="maskxxxxxxxx"){
+            style+="filter: blur(5px);transition: filter 0.5s ease;"
+            // add class immersive-translate-mask
+            fontNode.classList.add("immersive-translate-mask")
+          }else if(dualStyle){
+            style+=dualStyle;
+          }
         }
         fontNode.setAttribute("style", style)
+        // add class name 
         fontNode.textContent = node.textContent
 
         node.replaceWith(fontNode)
@@ -750,7 +774,11 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                             if (pageLanguageState === "translated" && currentFooCount === fooCount) {
                                  await translateResults(piecesToTranslateNow, results,ctx)
                                  // changed here
-                                 showCopyiedNodes()
+                                 const isShowDualLanguage = twpConfig.get("isShowDualLanguage")==='no'?false:true;
+
+                                 if(isShowDualLanguage){
+                                    showCopyiedNodes()
+                                 }
                             }
                     }
 

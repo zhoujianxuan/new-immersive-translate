@@ -18,7 +18,7 @@ const pdfSelectorsConfig =   {
     selectors:[
       'div'
     ],
-    noStyle:true,
+    style:"none",
   };
 
 const inlineElements = [
@@ -146,7 +146,7 @@ const translateSelectors = [
     hostname:["mail.jabber.org","antirez.com"],
     selectors:["pre"],
     containerSelectors: "pre",
-    noStyle: true
+    style: 'none'
   },
   {
     hostname:"github.com",
@@ -288,6 +288,8 @@ function isDuplicatedChild(array,child){
 function getNodesThatNeedToTranslate(root,ctx,options){
   options = options || {};
   const pageSpecialConfig = getPageSpecialConfig(ctx);
+  const twpConfig = ctx.twpConfig
+  const isShowDualLanguage = twpConfig.get("isShowDualLanguage")==='no'?false:true;
   const allBlocksSelectors = pageSpecialConfig && pageSpecialConfig.selectors || []
   const noTranslateSelectors = pageSpecialConfig && pageSpecialConfig.noTranslateSelectors || []
   if(noTranslateSelectors.length > 0){
@@ -384,6 +386,10 @@ function getNodesThatNeedToTranslate(root,ctx,options){
     return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
   })
 
+  if(!isShowDualLanguage){
+      return allNodes;
+  }
+
   // is pdf, if pdf, then treat it as a special case
   const isPdf = new RegExp(pdfSelectorsConfig.regex).test(currentUrlWithoutSearch);
   if(isPdf){
@@ -401,6 +407,7 @@ function getNodesThatNeedToTranslate(root,ctx,options){
     const previousSibling = node.previousSibling;
     // console.log("previousSibling.hasAttribute(markAttributeName)", previousSibling.hasAttribute(markAttributeName))
     if(!previousSibling || !previousSibling.hasAttribute || !previousSibling.hasAttribute(enhanceMarkAttributeName)){
+      // add 
       let copyNode = node.cloneNode(true);
       if(inlineElements.includes(copyNode.nodeName.toLowerCase())){
         // add a space
@@ -415,7 +422,7 @@ function getNodesThatNeedToTranslate(root,ctx,options){
         // display to block
         originalDisplay = "block";
       }
-      formatCopiedNode(copyNode,originalDisplay);
+      formatCopiedNode(copyNode,originalDisplay,ctx,pageSpecialConfig);
       if(ctx.tabHostName === "www.youtube.com"){
         // special, we need to insert all children of the copied node to node
         const copiedChildren = copyNode.childNodes;
@@ -427,13 +434,13 @@ function getNodesThatNeedToTranslate(root,ctx,options){
             span.appendChild(copiedChild);
             copiedChild = span;
           }
-          formatCopiedNode(copiedChild);
+          formatCopiedNode(copiedChild,undefined,ctx,pageSpecialConfig);
           node.insertBefore(copiedChild,firstNode);
         }
         // new line span node
         const newLineSpan = document.createElement("span");
         newLineSpan.innerHTML = "\n";
-        formatCopiedNode(newLineSpan);
+        formatCopiedNode(newLineSpan,undefined,ctx,pageSpecialConfig);
         node.insertBefore(newLineSpan,firstNode);
       }else{
         node.parentNode.insertBefore(copyNode, node)
@@ -550,7 +557,7 @@ function getStyle(el) {
   return window.getComputedStyle(el)
 }
 
-function formatCopiedNode(copyNode,originalDisplay){
+function formatCopiedNode(copyNode,originalDisplay,ctx,pageSpecialConfig){
       copyNode.setAttribute(enhanceMarkAttributeName, "copiedNode");
       // add data-translationoriginaldisplay
       if(originalDisplay){
@@ -560,5 +567,35 @@ function formatCopiedNode(copyNode,originalDisplay){
       copyNode.style.display = "none";
       // add notranslate class
       copyNode.classList.add("notranslate");
-
+      const twpConfig = ctx.twpConfig;
+      const isShowDualLanguage = twpConfig.get("isShowDualLanguage")==='no'?false:true;
+      if (isShowDualLanguage && (!pageSpecialConfig || pageSpecialConfig.style!=="none")) {
+        let customDualStyle = twpConfig.get("customDualStyle");
+        let dualStyle = customDualStyle || twpConfig.get("dualStyle") || 'underline';
+        if(pageSpecialConfig && pageSpecialConfig.style){
+          dualStyle = pageSpecialConfig.style;
+        }
+        if (dualStyle === 'mask') {
+          copyNode.classList.add("immersive-translate-mask-next-sibling");
+        }
+      }
 }
+
+function addStyle(){
+  try{
+
+  // important style
+  var css = '.immersive-translate-mask-next-sibling + *{filter:blur(5px);transition: filter 0.1s ease; } .immersive-translate-mask-next-sibling + *:hover {filter:none !important;}';
+  var style = document.createElement('style');
+  if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+  } else {
+      style.appendChild(document.createTextNode(css));
+  }
+  document.getElementsByTagName('head')[0].appendChild(style);
+  }catch(e){
+    // ignore
+  }
+}
+
+addStyle()

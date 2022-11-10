@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.0.19
+
+- Support Is Show Dual Language Option
+- Support 5 theme for dual language style
+  - Mask
+  - Highlight
+  - Weakening
+  - Underline
+  - None
+- Support custom theme for dual language style
 
 ## 0.0.18.1
 

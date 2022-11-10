@@ -353,10 +353,10 @@ twpConfig.onReady(function () {
       window.close()
     }
 
-    $("#btnSwitchInterfaces").addEventListener("click", () => {
-        twpConfig.set("useOldPopup", "no")
-        window.location = "popup.html"
-    })
+    // $("#btnSwitchInterfaces").addEventListener("click", () => {
+    //     twpConfig.set("useOldPopup", "no")
+    //     window.location.href = "popup.html"
+    // })
 
     $("#divIconTranslate").addEventListener("click", () => {
         chrome.tabs.query({
@@ -438,6 +438,14 @@ twpConfig.onReady(function () {
                         twpConfig.set("showTranslateSelectedButton", "no")
                     } else {
                         twpConfig.set("showTranslateSelectedButton", "yes")
+                    }
+                    window.close()
+                    break
+                case "isShowDualLanguage":
+                    if (twpConfig.get("isShowDualLanguage") === "yes") {
+                        twpConfig.set("isShowDualLanguage", "no")
+                    } else {
+                        twpConfig.set("isShowDualLanguage", "yes")
                     }
                     window.close()
                     break
@@ -527,7 +535,18 @@ twpConfig.onReady(function () {
             } else {
                 $("option[data-i18n=lblShowTranslateSelectedButton]").textContent = "✔ " + text
             }
-        } {
+        }
+        {
+            const text = chrome.i18n.getMessage("msgIsShowDualLanguage")
+            
+            if (twpConfig.get("isShowDualLanguage") !== "yes") {
+                $("option[data-i18n=msgIsShowDualLanguage]").textContent = text
+            } else {
+                $("option[data-i18n=msgIsShowDualLanguage]").textContent = "✔ " + text
+            }
+        }
+  
+      {
             const text = chrome.i18n.getMessage("lblShowOriginalTextWhenHovering")
             if (twpConfig.get("showOriginalTextWhenHovering") !== "yes") {
                 $("option[data-i18n=lblShowOriginalTextWhenHovering]").textContent = text

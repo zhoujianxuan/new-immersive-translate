@@ -599,6 +599,22 @@ twpConfig.onReady(function () {
     }
     $("#useOldPopup").value = twpConfig.get("useOldPopup")
 
+    $("#isShowDualLanguage").onchange = e => {
+        twpConfig.set("isShowDualLanguage", e.target.value)
+    }
+    $("#saveCustomDualStyle").onclick = e => {
+       const customDualStyle = $("#customDualStyle").value;
+       twpConfig.set("customDualStyle", customDualStyle)
+    }
+    if(twpConfig.get("customDualStyle") !== "") {
+      $("#customDualStyle").value = twpConfig.get("customDualStyle")
+    }
+    $("#isShowDualLanguage").value = twpConfig.get("isShowDualLanguage")
+    $("#dualStyle").onchange = e => {
+        twpConfig.set("dualStyle", e.target.value)
+    }
+    $("#dualStyle").value = twpConfig.get("dualStyle")
+
     $("#darkMode").onchange = e => {
         twpConfig.set("darkMode", e.target.value)
         updateDarkMode()

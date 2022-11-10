@@ -14,14 +14,14 @@
     <main>
         <div class="w3-display-topright">
             <div style="display: flex;">
-                <div class="w3-hover-light-grey" id="btnPatreon"
+                <div class="w3-hover-light-grey" style="margin-right: 5px;" id="btnPatreon"
                     title="patreon" data-i18n-title="lblMakeDonation">
                     <i class="gg-heart" style="scale: 0.85;"></i>
                 </div>
-                <div class="w3-hover-light-grey" id="btnSwitchInterfaces"
-                    title="Switch between the old interface and the new one" data-i18n-title="swapPopup">
-                    <i class="gg-swap"></i>
-                </div>
+                <!-- <div class="w3-hover-light-grey" id="btnSwitchInterfaces" -->
+                <!--     title="Switch between the old interface and the new one" data-i18n-title="swapPopup"> -->
+                <!--     <i class="gg-swap"></i> -->
+                <!-- </div> -->
             </div>
         </div>
 
@@ -40,7 +40,7 @@
             <optgroup name="all" label="all" data-i18n-label="msgAll"></optgroup>
         </select>
         <div id="divAlwaysTranslateThisLang">
-            <input id="cbAlwaysTranslateThisLang" class="w3-check" type="checkbox">
+            <input id="cbAlwaysTranslateThisLang" class="w3-check w3-small" type="checkbox">
             <label id="lblAlwaysTranslateThisLang" for="cbAlwaysTranslateThisLang" class="w3-small"
                 data-i18n="lblAlwaysTranslate">Always translate from</label>
         </div>
@@ -76,6 +76,7 @@
                         <optgroup label=""></optgroup>
                         <option data-i18n="lblShowTranslateSelectedButton" value="showTranslateSelectedButton">Show the
                             button to translate the selected text</option>
+                        <option data-i18n="msgIsShowDualLanguage" value="isShowDualLanguage">Show dual language</option>
                         <option data-i18n="lblShowOriginalTextWhenHovering" value="showOriginalTextWhenHovering">Show
                             original text when hovering</option>
                         <option data-i18n="lblShowTranslatedWhenHoveringThisSite"
@@ -85,7 +86,7 @@
                             value="showTranslatedWhenHoveringThisLang" hidden>Show translation when hovering over
                             websites in</option>
                         <optgroup label=""></optgroup>
-                        <option value="translateInExternalSite" data-i18n="btnOpenOnGoogleTranslate">Open in google
+                        <option value="translateInExternalSite" data-i18n="btnOpenOnGoogleTranslate">Open in googleold
                             translate</option>
                         <option value="moreOptions" data-i18n="btnMoreOptions">More options</option>
                         <option value="donate" data-i18n="btnDonate">Donate</option>
@@ -93,13 +94,14 @@
                     <div id="btnOptionB"
                         style="display: inline; position: absolute; top: -6px; left: 0; background-color: white"
                         class="pointerIgnore w3-btn w3-padding-small w3-border w3-round w3-text-blue"
+                        data-i18n="more"
                         >More</div>
                 </div>
             </div>
         </div>
-                <div style="margin-top: 6px;font-size: 0.925em;">
-        <a href="#" style="color:#999;" id="moreOptions">Open Options</a>&nbsp;&nbsp;<span style="color:#999;">v__IMMERSIVE_TRANSLATE_VERSION__</span>
-                </div>
+                <div style="margin-top: 6px;font-size: 0.925em;display:flex;justify-content:space-between;">
+        <span style="color:#999;">v__IMMERSIVE_TRANSLATE_VERSION__</span>
+      <a href="#" style="color:#999;" id="moreOptions" data-i18n="msgOpenOptions">Options</a>          </div>
     </main>
 
     <script src="/lib/languages.js"></script>
