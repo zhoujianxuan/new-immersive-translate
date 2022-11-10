@@ -78,15 +78,15 @@ gulp.task("chrome-zip", () => {
 });
 
 gulp.task("chrome-replace",()=>{
-  return gulp.src(["dist/chrome/options/options.html"])
+  return gulp.src(["dist/chrome/**/*.html"])
   .pipe(replace("__IMMERSIVE_TRANSLATE_VERSION__",manifest.version))
-  .pipe(gulp.dest("dist/chrome/options/"));
+  .pipe(gulp.dest("dist/chrome/"));
 })
 
 gulp.task("firefox-replace",()=>{
-  return gulp.src(["dist/firefox/options/options.html"])
+  return gulp.src(["dist/firefox/**/*.html"])
   .pipe(replace("__IMMERSIVE_TRANSLATE_VERSION__",manifest.version))
-  .pipe(gulp.dest("dist/firefox/options/"));
+  .pipe(gulp.dest("dist/firefox"));
 })
 gulp.task(
   "firefox-build",

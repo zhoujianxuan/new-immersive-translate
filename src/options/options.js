@@ -918,23 +918,23 @@ twpConfig.onReady(function () {
         })
     }
 
-    if (navigator.language === "pt-BR") {
-        $("#currency").value = "BRL"
-        $("#donateInUSD").style.display = "none"
-    } else {
-        $("#currency").value = "USD"
-        $("#donateInBRL").style.display = "none"
-    }
+    // if (navigator.language === "pt-BR") {
+    //     $("#currency").value = "BRL"
+    //     $("#donateInUSD").style.display = "none"
+    // } else {
+    //     $("#currency").value = "USD"
+    //     $("#donateInBRL").style.display = "none"
+    // }
 
-    $("#currency").onchange = e => {
-        if (e.target.value === "BRL") {
-            $("#donateInUSD").style.display = "none"
-            $("#donateInBRL").style.display = "block"
-        } else {
-            $("#donateInUSD").style.display = "block"
-            $("#donateInBRL").style.display = "none"
-        }
-    }
+    // $("#currency").onchange = e => {
+    //     if (e.target.value === "BRL") {
+    //         $("#donateInUSD").style.display = "none"
+    //         $("#donateInBRL").style.display = "block"
+    //     } else {
+    //         $("#donateInUSD").style.display = "block"
+    //         $("#donateInBRL").style.display = "none"
+    //     }
+    // }
 })
 
 window.scrollTo({

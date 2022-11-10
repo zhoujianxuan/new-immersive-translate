@@ -7,4 +7,4 @@ build:
 	npm run build
 .Phony: watch
 watch:
-	watchexec -e js,json npm run chrome
+	watchexec -e js,json,html npm run chrome

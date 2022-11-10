@@ -246,7 +246,7 @@ twpConfig.onReady(function () {
         } else {
             divIconTranslateContainer.style.display = "none"
             lblTargetLanguage.style.display = "none"
-            selectTargetLanguage.style.display = "none"
+            // selectTargetLanguage.style.display = "none"
             btnReset.style.display = "none"
             switch (currentPageLanguageState) {
                 case "translated":
@@ -345,6 +345,12 @@ twpConfig.onReady(function () {
         })
 
         updateInterface()
+    }
+    $("#moreOptions").onclick = e => {
+      chrome.tabs.create({
+          url: chrome.runtime.getURL("/options/options.html")
+      })
+      window.close()
     }
 
     $("#btnSwitchInterfaces").addEventListener("click", () => {
