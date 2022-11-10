@@ -473,7 +473,8 @@ function getContainers(root,pageSpecialConfig){
     //   return main;
     // }
     let selectedContainer;
-    const numWordsOnPage = root.innerText.match(/\S+/g).length;
+    const matched =  root.innerText.match(/\S+/g);
+    const numWordsOnPage =matched?matched.length:0;
     let ps = root.querySelectorAll("p");
 
     // Find the paragraphs with the most words in it

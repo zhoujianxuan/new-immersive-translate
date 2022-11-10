@@ -620,7 +620,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         return fontNode
     }
 
-    function translateResults(piecesToTranslateNow, results,ctx) {
+    async function translateResults(piecesToTranslateNow, results,ctx) {
         if (dontSortResults) {
             for (let i = 0; i < results.length; i++) {
                 for (let j = 0; j < results[i].length; j++) {
@@ -642,9 +642,8 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                             original: nodes[j].textContent
                         })
 
-                        handleCustomWords(translated, nodes[j].textContent, currentPageTranslatorService, currentTargetLanguage).then(results => {
-                            nodes[j].textContent = results
-                        })
+                       const result = await handleCustomWords(translated, nodes[j].textContent, currentPageTranslatorService, currentTargetLanguage);
+                            nodes[j].textContent = result
                     }
                 }
             }
@@ -663,9 +662,9 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                             original: nodes[j].textContent
                         })
 
-                        handleCustomWords(translated, nodes[j].textContent, currentPageTranslatorService, currentTargetLanguage).then(results => {
-                            nodes[j].textContent = results
-                        })
+                      const result =  await handleCustomWords(translated, nodes[j].textContent, currentPageTranslatorService, currentTargetLanguage);
+                      nodes[j].textContent = result
+                        
                     }
                 }
             }
@@ -680,11 +679,11 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         }
     }
 
-    function translateDynamically() {
+    async function translateDynamically() {
         try {
             if (piecesToTranslate && pageIsVisible) {
                 ;
-                (function () {
+                await (async function () {
                     function isInScreen(element) {
                         const rect = element.getBoundingClientRect()
                         if ((rect.top > 0 && rect.top <= window.innerHeight) || (rect.bottom > 0 && rect.bottom <= window.innerHeight)) {
@@ -742,19 +741,17 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                     })
 
                     if (piecesToTranslateNow.length > 0) {
-                        backgroundTranslateHTML(
+                        const results = await backgroundTranslateHTML(
                                 currentPageTranslatorService,
                                 currentTargetLanguage,
                                 piecesToTranslateNow.map(ptt => ptt.nodes.map(node => filterKeywordsInText(node.textContent))),
                                 dontSortResults
                             )
-                            .then(results => {
-                                if (pageLanguageState === "translated" && currentFooCount === fooCount) {
-                                    translateResults(piecesToTranslateNow, results,ctx)
-                                     // changed here
-                                     showCopyiedNodes()
-                                }
-                            })
+                            if (pageLanguageState === "translated" && currentFooCount === fooCount) {
+                                 await translateResults(piecesToTranslateNow, results,ctx)
+                                 // changed here
+                                 showCopyiedNodes()
+                            }
                     }
 
                     if (attributesToTranslateNow.length > 0) {
