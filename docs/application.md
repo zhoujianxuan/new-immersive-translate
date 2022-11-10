@@ -1,6 +1,9 @@
 # Application to Store
 
 
+
+
+
 ## Purpose
 
 This extension is used to translate web pages, as well as selected text. Unlike other translation extensions, this extension supports bilingual display at the same time, and translates only the important content of the web page instead of the whole web page, it is like the browser's reading mode, designed to improve the user experience and help user to learn the target language when reading translated pages. It supports most websites out of the box, but has special adaptations for Twitter, Reddit and other information flow websites to make it a better experience.

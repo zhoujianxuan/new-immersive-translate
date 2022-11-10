@@ -7,15 +7,19 @@ function getTabHostName() {
 }
 
 Promise.all([twpConfig.onReady(), getTabHostName()])
-.then(function (_) {
+.then(async function (_) {
     const tabHostName = _[1]
     if (platformInfo.isMobile.any) return;
 
     let styleTextContent = ""
-    fetch(chrome.runtime.getURL("/contentScript/css/showTranslated.css"))
-        .then(response => response.text())
-        .then(response => styleTextContent = response)
-        .catch(e => console.error(e))
+    try{
+
+      const response = await fetch(chrome.runtime.getURL("/contentScript/css/showTranslated.css"))
+      styleTextContent = await response.text()
+    }catch(e){
+      console.warn(e)
+    }
+
 
     let pageLanguageState = "original"
     let originalTabLanguage = "und"
