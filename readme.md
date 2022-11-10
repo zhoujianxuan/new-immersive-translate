@@ -61,6 +61,10 @@ chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 
 ![twitter](assets/twitter.png)
 
+### Twitter 模糊效果
+
+![Twitter mask](assets/twitter-mask.png)
+
 ### Reddit
 
 ![reddit](assets/reddit.png)
@@ -75,6 +79,7 @@ chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 ![epub](assets/epub.jpg)
 
 > 配合epub在线阅读网站<https://1paragraph.app/> 即可实现如图的通过双语阅读国外电子书
+
 
 
 ### Hacker News
