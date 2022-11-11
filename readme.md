@@ -33,8 +33,6 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 已发布到商店，可以[直接下载](https://addons.mozilla.org/en-US/firefox/addon/immersive-translate/)。如果你想最快体验到新版，也可以直接在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)下载最新构建的版本，已签名，可以直接安装。
 
-
-
 ### Chrome/Edge
 
 chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
@@ -46,6 +44,10 @@ chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
 5. 载入刚解压的扩展文件夹
 6. 安装后，target语言可以选中文
 7. 接下来可以设置为always自动翻译英文，或者右键手动点击翻译本页面，即可有双语显示，打开推特试试看！
+
+### Google 接口
+
+Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/t?anno=3&client=te&v=1.0&format=html`，所以需要你的网络能访问google的这个网址。
 
 ## 项目状态
 
