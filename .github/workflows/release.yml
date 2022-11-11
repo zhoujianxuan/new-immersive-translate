@@ -36,7 +36,7 @@ jobs:
         run: |
           content=`cat ./src/manifest.json`
           echo "::set-output name=version::$(echo $content | jq -r '.version')"
-      - name: Upload & release
+      - name: Upload & release to chrome store
         uses: mnao305/chrome-extension-upload@3.0.0
         with:
           file-path: dist/chrome.zip
@@ -44,41 +44,32 @@ jobs:
           client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
           client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           refresh-token: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
-      # - name: "web-ext build"
-      #   id: web-ext-build
-      #   uses: kewisch/action-web-ext@v1
-      #   with:
-      #     cmd: build
-      #     source: dist/firefox  
-      # # - uses: trmcnvn/firefox-addon@v1
-      # #   with:
-      # #     # uuid is only necessary when updating an existing addon,
-      # #     # omitting it will create a new addon
-      # #     uuid: '{5efceaa7-f3a2-4e59-a54b-85319448e305}'
-      # #     xpi: ${{ steps.web-ext-build.outputs.target }}
-      # #     manifest: ./src/manifest.json
-      # #     api-key: ${{ secrets.FIREFOX_API_KEY }}
-      # #     api-secret: ${{ secrets.FIREFOX_API_SECRET }}
-      # - name: "web-ext sign"
-      #   id: web-ext-sign
-      #   uses: kewisch/action-web-ext@v1
-      #   with:
-      #     cmd: sign
-      #     source: ${{ steps.web-ext-build.outputs.target }} 
-      #     channel: listed
-      #     apiKey: ${{ secrets.FIREFOX_API_KEY }}
-      #     apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
-      #     timeout: 900000
-      #
-      # - name: move dist file to release
-      #   run: |
-      #     mv dist/chrome.zip dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
-      #     mv ${{ steps.web-ext-build.outputs.target }} dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
-      # - name: release assets
-      #   uses: "marvinpinto/action-automatic-releases@v1.2.1"
-      #   with:
-      #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
-      #     prerelease: false
-      #     files: |
-      #       dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
-      #       dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
+      - name: "web-ext build"
+        id: web-ext-build
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: build
+          source: dist/firefox  
+      - name: "web-ext sign"
+        id: web-ext-sign
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: sign
+          source: ${{ steps.web-ext-build.outputs.target }} 
+          channel: listed
+          apiKey: ${{ secrets.FIREFOX_API_KEY }}
+          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
+          timeout: 900000
+
+      - name: move dist file to release
+        run: |
+          mv dist/chrome.zip dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
+          mv ${{ steps.web-ext-build.outputs.target }} dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
+      - name: release assets
+        uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
+            dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
