@@ -35,7 +35,10 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 ### Chrome/Edge
 
-chrome,edge商店的升级和发布正在进行中，目前需要手动安装：
+
+Chrome商店已上架，可以[直接下载](https://chrome.google.com/webstore/detail/immersive-translate/bpoadfkcbjbfhfodiogcnhhhpibjhbnh),如果你想最快体验到新版，也可以直接在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)下载最新构建的版本。
+
+Edge商店正在提审中，你可以用chrome商店的版本，或者手动安装：
 
 1. 在[这里](https://github.com/immersive-translate/immersive-translate/releases)下载chrome的压缩包
 2. 解压到一个以后不会删除的文件夹

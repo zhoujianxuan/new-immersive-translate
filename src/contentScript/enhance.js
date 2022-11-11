@@ -221,18 +221,31 @@ function getPageSpecialConfig(ctx){
       }
     }
   }
+
+  // check is clearly reader
+  // html tag class clearly-overflow
+  // console.log("document.documentElement", document.documentElement.classList)
+  // if(document.documentElement && document.documentElement.classList.contains('clearly-overflow')){
+  //   specialConfig = {
+  //     containerSelectors:[
+  //       "div#container"
+  //     ]
+  //   }
+  // }
+
   // handle nitter, there are too many domains, so we detect it by meta, and element
   // if og:sitename is "Nitter", and there is class name tweet-content, then it is nitter
   const nitterMeta = document.querySelector('meta[property="og:site_name"]');
   if(nitterMeta && nitterMeta.getAttribute('content') === 'Nitter'){
     const nitterTweetContent = document.querySelector('.tweet-content');
     if(nitterTweetContent){
-      return {
+      specialConfig =  {
         name:"nitter",
         selectors:['.tweet-content','.quote-text']
       }
     }
   }
+  return specialConfig
 }
 
 
@@ -302,6 +315,7 @@ function isDuplicatedChild(array,child){
 function getNodesThatNeedToTranslate(root,ctx,options){
   options = options || {};
   const pageSpecialConfig = getPageSpecialConfig(ctx);
+  console.log("pageSpecialConfig", pageSpecialConfig)
   const twpConfig = ctx.twpConfig
   const isShowDualLanguage = twpConfig.get("isShowDualLanguage")==='no'?false:true;
   const allBlocksSelectors = pageSpecialConfig && pageSpecialConfig.selectors || []
