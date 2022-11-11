@@ -90,7 +90,9 @@ The extension also supports (relies on) Google translation engine or Yandex tran
 
 This extension is used to translate web pages, as well as selected text. Unlike other translation extensions, this extension supports bilingual display at the same time, and translates only the important content of the web page instead of the whole web page, it is like the browser's reading mode, designed to improve the user experience and help user to learn the target language when reading translated pages. It supports most websites out of the box, but has special adaptations for Twitter, Reddit and other information flow websites to make it a better experience.
 
-For the experience, after installing the plugin, you can select a target language, such as Chinese, and then you can open an English web page, for example
+For the experience, after installing the plugin, you can select a target language, such as Chinese, and then you can open an English web page, for example:
+
+https://github.com/microsoft/vscode
 
 https://mfiano.net/posts/2022-09-04-from-common-lisp-to-julia/index.html
 
