@@ -162,4 +162,5 @@ Some pages like [support.mozilla.org](https://support.mozilla.org/) and [addons.
 - [x] - 版本号自动添加
 - [x] - youtube comments
 - [x] - better for github
-
+- [ ] - check is target language, if so ,do not translate
+- [ ] - read mode
