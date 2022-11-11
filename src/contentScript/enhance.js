@@ -170,6 +170,10 @@ const translateSelectors = [
     containerSelectors:[
       ".post"
     ]
+  },
+  {
+    hostname:"www.nature.com",
+    containerSelectors:"article"
   }
 
 ]

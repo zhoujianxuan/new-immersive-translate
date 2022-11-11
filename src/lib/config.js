@@ -29,7 +29,7 @@ const twpConfig = (function () {
     showOriginalTextWhenHovering: "no",
     showTranslateSelectedButton: "yes",
     isShowDualLanguage: "yes",
-    dualStyle:"underline",
+    dualStyle:"none",
     customDualStyle:"",
     showPopupMobile: "yes", // yes no threeFingersOnTheScreen
     useOldPopup: "yes",

@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.19.2
+
+- Support nature.com
+- The Dual Style default style to none
+
 ## 0.0.19.1
 
 - Support substack.com
