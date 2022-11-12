@@ -52,10 +52,33 @@ jobs:
           apiKey: ${{ secrets.FIREFOX_API_KEY }}
           apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
           timeout: 900000
+      # build for assets
+      # change manifest.json version +1
+
+      # - name: "change firefox self signed version to ${{ steps.set_var.outputs.version }}.1"
+      #   run: |
+      #     content=`cat ./dist/firefox/manifest.json`
+      #     echo $content | jq ".version = \"${{ steps.set_var.outputs.version }}.1\"" > ./dist/firefox/manifest.json
+      # - name: "web-ext build for signed version"
+      #   id: web-ext-build-signed
+      #   uses: kewisch/action-web-ext@v1
+      #   with:
+      #     cmd: build
+      #     source: dist/firefox
+      # - name: "web-ext sign version"
+      #   id: web-ext-self-sign
+      #   uses: kewisch/action-web-ext@v1
+      #   with:
+      #     cmd: sign
+      #     source: ${{ steps.web-ext-build-signed.outputs.target }} 
+      #     channel: unlisted
+      #     apiKey: ${{ secrets.FIREFOX_API_KEY }}
+      #     apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
+      #     timeout: 900000
       - name: move dist file to release
         run: |
           mv dist/chrome.zip dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
-          mv ${{ steps.web-ext-build.outputs.target }} dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
+          mv ${{ steps.web-ext-sign.outputs.target }} dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
       - name: release assets
         uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
