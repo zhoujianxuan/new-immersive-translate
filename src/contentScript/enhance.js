@@ -366,7 +366,7 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
           // check language
           try{
             const lang = node.getAttribute("lang");
-            if(lang &&  currentTargetLanguage.startsWith(lang)){
+            if(lang && checkIsSameLanguage(lang,currentTargetLanguage,ctx)){
               continue;
             }
           }catch(e){
@@ -437,7 +437,7 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
     const nodeText = node.innerText;
     if(nodeText && nodeText.trim().length>0){
       const lang = await detectLanguage(nodeText);
-      if(lang && !currentTargetLanguage.startsWith(lang)){
+      if(lang && !checkIsSameLanguage(lang,currentTargetLanguage,ctx)){
         // only translate the clearly language
         newAllNodes.push(node);
       }
@@ -682,4 +682,29 @@ addStyle()
             resolve(response)
         })
     })
+}
+
+function checkIsSameLanguage(lang,currentTargetLang,ctx){
+  const finalLang = twpLang.fixTLanguageCode(lang);
+  if(!finalLang){
+    return false;
+  }
+  if(finalLang === currentTargetLang){
+    return true;
+  }
+  
+  // for api does not has the best detect for zh-CN and zh-TW
+  // we will treat zh-CN and zh-TW as same language
+  // we focus on the dual language display, so zh-TW -> zh-CN is not the first priority to fix,
+  // I think people will not use it to learn zh-TW to zh-CN
+  // only is show dual language, we will treat zh-CN and zh-TW as same language
+  if(ctx && ctx.twpConfig && ctx.twpConfig.get("isShowDualLanguage")==='yes'){
+    if(finalLang.startsWith("zh-") && currentTargetLang.startsWith('zh-')){
+      return true;
+    }else{
+      return false
+    }
+  }
+
+  return false
 }

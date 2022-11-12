@@ -5254,9 +5254,9 @@ const twpLang = (function () {
   twpLang.fixTLanguageCode = function (langCode) {
     if (typeof langCode !== "string") return;
 
-    if (langCode === "zh") {
+    if (langCode === "zh" || langCode==='zh-Hans') {
       return "zh-CN";
-    } else if (langCode === "zh-Hant") {
+    } else if (langCode === "zh-Hant" || langCode === "zh-HK") {
       return "zh-TW";
     } else if (langCode === "iw") {
       return "he";
