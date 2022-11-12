@@ -61,6 +61,7 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
+          automatic_release_tag: "v${{ steps.set_var.outputs.version }}"
           files: |
             dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
             dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
