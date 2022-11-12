@@ -4,7 +4,7 @@ const enhanceOriginalDisplayValueAttributeName = "data-translationoriginaldispla
 const enhanceHtmlTagsInlineIgnore = ['BR', 'CODE', 'KBD', 'WBR'] // and input if type is submit or button, and pre depending on settings
 const enhanceHtmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG', 'svg'] //TODO verificar porque 'svg' é com letras minúsculas
 const blockElements = [
-    'H1', 'H2', 'H3', 'H4', 'H5', 'H6','TABLE',  'OL',  'UL', 'P',
+    'H1', 'H2', 'H3', 'H4', 'H5', 'H6','TABLE',  'LI', 'P',
   ];
 if (twpConfig.get('translateTag_pre') !== 'yes') {
     blockElements.push('PRE')
@@ -174,6 +174,10 @@ const translateSelectors = [
   {
     hostname:"www.nature.com",
     containerSelectors:"article"
+  },{
+    hostname:"seekingalpha.com",
+    containerSelectors:"div.wsb_section",
+    brToParagraph: true
   }
 
 ]
@@ -226,6 +230,18 @@ function getPageSpecialConfig(ctx){
   // html tag class clearly-overflow
   // console.log("document.documentElement", document.documentElement.classList)
   // if(document.documentElement && document.documentElement.classList.contains('clearly-overflow')){
+  //   // id=clearly-container iframe
+  //   // remove  referrerpolicy attribute
+  //   const clearlyContainer = document.querySelector('iframe#clearly-container');
+  //   if(clearlyContainer){
+  //     // clearlyContainer.removeAttribute('referrerpolicy');
+  //     console.log("clearlyContainer", clearlyContainer)
+  //     // change referrerpolicy to  unsafe-url
+  //     clearlyContainer.setAttribute('referrerpolicy', 'unsafe-url');
+  //     // remove this node
+  //     // clearlyContainer.parentNode.removeChild(clearlyContainer);
+  //
+  //   }
   //   specialConfig = {
   //     containerSelectors:[
   //       "div#container"
@@ -315,7 +331,6 @@ function isDuplicatedChild(array,child){
 function getNodesThatNeedToTranslate(root,ctx,options){
   options = options || {};
   const pageSpecialConfig = getPageSpecialConfig(ctx);
-  console.log("pageSpecialConfig", pageSpecialConfig)
   const twpConfig = ctx.twpConfig
   const isShowDualLanguage = twpConfig.get("isShowDualLanguage")==='no'?false:true;
   const allBlocksSelectors = pageSpecialConfig && pageSpecialConfig.selectors || []
@@ -441,7 +456,10 @@ function getNodesThatNeedToTranslate(root,ctx,options){
         // add a space
         copyNode.style.paddingRight = "8px";
       }else{
-        copyNode.style.paddingBottom = "8px";
+        // if not li element
+        if(copyNode.nodeName.toLowerCase() !== "li"){
+          copyNode.style.paddingBottom = "8px";
+        }
       }
       // get original display value
       let originalDisplay = node.style.display;
@@ -492,6 +510,13 @@ function getContainers(root,pageSpecialConfig){
           const allContainer = root.querySelectorAll(pageSpecialConfig.containerSelectors);
           if(allContainer){
             for(const container of allContainer){
+              // check if brToParagraph
+              if(pageSpecialConfig.brToParagraph){
+                  const pattern = new RegExp ("<br/?>[ \r\n\s]*<br/?>", "g");
+                  container.innerHTML = container.innerHTML.replace(pattern, "</p><p>");
+              }
+
+
               containers.push(container);
             } 
           }
