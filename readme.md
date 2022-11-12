@@ -28,6 +28,8 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行文本选中翻译，扩展完全免费，希望我们都能尽可能平等的获取知识，不要让语言成为障碍，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
 
+本项目的[Wiki页面](https://github.com/immersive-translate/immersive-translate/wiki)下也有一些大家贡献的常用小技巧和使用说明～
+
 ## 安装说明
 
 ### Firefox 
