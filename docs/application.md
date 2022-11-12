@@ -128,3 +128,15 @@ Then right click and select Translate that page and you can see the translated e
 ## Video
 
 16:9 1248:702
+
+
+### Description: 
+
+
+This is a demo for Immersive Translate Extension.
+
+Home Page: https://github.com/immersive-translate/immersive-translate
+Chrome Store: https://chrome.google.com/webstore/detail/immersive-translate/bpoadfkcbjbfhfodiogcnhhhpibjhbnh
+Firefox Store: https://addons.mozilla.org/en-US/firefox/addon/immersive-translate/
+
+

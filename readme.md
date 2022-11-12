@@ -19,7 +19,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 **视频介绍**
 
-[![Demo](https://img.youtube.com/vi/KleBObLSa6Y/0.jpg)](https://www.youtube.com/watch?v=KleBObLSa6Y)
+[![Demo](https://img.youtube.com/vi/9TzX0xEBmyw/0.jpg)](https://www.youtube.com/watch?v=9TzX0xEBmyw)
 
 
 
