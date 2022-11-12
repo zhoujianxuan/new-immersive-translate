@@ -101,3 +101,26 @@ Or the Twitter homepage at
 https://twitter.com/spectatorindex/
 
 Then right click and select Translate that page and you can see the translated effect.
+
+
+
+
+
+## Examples
+
+- <https://twitter.com/elonmusk>
+- <https://twitter.com/spectatorindex>
+- <https://twitter.com/i/lists/1591319857319903233>
+- <https://news.ycombinator.com/>
+- <https://hn.algolia.com/>
+- <https://www.reddit.com/>
+- <https://www.judiciary.senate.gov/imo/media/doc/Haidt%20Testimony.pdf>
+- <https://1paragraph.app/>
+- <https://github.com/bitcoin/bitcoin>
+- <https://www.nature.com/articles/d41586-022-03611-w>
+- <https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01482-6>
+- <https://www.reuters.com/markets/currencies/exclusive-least-1-billion-client-funds-missing-failed-crypto-firm-ftx-sources-2022-11-12/>
+- <https://www.youtube.com/watch?v=LNm9kZR15m8>
+- <https://www.facebook.com/groups/cheapmealideas>
+
+

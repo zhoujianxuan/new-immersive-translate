@@ -181,6 +181,12 @@ const translateSelectors = [
   },{
     hostname:"hn.algolia.com",
     selectors:[".Story_title"]
+  },{
+    hostname:"read.readwise.io",
+    selectors:['div[class^="_titleRow_"]','div[class^="_description_"]'],
+    containerSelectors:[
+      "#document-text-content"
+    ]
   }
 
 ]
@@ -367,7 +373,16 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
   if((pageSpecialConfig && pageSpecialConfig.containerSelectors) || allBlocksSelectors.length === 0){
     const originalRoot = root;
     const contentContainers = getContainers(root,pageSpecialConfig);
-    let containers = [root]
+    let containers = []
+    if(pageSpecialConfig && pageSpecialConfig.containerSelectors){
+      if(!Array.isArray(pageSpecialConfig.containerSelectors)){
+        pageSpecialConfig.containerSelectors = [pageSpecialConfig.containerSelectors];
+      }
+      // check length
+      if(pageSpecialConfig.containerSelectors.length ===0){
+        containers = [root]
+      }
+    }
     if(contentContainers && Array.isArray(contentContainers)){
       containers = contentContainers;
     }  
@@ -504,23 +519,26 @@ function getContainers(root,pageSpecialConfig){
       if(!Array.isArray(pageSpecialConfig.containerSelectors)){
         pageSpecialConfig.containerSelectors = [pageSpecialConfig.containerSelectors];
       }
-      let containers =[];
-      for(const selector of pageSpecialConfig.containerSelectors){
-          const allContainer = root.querySelectorAll(pageSpecialConfig.containerSelectors);
-          if(allContainer){
-            for(const container of allContainer){
-              // check if brToParagraph
-              if(pageSpecialConfig.brToParagraph){
-                  const pattern = new RegExp ("<br/?>[ \r\n\s]*<br/?>", "g");
-                  container.innerHTML = container.innerHTML.replace(pattern, "</p><p>");
-              }
+
+      if(pageSpecialConfig.containerSelectors.length >0){
+        let containers =[];
+        for(const selector of pageSpecialConfig.containerSelectors){
+            const allContainer = root.querySelectorAll(pageSpecialConfig.containerSelectors);
+            if(allContainer){
+              for(const container of allContainer){
+                // check if brToParagraph
+                if(pageSpecialConfig.brToParagraph){
+                    const pattern = new RegExp ("<br/?>[ \r\n\s]*<br/?>", "g");
+                    container.innerHTML = container.innerHTML.replace(pattern, "</p><p>");
+                }
 
 
-              containers.push(container);
-            } 
-          }
+                containers.push(container);
+              } 
+            }
+        }
+        return containers.length>0?containers:null;
       }
-      return containers.length>0?containers:null;
     }
 
     if(!(root && root.innerText)){
