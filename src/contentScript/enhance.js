@@ -205,6 +205,9 @@ const translateSelectors = [
   },{
     hostname:"www.producthunt.com",
     selectors:["a[data-test^='post-']",'h2',"div.layoutCompact div[class^='styles_htmlText__']"],
+  },{
+    hostname:"arxiv.org",
+    selectors:["blockquote.abstract","h1"]
   }
 
 ]

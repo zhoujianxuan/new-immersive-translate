@@ -17,6 +17,12 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 - 支持PDF文件双语对照翻译
 - 配合epub在线阅读网站<https://1paragraph.app/> 即可实现双语阅读国外电子书
 
+**视频介绍**
+
+[![Demo](https://img.youtube.com/vi/KleBObLSa6Y/0.jpg)](https://www.youtube.com/watch?v=KleBObLSa6Y)
+
+
+
 沉浸式翻译和[原扩展](https://github.com/FilipePS/Traduzir-paginas-web)的目标不太一样，原扩展更多的是作为一个非常好用的通用翻译扩展，是浏览器自带翻译的良好替代品，在没有浏览器自带翻译的浏览器里提供了巨大的帮助。但是本扩展更关注经常需要看外文的用户在阅读外文页面时能有一个良好的体验（我想做这个扩展就是因为我经常需要在[Buzzing](https://www.buzzing.cc/)上浏览大量的外媒文章），所以该扩展的目标群体是：
 
 - 经常阅读国外长篇文章，论文
