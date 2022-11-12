@@ -9,15 +9,15 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 [![GitHub license](https://img.shields.io/github/license/immersive-translate/immersive-translate?color=lightgrey)](https://github.com/immersive-translate/immersive-translate/blob/master/LICENSE)
 
 
-说明： 该扩展Fork自[TWP](https://github.com/FilipePS/Traduzir-paginas-web)插件，我为其添加了以下功能：
+说明： 该扩展Fork自[TWP](https://github.com/FilipePS/Traduzir-paginas-web)扩展，我为其添加了以下功能：
 
 - 双语显示，按照段落分割
-- 只翻译网页里的内容区域，这极大的增强了翻译的阅读体验，而不是像之前那样网页的所有元素都被翻译，类似浏览器的阅读模式，所以该插件被重新命名为“沉浸式翻译”
-- 为常用网站做了定制优化，比如推特，Reddit，Hacker News等，我希望这个插件足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站在单独优化后体验更好，所以我们会对这类网站做单独适配，同时坏处就是可能随时网站的更新而失效，所以这里我会持续优化。如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/immersive-translate/immersive-translate/issues)或[Telegram群组](https://t.me/+rq848Z09nehlOTgx)中提出。
+- 只翻译网页里的内容区域，这极大的增强了翻译的阅读体验，而不是像之前那样网页的所有元素都被翻译，类似浏览器的阅读模式，所以该扩展被重新命名为“沉浸式翻译”
+- 为常用网站做了定制优化，比如推特，Reddit，Hacker News等，我希望这个扩展足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站在单独优化后体验更好，所以我们会对这类网站做单独适配，同时坏处就是可能随时网站的更新而失效，所以这里我会持续优化。如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/immersive-translate/immersive-translate/issues)或[Telegram群组](https://t.me/+rq848Z09nehlOTgx)中提出。
 - 支持PDF文件双语对照翻译
 - 配合epub在线阅读网站<https://1paragraph.app/> 即可实现双语阅读国外电子书
 
-沉浸式翻译和[原插件](https://github.com/FilipePS/Traduzir-paginas-web)的目标不太一样，原插件更多的是作为一个非常好用的通用翻译扩展，是浏览器自带翻译的良好替代品，在没有浏览器自带翻译的浏览器里提供了巨大的帮助。但是本插件更关注经常需要看外文的用户在阅读外文页面时能有一个良好的体验（我想做这个插件就是因为我经常需要在[Buzzing](https://www.buzzing.cc/)上浏览大量的外媒文章），所以该插件的目标群体是：
+沉浸式翻译和[原扩展](https://github.com/FilipePS/Traduzir-paginas-web)的目标不太一样，原扩展更多的是作为一个非常好用的通用翻译扩展，是浏览器自带翻译的良好替代品，在没有浏览器自带翻译的浏览器里提供了巨大的帮助。但是本扩展更关注经常需要看外文的用户在阅读外文页面时能有一个良好的体验（我想做这个扩展就是因为我经常需要在[Buzzing](https://www.buzzing.cc/)上浏览大量的外媒文章），所以该扩展的目标群体是：
 
 - 经常阅读国外长篇文章，论文
 - 阅读外文PDF，外语电子书
@@ -26,7 +26,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 - 希望同时显示双语，以平衡部分机器翻译的不知所云
 - 希望尽快摆脱这个扩展，直接习惯看原文的用户的过度助手
 
-该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行文本选中翻译，插件完全免费，希望我们都能尽可能平等的获取知识，不要让语言成为障碍，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
+该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行文本选中翻译，扩展完全免费，希望我们都能尽可能平等的获取知识，不要让语言成为障碍，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
 
 ## 安装说明
 
@@ -55,7 +55,7 @@ Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/
 
 ## 项目状态
 
-目前依然处于Alpha阶段，但是常用内容网站在使用上已经没有问题，同时在[Telegram 沉浸式插件讨论组](https://t.me/+rq848Z09nehlOTgx)中经常得到很多有用的反馈，如果你有反馈，也可以在[群里](https://t.me/+rq848Z09nehlOTgx)提出。
+目前依然处于Alpha阶段，但是常用内容网站在使用上已经没有问题，同时在[Telegram 沉浸式翻译扩展讨论组](https://t.me/+rq848Z09nehlOTgx)中经常得到很多有用的反馈，如果你有反馈，也可以在[群里](https://t.me/+rq848Z09nehlOTgx)提出。
 
 在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)会有一个nightly版本被频繁的构建，建议喜欢体验最新版/或者想帮忙测试的同学，可以手动安装nightly版本，firefox的扩展包已签名，可以直接下载后作为扩展文件安装。
 
