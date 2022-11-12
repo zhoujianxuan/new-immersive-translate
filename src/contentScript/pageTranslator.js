@@ -268,13 +268,13 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
 
     let nodesToRestore = []
 
-    function translateNewNodes() {
+    async function translateNewNodes() {
         try {
-            newNodes.forEach(nn => {
-                if (removedNodes.indexOf(nn) != -1) return;
+            for(const nn of newNodes) {
+                if (removedNodes.indexOf(nn) != -1) continue;
 
                 // let newPiecesToTranslate = getPiecesToTranslate(nn)
-                let newPiecesToTranslate = getNodesThatNeedToTranslate(nn,ctx).reduce((acc, node) => {
+                let newPiecesToTranslate = (await getNodesThatNeedToTranslate(nn,ctx)).reduce((acc, node) => {
                   return acc.concat(getPiecesToTranslate(node))
                 }, [])
 
@@ -292,7 +292,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                         piecesToTranslate.push(newPiecesToTranslate[i])
                     }
                 }
-            })
+            }
         } catch (e) {
             console.error(e)
         } finally {
@@ -829,7 +829,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         pageLanguageStateObservers.push(callback)
     }
 
-    pageTranslator.translatePage = function (targetLanguage) {
+    pageTranslator.translatePage = async function (targetLanguage) {
         fooCount++
         pageTranslator.restorePage()
         showOriginal.enable()
@@ -843,7 +843,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         // piecesToTranslate = getPiecesToTranslate()
        try{
 
-        piecesToTranslate = getNodesThatNeedToTranslate(document.body,ctx).reduce((acc, node) => {
+        piecesToTranslate = (await getNodesThatNeedToTranslate(document.body,ctx)).reduce((acc, node) => {
           return acc.concat(getPiecesToTranslate(node))
         }, [])
        }catch(e){

@@ -81,6 +81,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             sendResponse(tabToMimeType[tabs[0].id])
         })
         return true
+    }else if(request.action ==='detectLanguage'){
+        chrome.i18n.detectLanguage(request.text, function(result){
+          if(result.languages.length > 0){
+            sendResponse(result.languages[0].language);
+          }else{
+            sendResponse(undefined);
+          }
+        });
+        return true
     }
 })
 

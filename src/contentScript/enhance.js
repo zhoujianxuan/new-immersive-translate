@@ -4,7 +4,7 @@ const enhanceOriginalDisplayValueAttributeName = "data-translationoriginaldispla
 const enhanceHtmlTagsInlineIgnore = ['BR', 'CODE', 'KBD', 'WBR'] // and input if type is submit or button, and pre depending on settings
 const enhanceHtmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG', 'svg'] //TODO verificar porque 'svg' é com letras minúsculas
 const blockElements = [
-    'H1', 'H2', 'H3', 'H4', 'H5', 'H6','TABLE',  'LI', 'P',
+    'H1', 'H2', 'H3', 'H4', 'H5', 'H6','TABLE',  'OL',"UL", 'P',
   ];
 if (twpConfig.get('translateTag_pre') !== 'yes') {
     blockElements.push('PRE')
@@ -328,7 +328,7 @@ function isDuplicatedChild(array,child){
   }
   return false;
 }
-function getNodesThatNeedToTranslate(root,ctx,options){
+async function getNodesThatNeedToTranslate(root,ctx,options){
   options = options || {};
   const pageSpecialConfig = getPageSpecialConfig(ctx);
   const twpConfig = ctx.twpConfig
@@ -429,6 +429,23 @@ function getNodesThatNeedToTranslate(root,ctx,options){
     return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
   })
 
+
+  // check node language is target language, if yes, remove it
+
+  let newAllNodes = [];
+  for(const node of allNodes){
+    const nodeText = node.innerText;
+    if(nodeText && nodeText.trim().length>0){
+      const lang = await detectLanguage(nodeText);
+      if(lang && !currentTargetLanguage.startsWith(lang)){
+        // only translate the clearly language
+        newAllNodes.push(node);
+      }
+    }
+  }
+
+  allNodes = newAllNodes;
+
   if(!isShowDualLanguage){
       return allNodes;
   }
@@ -457,7 +474,8 @@ function getNodesThatNeedToTranslate(root,ctx,options){
         copyNode.style.paddingRight = "8px";
       }else{
         // if not li element
-        if(copyNode.nodeName.toLowerCase() !== "li"){
+        const copiedNodeName = copyNode.nodeName.toLowerCase();
+        if(!['p','ul','ol','li'].includes(copiedNodeName)){
           copyNode.style.paddingBottom = "8px";
         }
       }
@@ -652,3 +670,16 @@ function addStyle(){
 }
 
 addStyle()
+
+
+ function detectLanguage(text) {
+  // send message to background
+    return new Promise((resolve, reject) => {
+        chrome.runtime.sendMessage({
+            action: "detectLanguage",
+             text: text
+        }, response => {
+            resolve(response)
+        })
+    })
+}
