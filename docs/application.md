@@ -111,8 +111,6 @@ Then right click and select Translate that page and you can see the translated e
 - <https://twitter.com/elonmusk>
 - <https://twitter.com/spectatorindex>
 - <https://twitter.com/i/lists/1591319857319903233>
-- <https://news.ycombinator.com/>
-- <https://hn.algolia.com/>
 - <https://www.reddit.com/>
 - <https://www.judiciary.senate.gov/imo/media/doc/Haidt%20Testimony.pdf>
 - <https://1paragraph.app/>
@@ -122,5 +120,11 @@ Then right click and select Translate that page and you can see the translated e
 - <https://www.reuters.com/markets/currencies/exclusive-least-1-billion-client-funds-missing-failed-crypto-firm-ftx-sources-2022-11-12/>
 - <https://www.youtube.com/watch?v=LNm9kZR15m8>
 - <https://www.facebook.com/groups/cheapmealideas>
+- <https://www.producthunt.com>
+- <https://news.ycombinator.com/>
+- <https://hn.algolia.com/>
 
 
+## Video
+
+16:9 1248:702

@@ -76,7 +76,9 @@ const translateSelectors = [
   {
     hostname:"www.reddit.com",
     selectors:[
-      "[data-adclicklocation=title]",
+      // "[data-adclicklocation=title]",
+      "h1",
+      "[data-click-id=body] h3","[data-click-id=background] h3"
     ],
     containerSelectors:[
       "[data-testid=comment]",
@@ -481,6 +483,15 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
     if(!previousSibling || !previousSibling.hasAttribute || !previousSibling.hasAttribute(enhanceMarkAttributeName)){
       // add 
       let copyNode = node.cloneNode(true);
+
+      if(ctx.tabHostName==="www.reddit.com"){
+        // append child <br>
+        if(copyNode.nodeName.toLowerCase() === "h3" || copyNode.nodeName.toLowerCase() === "h1"){
+          const br = document.createElement("br");
+          copyNode.appendChild(br);
+        }
+      }
+
       if(inlineElements.includes(copyNode.nodeName.toLowerCase())){
         // add a space
         copyNode.style.paddingRight = "8px";
