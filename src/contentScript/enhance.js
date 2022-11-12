@@ -226,28 +226,6 @@ function getPageSpecialConfig(ctx){
     }
   }
 
-  // check is clearly reader
-  // html tag class clearly-overflow
-  // console.log("document.documentElement", document.documentElement.classList)
-  // if(document.documentElement && document.documentElement.classList.contains('clearly-overflow')){
-  //   // id=clearly-container iframe
-  //   // remove  referrerpolicy attribute
-  //   const clearlyContainer = document.querySelector('iframe#clearly-container');
-  //   if(clearlyContainer){
-  //     // clearlyContainer.removeAttribute('referrerpolicy');
-  //     console.log("clearlyContainer", clearlyContainer)
-  //     // change referrerpolicy to  unsafe-url
-  //     clearlyContainer.setAttribute('referrerpolicy', 'unsafe-url');
-  //     // remove this node
-  //     // clearlyContainer.parentNode.removeChild(clearlyContainer);
-  //
-  //   }
-  //   specialConfig = {
-  //     containerSelectors:[
-  //       "div#container"
-  //     ]
-  //   }
-  // }
 
   // handle nitter, there are too many domains, so we detect it by meta, and element
   // if og:sitename is "Nitter", and there is class name tweet-content, then it is nitter
