@@ -254,8 +254,8 @@ twpConfig.onReady(function () {
                     lblTranslating.style.display = "none"
                     lblTranslated.style.display = "inline"
                     lblError.style.display = "none"
+                    showAlwaysTranslateCheckbox ? divAlwaysTranslate.style.display = "block" : divAlwaysTranslate.style.display = "none";
 
-                    divAlwaysTranslate.style.display = "none"
                     btnTranslate.style.display = "none"
                     btnRestore.style.display = "inline"
                     btnTryAgain.style.display = "none"
@@ -266,8 +266,8 @@ twpConfig.onReady(function () {
                     lblTranslating.style.display = "inline"
                     lblTranslated.style.display = "none"
                     lblError.style.display = "none"
+                    showAlwaysTranslateCheckbox ? divAlwaysTranslate.style.display = "block" : divAlwaysTranslate.style.display = "none";
 
-                    divAlwaysTranslate.style.display = "none"
                     btnTranslate.style.display = "none"
                     btnRestore.style.display = "inline"
                     btnTryAgain.style.display = "none"
@@ -282,8 +282,8 @@ twpConfig.onReady(function () {
                     lblTranslating.style.display = "none"
                     lblTranslated.style.display = "none"
                     lblError.style.display = "inline"
-
-                    divAlwaysTranslate.style.display = "none"
+                    showAlwaysTranslateCheckbox ? divAlwaysTranslate.style.display = "block" : divAlwaysTranslate.style.display = "none";
+                    // divAlwaysTranslate.style.display = "none"
                     btnTranslate.style.display = "none"
                     btnRestore.style.display = "none"
                     btnTryAgain.style.display = "inline"

@@ -1,5 +1,5 @@
 chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-    if (tabs[0].url.toLowerCase().endsWith(".pdf")) {
+    if (tabs && tabs[0] && tabs[0].url.toLowerCase().endsWith(".pdf")) {
         window.location.href = "popup-translate-document.html"
     }
 })

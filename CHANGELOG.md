@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.0.23
+
+- Support mail.google.com
+- Support Sidekick browser
+- Support Producthunt
+
 ## 0.0.19.2
 
 - Support nature.com

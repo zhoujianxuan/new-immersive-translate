@@ -973,8 +973,16 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         const onTabVisible = function () {
             chrome.runtime.sendMessage({
                 action: "detectTabLanguage"
-            }, result => {
+            },async  result => {
+                // if und, manual check
+                
+                if(result === 'und'){
+                    result = await detectPageLanguage()
+                }
+
                 result = result || "und"
+
+
                 if (result === "und") {
                     originalTabLanguage = result
                 } else {
@@ -1034,3 +1042,25 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         })
     }
 })
+
+function detectPageLanguage() {
+  return new Promise((resolve, reject) => {
+    if(document.documentElement && document.documentElement.lang){
+      resolve(document.documentElement.lang)
+    }else{
+      // use detect language api
+      if(document.body && document.body.innerText){
+        chrome.runtime.sendMessage({
+            action: "detectLanguage",
+             text: document.body.innerText
+        }, response => {
+            resolve(response)
+        })
+      }else{
+        resolve(undefined)
+      }
+    }
+  })
+
+}
+

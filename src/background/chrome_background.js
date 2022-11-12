@@ -78,7 +78,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.tabs.sendMessage(sender.tab.id, {action: "anotherFrameIsInFocus"}, checkedLastError)
     } else if (request.action === "getTabMimeType") {
         chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-            sendResponse(tabToMimeType[tabs[0].id])
+            if(tabs && tabs.length > 0) {
+             sendResponse(tabToMimeType[tabs[0].id])
+            }else{
+              sendResponse(null)
+            }
         })
         return true
     }else if(request.action ==='detectLanguage'){

@@ -593,11 +593,11 @@ twpConfig.onReady(function () {
     $("#dontShowIfSelectedTextIsUnknown").checked = twpConfig.get("dontShowIfSelectedTextIsUnknown") === "yes" ? true : false
 
     // style options
-    $("#useOldPopup").onchange = e => {
-        twpConfig.set("useOldPopup", e.target.value)
-        updateDarkMode()
-    }
-    $("#useOldPopup").value = twpConfig.get("useOldPopup")
+    // $("#useOldPopup").onchange = e => {
+    //     twpConfig.set("useOldPopup", e.target.value)
+    //     updateDarkMode()
+    // }
+    // $("#useOldPopup").value = twpConfig.get("useOldPopup")
 
     $("#isShowDualLanguage").onchange = e => {
         twpConfig.set("isShowDualLanguage", e.target.value)

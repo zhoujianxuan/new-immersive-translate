@@ -4,7 +4,7 @@ const enhanceOriginalDisplayValueAttributeName = "data-translationoriginaldispla
 const enhanceHtmlTagsInlineIgnore = ['BR', 'CODE', 'KBD', 'WBR'] // and input if type is submit or button, and pre depending on settings
 const enhanceHtmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG', 'svg'] //TODO verificar porque 'svg' é com letras minúsculas
 const blockElements = [
-    'H1', 'H2', 'H3', 'H4', 'H5', 'H6','TABLE',  'OL',"UL", 'P',
+    'H1', 'H2', 'H3', 'H4', 'H5', 'H6','TABLE',  'OL', 'P','LI'
   ];
 if (twpConfig.get('translateTag_pre') !== 'yes') {
     blockElements.push('PRE')
@@ -187,6 +187,22 @@ const translateSelectors = [
     containerSelectors:[
       "#document-text-content"
     ]
+  },{
+    hostname:"www.inoreader.com",
+    selectors:[".article_title",],
+    containerSelectors:[
+      ".article_content"
+    ]
+  },
+  {
+    hostname:"mail.google.com",
+    selectors:["h2[data-thread-perm-id]","span[data-thread-id]"],
+    containerSelectors:[
+      "div[data-message-id] > div > div[class='']"
+    ]
+  },{
+    hostname:"www.producthunt.com",
+    selectors:["a[data-test^='post-']",'h2',"div.layoutCompact div[class^='styles_htmlText__']"],
   }
 
 ]
