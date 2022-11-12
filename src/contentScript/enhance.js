@@ -178,6 +178,9 @@ const translateSelectors = [
     hostname:"seekingalpha.com",
     containerSelectors:"div.wsb_section",
     brToParagraph: true
+  },{
+    hostname:"hn.algolia.com",
+    selectors:[".Story_title"]
   }
 
 ]
