@@ -23,16 +23,16 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 
 
-沉浸式翻译和[原扩展](https://github.com/FilipePS/Traduzir-paginas-web)的目标不太一样，原扩展更多的是作为一个非常好用的通用翻译扩展，是浏览器自带翻译的良好替代品，在没有浏览器自带翻译的浏览器里提供了巨大的帮助。但是本扩展更关注经常需要看外文的用户在阅读外文页面时能有一个良好的体验（我想做这个扩展就是因为我经常需要在[Buzzing](https://www.buzzing.cc/)上浏览大量的外媒文章），所以该扩展的目标群体是：
+沉浸式翻译和[原扩展](https://github.com/FilipePS/Traduzir-paginas-web)的目标不太一样，原扩展的目标是成为一个非常通用的翻译扩展，是浏览器自带翻译的良好替代品。但是此扩展更关注的用户群体是经常需要看外文的用户，希望这些群体在阅读外文页面时能有一个更好的体验（我想做这个扩展就是因为我经常需要在[Buzzing](https://www.buzzing.cc/)上浏览大量的外媒文章），所以该扩展的目标群体是：
 
 - 经常阅读国外长篇文章，论文
 - 阅读外文PDF，外语电子书
-- 希望快速浏览推特，Reddit，Hacker News，Github Issue等国外论坛网站
+- 希望快速浏览Twitter，Reddit，Hacker News，Telegram, Discord, Github 等国外论坛网站
 - 希望同时显示双语来学习目标语言
 - 希望同时显示双语，以平衡部分机器翻译的不知所云
-- 希望尽快摆脱这个扩展，直接习惯看原文的用户的过度助手
+- 希望尽快摆脱这个扩展，直接习惯看原文的用户的过渡助手
 
-该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行文本选中翻译，扩展完全免费，希望我们都能尽可能平等的获取知识，不要让语言成为障碍，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
+该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时也支持使用Bing，Deepl进行文本选中翻译，完全免费，希望我们都能尽可能平等的获取知识，不要让语言成为障碍，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
 
 本项目的[Wiki页面](https://github.com/immersive-translate/immersive-translate/wiki)下有更多使用帮助信息。
 
