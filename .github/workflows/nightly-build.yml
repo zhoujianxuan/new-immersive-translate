@@ -67,7 +67,19 @@ jobs:
           else
             echo "Version is release"
             exit 1
-          fi
+       # pack zip and read manifest, can be reused in the following steps
+      - id: packExtensionDir
+        uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
+        with:
+          extensionDir: 'dist/chrome'
+          zipFilePath: 'dist/chrome-dist.zip'
+      
+      - uses: cardinalby/webext-buildtools-chrome-crx-action@v2
+        with:
+          # zip file made at the packExtensionDir step
+          zipFilePath: 'dist/chrome-dist.zip'
+          crxFilePath: 'dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.crx'
+          privateKey: ${{ secrets.CHROME_CRX_PRIVATE_KEY }}
       - name: "web-ext sign"
         if: steps.check_version.outcome == 'success'
         id: web-ext-sign
@@ -90,4 +102,5 @@ jobs:
           title: "Nightly Build ${{ steps.set_var.outputs.version }}"
           files: |
             dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
+            dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.crx
             ${{ steps.web-ext-sign.outputs.target }}
