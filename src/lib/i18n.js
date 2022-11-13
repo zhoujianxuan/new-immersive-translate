@@ -54,6 +54,16 @@ void (function () {
       element.textContent = text;
     }
 
+    for (const element of root.querySelectorAll("[data-i18n-html]")) {
+      let text = getMessage(
+        element.getAttribute("data-i18n-html"),
+        undefined
+      );
+      if (!text) {
+        continue;
+      }
+      element.innerHTML = text;
+    }
     translateAttributes(root, "title");
     translateAttributes(root, "placeholder");
     translateAttributes(root, "label");

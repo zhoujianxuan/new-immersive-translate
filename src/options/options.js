@@ -388,6 +388,54 @@ twpConfig.onReady(function () {
         twpConfig.addSiteToNeverTranslate(hostname)
     }
 
+    function createNodeToSpecialRulesList(hostname) {
+        const li = document.createElement("li")
+        li.setAttribute("class", "w3-display-container")
+        li.value = hostname
+        li.textContent = hostname
+
+        const close = document.createElement("span")
+        close.setAttribute("class", "w3-button w3-transparent w3-display-right")
+        close.innerHTML = "&times;"
+
+        close.onclick = e => {
+            e.preventDefault()
+
+            twpConfig.removeRuleFromSpecialRules(hostname)
+            li.remove()
+        }
+
+        li.appendChild(close)
+
+        return li
+    }
+    const specialRules = twpConfig.get("specialRules")
+    specialRules.forEach(hostname => {
+        const li = createNodeToSpecialRulesList(hostname)
+        $("#specialRules").appendChild(li)
+    })
+
+    $("#addToSpecialRules").onclick = e => {
+
+        const rule = document.querySelector("#specialRule").value
+        if (!rule) return;
+
+        // check rule is valid
+        // it must an valid json object 
+        
+        try{
+          const ruleObj = JSON.parse(rule)
+        }catch(e){
+          alert("Invalid rule, it should be an json object string")
+          return
+        }
+        const li = createNodeToSpecialRulesList(rule)
+        $("#specialRules").appendChild(li)
+        // clean textarea
+        document.querySelector("#specialRule").value = ""
+
+        twpConfig.addRuleToSpecialRules(rule)
+    }
     function createcustomDictionary(keyWord,customValue) {
         const li = document.createElement("li")
         li.setAttribute("class", "w3-display-container")

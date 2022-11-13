@@ -225,6 +225,18 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
     const htmlTagsInlineText = ['#text', 'A', 'ABBR', 'ACRONYM', 'B', 'BDO', 'BIG', 'CITE', 'DFN', 'EM', 'I', 'LABEL', 'Q', 'S', 'SMALL', 'SPAN', 'STRONG', 'SUB', 'SUP', 'U', 'TT', 'VAR']
     const htmlTagsInlineIgnore = ['BR', 'CODE', 'KBD', 'WBR'] // and input if type is submit or button, and pre depending on settings
     const htmlTagsNoTranslate = ['TITLE', 'SCRIPT', 'STYLE', 'TEXTAREA', 'SVG', 'svg'] //TODO verificar porque 'svg' é com letras minúsculas
+    const specialRulesConfigs = twpConfig.get('specialRules');
+    if(Array.isArray(specialRulesConfigs) && specialRulesConfigs.length > 0){
+      for(const specialRuleString of specialRulesConfigs){
+        // add to specialRules
+        try{
+          const specialRule = JSON.parse(specialRuleString);
+          specialRules.unshift(specialRule);
+        }catch(e){
+          console.warn(`Error parsing special rule: ${specialRuleString}`)
+        }
+      }
+    }
 
     if (twpConfig.get('translateTag_pre') !== 'yes') {
         htmlTagsInlineIgnore.push('PRE')

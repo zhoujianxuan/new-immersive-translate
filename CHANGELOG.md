@@ -1,5 +1,13 @@
 # Change Log
 
+
+## 0.0.24
+
+- Support discord.com
+- Support web.telegram.org/z/
+- Fix mail.google.com , now it'll be better for long articles.
+- Support Custom Page Special Rules
+
 ## 0.0.23
 
 - Support mail.google.com

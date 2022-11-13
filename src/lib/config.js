@@ -18,6 +18,7 @@ const twpConfig = (function () {
     targetLanguages: [], // "en", "es", "de"
     alwaysTranslateSites: [],
     neverTranslateSites: [],
+    specialRules: [],
     sitesToTranslateWhenHovering: [],
     langsToTranslateWhenHovering: [],
     alwaysTranslateLangs: [],
@@ -400,11 +401,17 @@ const twpConfig = (function () {
     removeFromArray("alwaysTranslateSites", hostname);
     removeFromArray("sitesToTranslateWhenHovering", hostname);
   };
+  twpConfig.addRuleToSpecialRules = function (hostname) {
+    addInArray("specialRules", hostname);
+  };
   twpConfig.addKeyWordTocustomDictionary = function (key, value) {
     addInMap("customDictionary", key, value);
   };
   twpConfig.removeSiteFromNeverTranslate = function (hostname) {
     removeFromArray("neverTranslateSites", hostname);
+  };
+  twpConfig.removeRuleFromSpecialRules = function (hostname) {
+    removeFromArray("specialRules", hostname);
   };
   twpConfig.removeKeyWordFromcustomDictionary = function (keyWord) {
     removeFromMap("customDictionary", keyWord);
