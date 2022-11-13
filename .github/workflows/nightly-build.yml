@@ -62,7 +62,7 @@ jobs:
         id: check_version
         continue-on-error: true
         run: |
-          if [[ ${{ steps.set_var.outputs.version }} =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ "${{ steps.set_var.outputs.version }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Version is nightly"
           else
             echo "Version is release"
