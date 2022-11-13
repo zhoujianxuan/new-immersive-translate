@@ -1,6 +1,10 @@
 # Change Log
 
 
+## 0.0.25
+
+- Support gist.github.com
+
 ## 0.0.24
 
 - Support discord.com

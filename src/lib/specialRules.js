@@ -222,5 +222,11 @@ const specialRules = [
     "selectors": [
       ".text-content"
     ]
+  },
+  {
+    "hostname":"gist.github.com/",
+    "containerSelectors":[
+      ".markdown-body",".readme"
+    ]
   }
 ]
