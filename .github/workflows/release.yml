@@ -88,10 +88,18 @@ jobs:
           files: |
             dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
             dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
+      - name: Download key.pem from secret CHROME_CRX_PRIVATE_KEY
+        run: |
+          echo "${{ secrets.CHROME_CRX_PRIVATE_KEY }}" > dist/chrome/key.pem
+      - name: rezip dist/chrome
+        run: |
+          cd dist/chrome
+          zip -r chrome-store.zip *
+          cd ../..
       - name: Upload & release to chrome store
         uses: mnao305/chrome-extension-upload@3.0.0
         with:
-          file-path: dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
+          file-path: dist/chrome-store.zip
           extension-id: bpoadfkcbjbfhfodiogcnhhhpibjhbnh
           client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
           client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
