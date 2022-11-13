@@ -13,7 +13,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 - 双语显示，按照段落分割
 - 只翻译网页里的内容区域，这极大的增强了翻译的阅读体验，而不是像之前那样网页的所有元素都被翻译，类似浏览器的阅读模式，所以该扩展被重新命名为“沉浸式翻译”
-- 为常用网站做了定制优化，比如推特，Reddit，Hacker News等，我希望这个扩展足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站在单独优化后体验更好，所以我们会对这类网站做单独适配，同时坏处就是可能随时网站的更新而失效，所以这里我会持续优化。如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/immersive-translate/immersive-translate/issues)或[Telegram群组](https://t.me/+rq848Z09nehlOTgx)中提出。
+- 为常用网站做了定制优化，比如Twitter，Reddit，Discord, Telegram, Youtube, Hacker News等，我希望这个扩展足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站在单独优化后体验更好，所以我们会对这类网站做单独适配，同时坏处就是可能随时网站的更新而失效，所以这里我会持续优化。如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/immersive-translate/immersive-translate/issues)或[Telegram群组](https://t.me/+rq848Z09nehlOTgx)中提出。
 - 支持PDF文件双语对照翻译（pdf文件翻译需要点击浏览器右上角的该扩展图标，弹出提示框后按提示框操作）
 - 配合epub在线阅读网站<https://1paragraph.app/> 即可实现双语阅读国外电子书
 
@@ -34,7 +34,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时支持使用Bing，Deepl进行文本选中翻译，扩展完全免费，希望我们都能尽可能平等的获取知识，不要让语言成为障碍，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
 
-本项目的[Wiki页面](https://github.com/immersive-translate/immersive-translate/wiki)下也有一些大家贡献的常用小技巧和使用说明～
+本项目的[Wiki页面](https://github.com/immersive-translate/immersive-translate/wiki)下有更多使用帮助信息。
 
 ## 安装说明
 
