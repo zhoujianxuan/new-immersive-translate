@@ -67,7 +67,7 @@ jobs:
           else
             echo "Version is release"
             exit 1
-          endif
+          fi
        # pack zip and read manifest, can be reused in the following steps
       - id: packExtensionDir
         uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
