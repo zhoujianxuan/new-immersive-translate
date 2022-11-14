@@ -228,5 +228,9 @@ const specialRules = [
     "containerSelectors":[
       ".markdown-body",".readme"
     ]
+  },
+  {
+    "hostname": "www.politico.com",
+    "containerSelectors": "main"
   }
 ]
