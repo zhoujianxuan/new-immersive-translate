@@ -98,18 +98,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 })
 
-function updateTranslateSelectedContextMenu() {
-    if (typeof chrome.contextMenus !== "undefined") {
-        chrome.contextMenus.remove("translate-selected-text", checkedLastError)
-        if (twpConfig.get("showTranslateSelectedContextMenu") === "yes") {
-            chrome.contextMenus.create({
-                id: "translate-selected-text",
-                title: chrome.i18n.getMessage("msgTranslateSelectedText"),
-                contexts: ["selection"]
-            })
-        }
-    }
-}
+
 
 function updateContextMenu(pageLanguageState = "original") {
     let contextMenuTitle
@@ -248,23 +237,6 @@ if (typeof chrome.contextMenus !== "undefined") {
               chrome.tabs.sendMessage(tab.id, {
                   action: "toggle-translation"
               }, checkedLastError)
-            }
-        } else if (info.menuItemId == "translate-selected-text") {
-            if (chrome.action && chrome.action.openPopup && (!tabHasContentScript[tab.id] || tab.isInReaderMode)) {
-
-                chrome.action.setPopup({
-                    popup: "popup/popup-translate-text.html#text=" + encodeURIComponent(info.selectionText),
-                    tabId: tab.id
-                })
-                chrome.action.openPopup()
-
-                resetPageAction(tab.id)
-            } else {
-                // a merda do chrome não suporte openPopup
-                chrome.tabs.sendMessage(tab.id, {
-                    action: "TranslateSelectedText",
-                    selectionText: info.selectionText
-                }, checkedLastError)
             }
         } else if (info.menuItemId == "browserAction-showPopup") {
             resetBrowserAction(true)
@@ -535,14 +507,6 @@ if (typeof chrome.commands !== "undefined") {
                     action: "toggle-translation"
                 }, checkedLastError)
             })
-        } else if (command === "hotkey-translate-selected-text") {
-            chrome.tabs.query({
-                currentWindow: true,
-                active: true
-            }, tabs =>
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    action: "TranslateSelectedText"
-                }, checkedLastError))
         } else if (command === "hotkey-swap-page-translation-service") {
             chrome.tabs.query({
                 active: true,
@@ -560,70 +524,13 @@ if (typeof chrome.commands !== "undefined") {
             }
 
             twpConfig.set("pageTranslatorService", currentPageTranslatorService)
-        } else if (command === "hotkey-show-original") {
-            chrome.tabs.query({
-                active: true,
-                currentWindow: true
-            }, tabs =>
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    action: "translatePage",
-                    targetLanguage: "original"
-                }, checkedLastError))
-        } else if (command === "hotkey-translate-page-1") {
-            chrome.tabs.query({
-                active: true,
-                currentWindow: true
-            }, tabs => {
-                twpConfig.setTargetLanguage(twpConfig.get("targetLanguages")[0])
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    action: "translatePage",
-                    targetLanguage: twpConfig.get("targetLanguages")[0]
-                }, checkedLastError)
-            })
-        } else if (command === "hotkey-translate-page-2") {
-            chrome.tabs.query({
-                active: true,
-                currentWindow: true
-            }, tabs => {
-                twpConfig.setTargetLanguage(twpConfig.get("targetLanguages")[1])
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    action: "translatePage",
-                    targetLanguage: twpConfig.get("targetLanguages")[1]
-                }, checkedLastError)
-            })
-        } else if (command === "hotkey-translate-page-3") {
-            chrome.tabs.query({
-                active: true,
-                currentWindow: true
-            }, tabs => {
-                twpConfig.setTargetLanguage(twpConfig.get("targetLanguages")[2])
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    action: "translatePage",
-                    targetLanguage: twpConfig.get("targetLanguages")[2]
-                }, checkedLastError)
-            })
-        } else if (command === "hotkey-hot-translate-selected-text") {
-            chrome.tabs.query({
-                active: true,
-                currentWindow: true
-            }, tabs => {
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    action: "hotTranslateSelectedText"
-                }, checkedLastError)
-            })
-        }
+        } 
     })
 }
 
 twpConfig.onReady(async () => {
     updateContextMenu()
-    updateTranslateSelectedContextMenu()
 
-    twpConfig.onChanged((name, newvalue) => {
-        if (name === "showTranslateSelectedContextMenu") {
-            updateTranslateSelectedContextMenu()
-        }
-    })
 
     if (!twpConfig.get("installDateTime")) {
         twpConfig.set("installDateTime", Date.now())

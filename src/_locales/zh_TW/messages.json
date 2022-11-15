@@ -522,6 +522,10 @@
   },
     "lblTelegram":{
     "message": "加Telegram群"
+  },
+"msgCommon":{
+    "message":"常用設置"
   }
+
 
 }

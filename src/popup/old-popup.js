@@ -415,14 +415,7 @@ twpConfig.onReady(function () {
                     }
                     window.close()
                     break
-                case "showTranslateSelectedButton":
-                    if (twpConfig.get("showTranslateSelectedButton") === "yes") {
-                        twpConfig.set("showTranslateSelectedButton", "no")
-                    } else {
-                        twpConfig.set("showTranslateSelectedButton", "yes")
-                    }
-                    window.close()
-                    break
+           
                 case "isShowDualLanguage":
                     if (twpConfig.get("isShowDualLanguage") === "yes") {
                         twpConfig.set("isShowDualLanguage", "no")

@@ -23,8 +23,8 @@ twpConfig.onReady(function () {
     }
 
     function hashchange() {
-        const hash = location.hash || "#languages"
-        const divs = [$("#languages"), $("#sites"), $("#translations"), $("#style"), $("#hotkeys"), $("#storage"), $("#others"), $("#donation"), $("#release_notes")]
+        const hash = location.hash || "#main"
+        const divs = [$("#main"),  $("#translations"),  $("#hotkeys"), $("#storage"), $("#others"), $("#donation"), ]
         divs.forEach(element => {
             element.style.display = "none"
         })
@@ -39,9 +39,7 @@ twpConfig.onReady(function () {
         let text
         if (hash === "#donation") {
             text = chrome.i18n.getMessage("lblMakeDonation")
-        } else if (hash === "#release_notes") {
-            text = chrome.i18n.getMessage("lblReleaseNotes")
-        } else {
+        }else {
             text = chrome.i18n.getMessage("lblSettings")
         }
         $("#itemSelectedName").textContent = text
@@ -52,11 +50,7 @@ twpConfig.onReady(function () {
             sideBarIsVisible = false
         }
 
-        if (hash === "#release_notes") {
-            $("#btnPatreon").style.display = "none"
-        } else {
-            $("#btnPatreon").style.display = "block"
-        }
+        $("#btnPatreon").style.display = "block"
     }
     hashchange()
     window.addEventListener("hashchange", hashchange)
@@ -83,12 +77,9 @@ twpConfig.onReady(function () {
     }
 
     fillLanguageList($("#targetLanguage1"))
-    fillLanguageList($("#targetLanguage2"))
-    fillLanguageList($("#targetLanguage3"))
 
     fillLanguageList($("#addToNeverTranslateLangs"))
     fillLanguageList($("#addToAlwaysTranslateLangs"))
-    fillLanguageList($("#addLangToTranslateWhenHovering"))
 
     function enableDarkMode() {
         if (!$("#darkModeElement")) {
@@ -151,33 +142,9 @@ twpConfig.onReady(function () {
     const targetLanguages = twpConfig.get("targetLanguages")
 
     $("#targetLanguage1").value = targetLanguages[0]
-    $("#targetLanguage2").value = targetLanguages[1]
-    $("#targetLanguage3").value = targetLanguages[2]
 
     $("#targetLanguage1").onchange = e => {
         targetLanguages[0] = e.target.value
-        twpConfig.set("targetLanguages", targetLanguages)
-        if (targetLanguages.indexOf(twpConfig.get("targetLanguage")) == -1) {
-            twpConfig.set("targetLanguage", targetLanguages[0])
-        }
-        if (targetLanguages.indexOf(twpConfig.get("targetLanguageTextTranslation")) == -1) {
-            twpConfig.set("targetLanguageTextTranslation", targetLanguages[0])
-        }
-    }
-
-    $("#targetLanguage2").onchange = e => {
-        targetLanguages[1] = e.target.value
-        twpConfig.set("targetLanguages", targetLanguages)
-        if (targetLanguages.indexOf(twpConfig.get("targetLanguage")) == -1) {
-            twpConfig.set("targetLanguage", targetLanguages[0])
-        }
-        if (targetLanguages.indexOf(twpConfig.get("targetLanguageTextTranslation")) == -1) {
-            twpConfig.set("targetLanguageTextTranslation", targetLanguages[0])
-        }
-    }
-
-    $("#targetLanguage3").onchange = e => {
-        targetLanguages[2] = e.target.value
         twpConfig.set("targetLanguages", targetLanguages)
         if (targetLanguages.indexOf(twpConfig.get("targetLanguage")) == -1) {
             twpConfig.set("targetLanguage", targetLanguages[0])
@@ -268,45 +235,6 @@ twpConfig.onReady(function () {
         twpConfig.addLangToAlwaysTranslate(langCode)
     }
 
-    // langsToTranslateWhenHovering
-
-    function createNodeToLangsToTranslateWhenHoveringList(langCode, langName) {
-        const li = document.createElement("li")
-        li.setAttribute("class", "w3-display-container")
-        li.value = langCode
-        li.textContent = langName
-
-        const close = document.createElement("span")
-        close.setAttribute("class", "w3-button w3-transparent w3-display-right")
-        close.innerHTML = "&times;"
-
-        close.onclick = e => {
-            e.preventDefault()
-
-            twpConfig.removeLangFromTranslateWhenHovering(langCode)
-            li.remove()
-        }
-
-        li.appendChild(close)
-
-        return li
-    }
-
-    const langsToTranslateWhenHovering = twpConfig.get("langsToTranslateWhenHovering")
-    langsToTranslateWhenHovering.forEach(langCode => {
-        const langName = twpLang.codeToLanguage(langCode)
-        const li = createNodeToLangsToTranslateWhenHoveringList(langCode, langName)
-        $("#langsToTranslateWhenHovering").appendChild(li)
-    })
-
-    $("#addLangToTranslateWhenHovering").onchange = e => {
-        const langCode = e.target.value
-        const langName = twpLang.codeToLanguage(langCode)
-        const li = createNodeToLangsToTranslateWhenHoveringList(langCode, langName)
-        $("#langsToTranslateWhenHovering").appendChild(li)
-
-        twpConfig.addLangToTranslateWhenHovering(langCode)
-    }
 
     // Always translate these Sites
 
@@ -478,78 +406,18 @@ twpConfig.onReady(function () {
         twpConfig.addKeyWordTocustomDictionary(keyWord,customValue)
     }
 
-    // sitesToTranslateWhenHovering
-
-    function createNodeToSitesToTranslateWhenHoveringList(hostname) {
-        const li = document.createElement("li")
-        li.setAttribute("class", "w3-display-container")
-        li.value = hostname
-        li.textContent = hostname
-
-        const close = document.createElement("span")
-        close.setAttribute("class", "w3-button w3-transparent w3-display-right")
-        close.innerHTML = "&times;"
-
-        close.onclick = e => {
-            e.preventDefault()
-
-            twpConfig.removeSiteFromTranslateWhenHovering(hostname)
-            li.remove()
-        }
-
-        li.appendChild(close)
-
-        return li
-    }
-
-    const sitesToTranslateWhenHovering = twpConfig.get("sitesToTranslateWhenHovering")
-    sitesToTranslateWhenHovering.forEach(hostname => {
-        const li = createNodeToSitesToTranslateWhenHoveringList(hostname)
-        $("#sitesToTranslateWhenHovering").appendChild(li)
-    })
-
-    $("#addSiteToTranslateWhenHovering").onclick = e => {
-        const hostname = prompt("Enter the site hostname", "www.site.com")
-        if (!hostname) return;
-
-        const li = createNodeToSitesToTranslateWhenHoveringList(hostname)
-        $("#sitesToTranslateWhenHovering").appendChild(li)
-
-        twpConfig.addSiteToTranslateWhenHovering(hostname)
-    }
-
     // translations options
     $("#pageTranslatorService").onchange = e => {
         twpConfig.set("pageTranslatorService", e.target.value)
     }
     $("#pageTranslatorService").value = twpConfig.get("pageTranslatorService")
 
-    $("#textTranslatorService").onchange = e => {
-        twpConfig.set("textTranslatorService", e.target.value)
-    }
-    $("#textTranslatorService").value = twpConfig.get("textTranslatorService")
-
-    $("#ttsSpeed").oninput = e => {
-        twpConfig.set("ttsSpeed", e.target.value)
-        $("#displayTtsSpeed").textContent = e.target.value
-    }
-    $("#ttsSpeed").value = twpConfig.get("ttsSpeed")
-    $("#displayTtsSpeed").textContent = twpConfig.get("ttsSpeed")
-
-    $("#showOriginalTextWhenHovering").onchange = e => {
-        twpConfig.set("showOriginalTextWhenHovering", e.target.value)
-    }
-    $("#showOriginalTextWhenHovering").value = twpConfig.get("showOriginalTextWhenHovering")
 
     $("#translateTag_pre").onchange = e => {
         twpConfig.set("translateTag_pre", e.target.value)
     }
     $("#translateTag_pre").value = twpConfig.get("translateTag_pre")
 
-    $("#enableDeepL").onchange = e => {
-        twpConfig.set("enableDeepL", e.target.value)
-    }
-    $("#enableDeepL").value = twpConfig.get("enableDeepL")
 
     $("#dontSortResults").onchange = e => {
         twpConfig.set("dontSortResults", e.target.value)
@@ -582,24 +450,6 @@ twpConfig.onReady(function () {
     }
     $("#autoTranslateWhenClickingALink").value = twpConfig.get("autoTranslateWhenClickingALink")
 
-    if (twpConfig.get("enableDeepL") === "yes") {
-        $('#textTranslatorService option[value="deepl"]').removeAttribute("hidden")
-    } else {
-        $('#textTranslatorService option[value="deepl"]').setAttribute("hidden", "")
-    }
-    twpConfig.onChanged((name, newvalue) => {
-        switch (name) {
-            case "enableDeepL":
-                if (newvalue === "yes") {
-                    $('#textTranslatorService option[value="deepl"]').removeAttribute("hidden")
-                } else {
-                    twpConfig.set("textTranslatorService", "google")
-                    $("#textTranslatorService").value = "google"
-                    $('#textTranslatorService option[value="deepl"]').setAttribute("hidden", "")
-                }
-                break
-        }
-    })
 
     function enableOrDisableTranslateSelectedAdvancedOptions(value) {
         if (value === "no") {
@@ -613,32 +463,6 @@ twpConfig.onReady(function () {
         }
     }
 
-    $("#showTranslateSelectedButton").onchange = e => {
-        twpConfig.set("showTranslateSelectedButton", e.target.value)
-        enableOrDisableTranslateSelectedAdvancedOptions(e.target.value)
-    }
-    $("#showTranslateSelectedButton").value = twpConfig.get("showTranslateSelectedButton")
-    enableOrDisableTranslateSelectedAdvancedOptions(twpConfig.get("showTranslateSelectedButton"))
-
-    $("#dontShowIfPageLangIsTargetLang").onchange = e => {
-        twpConfig.set("dontShowIfPageLangIsTargetLang", e.target.checked ? "yes" : "no")
-    }
-    $("#dontShowIfPageLangIsTargetLang").checked = twpConfig.get("dontShowIfPageLangIsTargetLang") === "yes" ? true : false
-
-    $("#dontShowIfPageLangIsUnknown").onchange = e => {
-        twpConfig.set("dontShowIfPageLangIsUnknown", e.target.checked ? "yes" : "no")
-    }
-    $("#dontShowIfPageLangIsUnknown").checked = twpConfig.get("dontShowIfPageLangIsUnknown") === "yes" ? true : false
-
-    $("#dontShowIfSelectedTextIsTargetLang").onchange = e => {
-        twpConfig.set("dontShowIfSelectedTextIsTargetLang", e.target.checked ? "yes" : "no")
-    }
-    $("#dontShowIfSelectedTextIsTargetLang").checked = twpConfig.get("dontShowIfSelectedTextIsTargetLang") === "yes" ? true : false
-
-    $("#dontShowIfSelectedTextIsUnknown").onchange = e => {
-        twpConfig.set("dontShowIfSelectedTextIsUnknown", e.target.checked ? "yes" : "no")
-    }
-    $("#dontShowIfSelectedTextIsUnknown").checked = twpConfig.get("dontShowIfSelectedTextIsUnknown") === "yes" ? true : false
 
 
     $("#isShowDualLanguage").onchange = e => {
@@ -657,16 +481,6 @@ twpConfig.onReady(function () {
     }
     $("#dualStyle").value = twpConfig.get("dualStyle")
 
-    $("#darkMode").onchange = e => {
-        twpConfig.set("darkMode", e.target.value)
-        updateDarkMode()
-    }
-    $("#darkMode").value = twpConfig.get("darkMode")
-
-    $("#popupBlueWhenSiteIsTranslated").onchange = e => {
-        twpConfig.set("popupBlueWhenSiteIsTranslated", e.target.value)
-    }
-    $("#popupBlueWhenSiteIsTranslated").value = twpConfig.get("popupBlueWhenSiteIsTranslated")
 
     // hotkeys options
     function escapeHtml(unsafe) {
@@ -677,24 +491,12 @@ twpConfig.onReady(function () {
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
-    $('[data-i18n="lblTranslateSelectedWhenPressTwice"]').innerHTML = $('[data-i18n="lblTranslateSelectedWhenPressTwice"]').innerHTML.replace("[Ctrl]", "<kbd>Ctrl</kbd>")
-    $('[data-i18n="lblTranslateTextOverMouseWhenPressTwice"]').innerHTML = $('[data-i18n="lblTranslateTextOverMouseWhenPressTwice"]').innerHTML.replace("[Ctrl]", "<kbd>Ctrl</kbd>")
 
     $("#openNativeShortcutManager").onclick = e => {
         chrome.tabs.create({
             url: "chrome://extensions/shortcuts"
         })
     }
-
-    $("#translateSelectedWhenPressTwice").onclick = e => {
-        twpConfig.set("translateSelectedWhenPressTwice", e.target.checked ? "yes" : "no")
-    }
-    $("#translateSelectedWhenPressTwice").checked = twpConfig.get("translateSelectedWhenPressTwice") === "yes"
-
-    $("#translateTextOverMouseWhenPressTwice").onclick = e => {
-        twpConfig.set("translateTextOverMouseWhenPressTwice", e.target.checked ? "yes" : "no")
-    }
-    $("#translateTextOverMouseWhenPressTwice").checked = twpConfig.get("translateTextOverMouseWhenPressTwice") === "yes"
 
     const defaultShortcuts = {}
     for (const name of Object.keys(chrome.runtime.getManifest().commands || {})) {
@@ -732,7 +534,9 @@ twpConfig.onReady(function () {
         const removeKey = li.querySelector(`[name="removeKey"]`)
         const resetKey = li.querySelector(`[name="resetKey"]`)
 
-        input.value = twpConfig.get("hotkeys")[hotkeyname]
+        const hotkeysValues = twpConfig.get("hotkeys");
+        console.log("hotkeysValues", hotkeysValues)
+        input.value = hotkeysValues[hotkeyname]
         if (input.value) {
             resetKey.style.display = "none"
         } else {
@@ -930,11 +734,6 @@ twpConfig.onReady(function () {
         }
     }
 
-    // others options
-    $("#showReleaseNotes").onchange = e => {
-        twpConfig.set("showReleaseNotes", e.target.value)
-    }
-    $("#showReleaseNotes").value = twpConfig.get("showReleaseNotes")
 
     $("#showPopupMobile").onchange = e => {
         twpConfig.set("showPopupMobile", e.target.value)
@@ -945,11 +744,6 @@ twpConfig.onReady(function () {
         twpConfig.set("showTranslatePageContextMenu", e.target.value)
     }
     $("#showTranslatePageContextMenu").value = twpConfig.get("showTranslatePageContextMenu")
-
-    $("#showTranslateSelectedContextMenu").onchange = e => {
-        twpConfig.set("showTranslateSelectedContextMenu", e.target.value)
-    }
-    $("#showTranslateSelectedContextMenu").value = twpConfig.get("showTranslateSelectedContextMenu")
 
     $("#showButtonInTheAddressBar").onchange = e => {
         twpConfig.set("showButtonInTheAddressBar", e.target.value)

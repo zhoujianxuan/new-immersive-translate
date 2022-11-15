@@ -4,6 +4,13 @@
 ## 0.0.25
 
 - Support gist.github.com
+- Support slack.com
+- Fix 1paragraph.app epub adapt
+
+### Break Changes
+
+- Remove select text to translate, now the extension is focus on web page translate
+- Better for Options
 
 ## 0.0.24
 

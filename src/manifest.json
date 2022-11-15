@@ -3,7 +3,7 @@
     "default_locale": "en",
     "name": "Immersive Translate",
     "description": "Let's experience immersive web translation, with bilingual simultaneous display and translation of only the important content.",
-    "version": "0.0.24.2",
+    "version": "0.0.25",
     "homepage_url": "https://github.com/immersive-translate/immersive-translate",
 
     "browser_specific_settings": {
@@ -16,51 +16,10 @@
     "commands": {
         "hotkey-toggle-translation": {
             "suggested_key": {
-                "default": "Ctrl+Alt+T"
+                "default": "Ctrl+T",
+                "mac": "MacCtrl+T"
             },
             "description": "__MSG_lblSwitchTranslatedAndOriginal__"
-        },
-        "hotkey-translate-selected-text": {
-            "suggested_key": {
-                "default": "Ctrl+Alt+S"
-            },
-            "description": "__MSG_msgTranslateSelectedText__"
-        },
-        "hotkey-swap-page-translation-service": {
-            "suggested_key": {
-                "default": "Ctrl+Alt+Q"
-            },
-            "description": "__MSG_swapTranslationService__"
-        },
-        "hotkey-show-original": {
-            "suggested_key": {
-                "default": "Shift+Alt+0"
-            },
-            "description": "__MSG_lblRestorePageToOriginal__"
-        },
-        "hotkey-translate-page-1": {
-            "suggested_key": {
-                "default": "Shift+Alt+1"
-            },
-            "description": "__MSG_lblTranslatePageToTargetLanguage__ 1"
-        },
-        "hotkey-translate-page-2": {
-            "suggested_key": {
-                "default": "Shift+Alt+2"
-            },
-            "description": "__MSG_lblTranslatePageToTargetLanguage__ 2"
-        },
-        "hotkey-translate-page-3": {
-            "suggested_key": {
-                "default": "Shift+Alt+3"
-            },
-            "description": "__MSG_lblTranslatePageToTargetLanguage__ 3"
-        },
-        "hotkey-hot-translate-selected-text": {
-            "suggested_key": {
-                "default": "Ctrl+Alt+X"
-            },
-            "description": "__MSG_lblHotTranslatedSelectedText__"
         }
     },
 
@@ -92,7 +51,7 @@
 
     "options_ui": {
         "page": "/options/options.html",
-        "open_in_tab": false,
+        "open_in_tab": true,
         "browser_style": false
     },
 

@@ -3,7 +3,7 @@
 const twpConfig = (function () {
   /** @type {function[]} */
   const observers = [];
-  const defaultTargetLanguages = ["zh-CN", "zh-TW",'en'];
+  const defaultTargetLanguages = ["zh-CN"];
   /**
    * all configName available
    * @typedef {"pageTranslatorService" | "textTranslatorService" | "ttsSpeed" | "enableDeepL" | "targetLanguage" | "targetLanguageTextTranslation" | "targetLanguages" | "alwaysTranslateSites" | "neverTranslateSites" | "sitesToTranslateWhenHovering" | "langsToTranslateWhenHovering" | "alwaysTranslateLangs" | "neverTranslateLangs" | "customDictionary" | "showTranslatePageContextMenu" | "showTranslateSelectedContextMenu" | "showButtonInTheAddressBar" | "showOriginalTextWhenHovering" | "showTranslateSelectedButton" | "showPopupMobile" | "useOldPopup" | "darkMode" | "popupBlueWhenSiteIsTranslated" | "popupPanelSection" | "showReleaseNotes" | "dontShowIfPageLangIsTargetLang" | "dontShowIfPageLangIsUnknown" | "dontShowIfSelectedTextIsTargetLang" | "dontShowIfSelectedTextIsUnknown" | "hotkeys" | "expandPanelTranslateSelectedText" | "translateTag_pre" | "dontSortResults" | "translateDynamicallyCreatedContent" | "autoTranslateWhenClickingALink" | "translateSelectedWhenPressTwice" | "translateTextOverMouseWhenPressTwice" | "translateClickingOnce"} DefaultConfigNames
@@ -25,10 +25,7 @@ const twpConfig = (function () {
     neverTranslateLangs: [],
     customDictionary: new Map(),
     showTranslatePageContextMenu: "yes",
-    showTranslateSelectedContextMenu: "yes",
     showButtonInTheAddressBar: "yes",
-    showOriginalTextWhenHovering: "no",
-    showTranslateSelectedButton: "yes",
     isShowDualLanguage: "yes",
     dualStyle:"none",
     customDualStyle:"",
@@ -38,19 +35,12 @@ const twpConfig = (function () {
     popupBlueWhenSiteIsTranslated: "yes",
     popupPanelSection: 1,
     showReleaseNotes: "no",
-    dontShowIfPageLangIsTargetLang: "no",
-    dontShowIfPageLangIsUnknown: "no",
-    dontShowIfSelectedTextIsTargetLang: "no",
-    dontShowIfSelectedTextIsUnknown: "no",
     hotkeys: {}, // Hotkeys are obtained from the manifest file
-    expandPanelTranslateSelectedText: "no",
     translateTag_pre: "yes",
     dontSortResults: "no",
     translateDynamicallyCreatedContent: "yes",
     autoTranslateWhenClickingALink: "no",
-    translateSelectedWhenPressTwice: "no",
-    translateTextOverMouseWhenPressTwice: "no",
-    translateClickingOnce: "no",
+
   };
   const config = structuredClone(defaultConfig);
 
@@ -239,7 +229,7 @@ const twpConfig = (function () {
 
       // try to get the 3 target languages through the user defined languages in the browser configuration.
       for (let lang of acceptedLanguages) {
-        if (config.targetLanguages.length >= 3) break;
+        if (config.targetLanguages.length >= 1) break;
         lang = twpLang.fixTLanguageCode(lang);
         if (lang && config.targetLanguages.indexOf(lang) === -1) {
           config.targetLanguages.push(lang);
@@ -248,7 +238,7 @@ const twpConfig = (function () {
 
       // then try to use de array defaultTargetLanguages ["en", "es", "de"]
       for (const lang in defaultTargetLanguages) {
-        if (config.targetLanguages.length >= 3) break;
+        if (config.targetLanguages.length >= 1) break;
         if (
           config.targetLanguages.indexOf(defaultTargetLanguages[lang]) === -1
         ) {
@@ -257,7 +247,7 @@ const twpConfig = (function () {
       }
 
       // if targetLanguages is bigger than 3 remove the surplus
-      while (config.targetLanguages.length > 3) config.targetLanguages.pop();
+      while (config.targetLanguages.length > 1) config.targetLanguages.pop();
 
       /*
       // remove the duplicates languages

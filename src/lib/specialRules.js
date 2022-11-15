@@ -9,7 +9,9 @@ const specialRules = [
       "[data-testid=\"tweetText\"]",
       ".tweet-text",
       ".js-quoted-tweet-text"
-    ]
+    ],
+    "detectLanguage":true
+
   },
   {
     "hostname": "news.ycombinator.com",
@@ -17,7 +19,7 @@ const specialRules = [
       ".titleline >a",
       ".comment",
       ".toptext"
-    ]
+    ],
   },
   {
     "hostname": "www.reddit.com",
@@ -29,7 +31,8 @@ const specialRules = [
     "containerSelectors": [
       "[data-testid=comment]",
       "[data-adclicklocation=media]"
-    ]
+    ],
+    "detectLanguage":true
   },
   {
     "hostname": "old.reddit.com",
@@ -38,7 +41,8 @@ const specialRules = [
     ],
     "containerSelectors": [
       "[role=main] .md-container"
-    ]
+    ],
+    "detectLanguage":true
   },
   {
     "regex": "finance.yahoo.com/$",
@@ -116,20 +120,24 @@ const specialRules = [
   },
   {
     "hostname": "github.com",
-    "containerSelectors": ".markdown-body"
+    "containerSelectors": ".markdown-body",
+    "detectLanguage":true
   },
   {
     "hostname": "www.youtube.com",
     "selectors": [
       "#content-text"
-    ]
+    ],
+    
+    "detectLanguage":true
   },
   {
     "hostname": "www.facebook.com",
     "selectors": [
       "div[data-ad-comet-preview=message] > div > div",
       "div[role=article] > div > div > div > div > div > div > div > div "
-    ]
+    ],
+    "detectLanguage":true
   },
   {
     "regex": ".substack.com/",
@@ -164,7 +172,9 @@ const specialRules = [
     ],
     "containerSelectors": [
       "#document-text-content"
-    ]
+    ],
+    
+    "detectLanguage":true
   },
   {
     "hostname": "www.inoreader.com",
@@ -173,7 +183,9 @@ const specialRules = [
     ],
     "containerSelectors": [
       ".article_content"
-    ]
+    ],
+    
+    "detectLanguage":true
   },
   {
     "hostname": "mail.google.com",
@@ -194,7 +206,9 @@ const specialRules = [
       "OL",
       "P",
       "LI"
-    ]
+    ],
+    
+    "detectLanguage":true
   },
   {
     "hostname": "www.producthunt.com",
@@ -215,19 +229,23 @@ const specialRules = [
     "hostname": "discord.com",
     "selectors": [
       "div[id^='message-content-']"
-    ]
+    ],
+    "detectLanguage":true
   },
   {
     "regex": "web.telegram.org/z/",
     "selectors": [
       ".text-content"
-    ]
+    ],
+    "detectLanguage":true
   },
   {
     "hostname":"gist.github.com/",
     "containerSelectors":[
       ".markdown-body",".readme"
-    ]
+    ],
+  
+    "detectLanguage":true
   },
   {
     "hostname": "www.politico.com",
@@ -238,5 +256,14 @@ const specialRules = [
     "hostname":"lobste.rs",
     "selectors":[".u-repost-of"],
     "containerSelectors":[".comment_text"]
+  },
+  {
+    "regex":"\.slack\.com\/",
+    "selectors":[".p-rich_text_section"],
+    "detectLanguage":true
+  },
+  {
+    "hostname":"1paragraph.app",
+    "selectors":["[xmlns='http://www.w3.org/1999/xhtml']"]
   }
 ]

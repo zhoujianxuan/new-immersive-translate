@@ -299,18 +299,26 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
   // check node language is target language, if yes, remove it
 
   let newAllNodes = [];
-  for(const node of allNodes){
-    const nodeText = node.innerText;
-    if(nodeText && nodeText.trim().length>0){
-      const lang = await detectLanguage(nodeText);
-      if(lang && !checkIsSameLanguage(lang,currentTargetLanguage,ctx)){
-        // only translate the clearly language
-        newAllNodes.push(node);
+
+  if((pageSpecialConfig && pageSpecialConfig.detectLanguage===true)){
+    // only check when detectLanguage is not false
+    if(allNodes.length<500){
+      for(const node of allNodes){
+        const nodeText = node.innerText;
+        if(nodeText && nodeText.trim().length>0){
+            const lang = await detectLanguage(nodeText);
+            if(lang && !checkIsSameLanguage(lang,currentTargetLanguage,ctx)){
+              // only translate the clearly language
+              newAllNodes.push(node);
+            }
+
+        }
       }
+      allNodes = newAllNodes;
     }
   }
 
-  allNodes = newAllNodes;
+
 
   if(!isShowDualLanguage){
       return allNodes;

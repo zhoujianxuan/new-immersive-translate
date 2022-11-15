@@ -17,6 +17,8 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 - 支持PDF文件双语对照翻译（pdf文件翻译需要点击浏览器右上角的该扩展图标，弹出提示框后按提示框操作）
 - 配合epub在线阅读网站<https://1paragraph.app/> 即可实现双语阅读国外电子书
 
+> 已删除原扩展选中文本翻译功能，此扩展现在仅 Focus 网页翻译。划词翻译功能请使用其他同类产品～
+
 **视频介绍**
 
 [![Demo](https://img.youtube.com/vi/9TzX0xEBmyw/0.jpg)](https://www.youtube.com/watch?v=9TzX0xEBmyw)
@@ -32,7 +34,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 - 希望同时显示双语，以平衡部分机器翻译的不知所云
 - 希望尽快摆脱这个扩展，直接习惯看原文的用户的过渡助手
 
-该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，同时也支持使用Bing，Deepl进行文本选中翻译，完全免费，希望我们都能尽可能平等的获取知识，不要让语言成为障碍，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
+该扩展同时支持（依赖）谷歌翻译引擎或Yandex翻译引擎，完全免费，希望我们都能尽可能平等的获取知识，不要让语言成为障碍，感谢[原作者](https://github.com/FilipePS/Traduzir-paginas-web)为这个项目付出的巨大努力。
 
 本项目的[Wiki页面](https://github.com/immersive-translate/immersive-translate/wiki)下有更多使用帮助信息。
 
@@ -86,7 +88,7 @@ Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/
 
 目前已有的规则见[这里](https://github.com/immersive-translate/immersive-translate/blob/main/src/lib/specialRules.js)
 
-你可以点击浏览器该扩展图标 -> 选项(进入扩展配置页面) -> 网站配置 -> 特殊页面翻译规则 来进入页面规则配置，
+你可以点击浏览器该扩展图标 -> 选项(进入扩展配置), 滑动到最后，即可看到特殊页面规则配置，
 
 一个基本的配置规则如下：
 
@@ -105,7 +107,7 @@ Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/
 
 ### 双语显示样式配置
 
-默认的双语显示没有添加任何样式，但是我们提供了内置的几种样式可供选择，你可以从`配置->样式->双语显示主题配置`来更改样式，比如下划线样式长这样：
+默认的双语显示没有添加任何样式，但是我们提供了内置的几种样式可供选择，你可以从`配置->常用配置->双语显示主题配置`来更改样式，比如下划线样式长这样：
 
 ![twitter](assets/twitter.png)
 
@@ -215,9 +217,9 @@ Some pages like [support.mozilla.org](https://support.mozilla.org/) and [addons.
 
 - [x] - adapt for Github
 - [x] - backup默认文件名还是TWP
-- [ ] - option页面从extension中打开的显示问题 
+- [x] - option页面从extension中打开的显示问题 
 - [x] - 版本号自动添加
 - [x] - youtube comments
 - [x] - better for github
-- [ ] - check is target language, if so ,do not translate
-- [ ] - read mode
+- [x] - check is target language, if so ,do not translate
+- [x] - read mode
