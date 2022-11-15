@@ -232,5 +232,11 @@ const specialRules = [
   {
     "hostname": "www.politico.com",
     "containerSelectors": "main"
+  },
+  {
+
+    "hostname":"lobste.rs",
+    "selectors":[".u-repost-of"],
+    "containerSelectors":[".comment_text"]
   }
 ]

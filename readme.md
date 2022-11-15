@@ -45,9 +45,12 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 ### Chrome/Edge
 
 
-Chrome商店已上架，可以[直接下载](https://chrome.google.com/webstore/detail/immersive-translate/bpoadfkcbjbfhfodiogcnhhhpibjhbnh),如果你想最快体验到新版，也可以直接在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)下载最新构建的版本。
+Chrome/Edge商店均已上架，可以直接下载
 
-Edge商店正在提审中，你可以用chrome商店的版本，或者手动安装：
+- [Chrome商店地址](https://chrome.google.com/webstore/detail/immersive-translate/bpoadfkcbjbfhfodiogcnhhhpibjhbnh)
+- [Edge商店地址](https://microsoftedge.microsoft.com/addons/detail/immersive-translate/amkbmndfnliijdhojkpoglbnaaahippg)
+
+如果你想最快体验到新版，也可以直接在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)下载最新的版本：
 
 1. 在[这里](https://github.com/immersive-translate/immersive-translate/releases)下载chrome的压缩包
 2. 解压到一个以后不会删除的文件夹
@@ -57,9 +60,14 @@ Edge商店正在提审中，你可以用chrome商店的版本，或者手动安�
 6. 安装后，target语言可以选中文
 7. 接下来可以设置为always自动翻译英文，或者右键手动点击翻译本页面，即可有双语显示，打开推特试试看！
 
-### Google 接口
 
-Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/t?anno=3&client=te&v=1.0&format=html`，所以需要你的网络能访问google的这个网址。
+### 中国用户谷歌翻译接口被墙说明
+
+Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/t?anno=3&client=te&v=1.0&format=html`，所以需要你的网络能访问google的这个网址。如果你使用代理，则需要将该域名加入代理名单：
+
+`translate.googleapis.com`
+
+如果你不使用代理，可以考虑使用[GoogleTranslate_IPFinder](https://github.com/GoodCoder666/GoogleTranslate_IPFinder)等工具获取Google域名的ip，然后将ip更新到电脑本机的host本文中。
 
 ## 项目状态
 
@@ -67,17 +75,61 @@ Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/
 
 在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)会有一个nightly版本被频繁的构建，建议喜欢体验最新版/或者想帮忙测试的同学，可以手动安装nightly版本，firefox的扩展包已签名，可以直接下载后作为扩展文件安装。
 
-> 现在还没有任何选项可以设置,欢迎加入一起开发呀～
 
-## 截图
+## 自定义配置
 
-### Twitter
+点击插件图标，找到Options链接，可以进入插件的设置页面，这里主要介绍两个主要自定义配置选项：
+
+### 页面规则配置
+
+沉浸式翻译扩展会针对部分网站进行特殊适配，因为这些网站的实现要么不标准，要么是信息流/社交媒体网站，比如 twitter.com, reddit.com等，对这类网站不太容易有一个统一的规则去适配，所以此扩展使用特殊规则去实现对不同网站的适配，以实现更好的翻译体验。
+
+目前已有的规则见[这里](https://github.com/immersive-translate/immersive-translate/blob/main/src/lib/specialRules.js)
+
+你可以点击浏览器该扩展图标 -> 选项(进入扩展配置页面) -> 网站配置 -> 特殊页面翻译规则 来进入页面规则配置，
+
+一个基本的配置规则如下：
+
+>  这是推特网站适配的真实规则，这个css选择器的意思是选中所有属性为`data-testid`,并且该属性的值为`tweetText`的元素集合，这就是所有推文所在的元素。
+
+```json
+{
+  "hostname": "twitter.com",
+  "selectors": [
+      "[data-testid=\"tweetText\"]"
+  ] 
+}
+```
+
+更多说明请在[页面规则配置](https://github.com/immersive-translate/immersive-translate/wiki/Special-Rules-Tutorial) Wiki查看。
+
+### 双语显示样式配置
+
+默认的双语显示没有添加任何样式，但是我们提供了内置的几种样式可供选择，你可以从`配置->样式->双语显示主题配置`来更改样式，比如下划线样式长这样：
 
 ![twitter](assets/twitter.png)
 
-### Twitter 模糊效果
+
+模糊效果长这样：
 
 ![Twitter mask](assets/twitter-mask.png)
+
+
+如果你想针对不同页面，提供不同的样式，那需要在`插件配置页面->网站->特殊页面翻译规则`来配置`style`,比如我想让discord的翻译添加下划线样式，只需要添加一条这样的配置即可：
+
+```json
+{
+    "hostname": "discord.com",
+    "selectors": [
+      "div[id^='message-content-']"
+    ],
+    "style":"underline"
+}
+```
+
+## 截图
+
+更多截图请在[Wiki页面](https://github.com/immersive-translate/immersive-translate/wiki/Screenshot-for-sites)查看
 
 ### Reddit
 
@@ -94,13 +146,9 @@ Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/
 
 > 配合epub在线阅读网站<https://1paragraph.app/> 即可实现如图的通过双语阅读国外电子书
 
-
-
 ### Hacker News
 
 ![hackernews](assets/hn-details.png)
-
-
 
 ---
 
