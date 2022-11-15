@@ -14,6 +14,7 @@ twpConfig.onReady(function () {
     userAgent = navigator.userAgent;
   }
 
+  platformInfo.isMac =  navigator.platform.indexOf('Mac') > -1;
   platformInfo.isMobile = {
     Android: userAgent.match(/Android/i),
     BlackBerry: userAgent.match(/BlackBerry/i),

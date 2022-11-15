@@ -125,33 +125,25 @@ chrome.runtime.onInstalled.addListener(details => {
         })
     } else if (details.reason == "update" && chrome.runtime.getManifest().version != details.previousVersion) {
         twpConfig.onReady(async () => {
-            if (platformInfo.isMobile.any) return;
-            if (twpConfig.get("showReleaseNotes") !== "yes") return;
-
-            let lastTimeShowingReleaseNotes = twpConfig.get("lastTimeShowingReleaseNotes")
-            let showReleaseNotes = false
-            if (lastTimeShowingReleaseNotes) {
-                const date = new Date();
-                date.setDate(date.getDate() - 21)
-                if (date.getTime() > lastTimeShowingReleaseNotes) {
-                    showReleaseNotes = true
-                    lastTimeShowingReleaseNotes = Date.now()
-                    twpConfig.set("lastTimeShowingReleaseNotes", lastTimeShowingReleaseNotes)
-                }
-            } else {
-                showReleaseNotes = true
-                lastTimeShowingReleaseNotes = Date.now()
-                twpConfig.set("lastTimeShowingReleaseNotes", lastTimeShowingReleaseNotes)
-            }
-
-            if (showReleaseNotes) {
-                chrome.tabs.create({
-                    url: chrome.runtime.getURL("/options/options.html#release_notes")
-                })
-            }
-
-            
             translationCache.deleteTranslationCache()
+            if (platformInfo.isMobile.any) return;
+            // delete hotkeys from old versions
+            // get current hostkeys 
+            
+            if (typeof chrome.commands !== "undefined") {
+              chrome.commands.getAll((results) => {
+                try {
+                  const hotKeys = [];
+                  const configHotKeys = twpConfig.get("hotKeys") || {};
+                  for (const result of results) {
+                    hotKeys[result.name] = configHotKeys[result.name] || result.shortcut;
+                  }
+                  twpConfig.set("hotkeys",hotKeys);
+                } catch (e) {
+                  console.error(e);
+                } 
+              });
+            }
         })
     }
 
@@ -497,7 +489,6 @@ twpConfig.onReady(() => {
 
 if (typeof chrome.commands !== "undefined") {
     chrome.commands.onCommand.addListener(command => {
-        console.log("command", command)
         if (command === "hotkey-toggle-translation") {
             chrome.tabs.query({
                 currentWindow: true,

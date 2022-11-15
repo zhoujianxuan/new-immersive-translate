@@ -535,7 +535,6 @@ twpConfig.onReady(function () {
         const resetKey = li.querySelector(`[name="resetKey"]`)
 
         const hotkeysValues = twpConfig.get("hotkeys");
-        console.log("hotkeysValues", hotkeysValues)
         input.value = hotkeysValues[hotkeyname]
         if (input.value) {
             resetKey.style.display = "none"
@@ -563,8 +562,21 @@ twpConfig.onReady(function () {
 
         function getKeyString(e) {
             let result = ""
-            if (e.ctrlKey) {
+            // if mac use mac ctrl
+            
+            if(platformInfo.isMac){
+              if (e.ctrlKey) {
+                  result += "MacCtrl+"
+              }
+ 
+              if(e.metaKey) {
+                  result += "Command+"
+              }
+            }else{
+              if (e.ctrlKey) {
                 result += "Ctrl+"
+              }
+
             }
             if (e.altKey) {
                 result += "Alt+"
