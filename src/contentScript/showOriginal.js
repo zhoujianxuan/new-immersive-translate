@@ -17,13 +17,6 @@ twpConfig.onReady(function () {
         .then(response => styleTextContent = response)
         .catch(e => console.error(e))
 
-    let showOriginalTextWhenHovering = twpConfig.get("showOriginalTextWhenHovering")
-    twpConfig.onChanged(function (name, newValue) {
-        if (name === "showOriginalTextWhenHovering") {
-            showOriginalTextWhenHovering = newValue
-            showOriginal.enable(true)
-        }
-    })
 
     let originalTextIsShowing = false
     let divElement
@@ -131,7 +124,6 @@ twpConfig.onReady(function () {
         showOriginal.disable(dontDeleteNodesToShowOriginal)
 
         if (platformInfo.isMobile.any) return;
-        if (showOriginalTextWhenHovering !== "yes") return;
         if (divElement) return;
 
         divElement = document.createElement("div")
@@ -222,3 +214,4 @@ twpConfig.onReady(function () {
         document.removeEventListener("visibilitychange", hideOriginalText)
     }
 })
+

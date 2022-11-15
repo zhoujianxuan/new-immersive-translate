@@ -181,17 +181,10 @@ function resetPageAction(tabId, forceShow = false) {
             tabId
         })
     } else {
-        if (twpConfig.get("useOldPopup") === "yes") {
             chrome.pageAction.setPopup({
                 popup: "popup/old-popup.html",
                 tabId
             })
-        } else {
-            chrome.pageAction.setPopup({
-                popup: "popup/popup.html",
-                tabId
-            })
-        }
     }
 }
 
@@ -201,15 +194,9 @@ function resetBrowserAction(forceShow = false) {
             popup: null
         })
     } else {
-        if (twpConfig.get("useOldPopup") === "yes") {
             chrome.browserAction.setPopup({
                 popup: "popup/old-popup.html"
             })
-        } else {
-            chrome.browserAction.setPopup({
-                popup: "popup/popup.html"
-            })
-        }
     }
 }
 
@@ -405,9 +392,6 @@ twpConfig.onReady(() => {
 
         twpConfig.onChanged((name, newvalue) => {
             switch (name) {
-                case "useOldPopup":
-                    resetBrowserAction()
-                    break
                 case "translateClickingOnce":
                     resetBrowserAction()
                     chrome.tabs.query({
@@ -530,9 +514,6 @@ twpConfig.onReady(() => {
 
             twpConfig.onChanged((name, newvalue) => {
                 switch (name) {
-                    case "useOldPopup":
-                        updateIconInAllTabs()
-                        break
                     case "showButtonInTheAddressBar":
                         updateIconInAllTabs()
                         break

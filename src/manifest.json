@@ -126,24 +126,18 @@
             "run_at": "document_end",
             "all_frames": true,
             "match_about_blank": true,
-            "js": ["/lib/i18n.js", "/contentScript/showOriginal.js","/lib/specialRules.js", "/contentScript/enhance.js", "/contentScript/pageTranslator.js", "/contentScript/play.js","/contentScript/translateSelected.js", "/contentScript/showTranslated.js"]
+            "js": ["/lib/i18n.js", "/contentScript/showOriginal.js","/lib/specialRules.js", "/contentScript/enhance.js", "/contentScript/pageTranslator.js"]
         },
         {
             "matches": ["<all_urls>"],
             "run_at": "document_end",
             "all_frames": false,
             "js": ["/contentScript/popupMobile.js"]
-        },
-        {
-            "matches": ["https://www.deepl.com/translator*"],
-            "run_at": "document_end",
-            "all_frames": false,
-            "js": ["/contentScript/deepl.js"]
         }
     ],
 
     "background": {
         "persistent": true,
-        "scripts": ["/lib/languages.js", "/lib/config.js", "/lib/platformInfo.js", "/lib/util.js","/background/translationCache.js", "/background/translationService.js", "/background/textToSpeech.js", "/background/background.js"]
+        "scripts": ["/lib/languages.js", "/lib/config.js", "/lib/platformInfo.js", "/lib/util.js","/background/translationCache.js", "/background/translationService.js",  "/background/background.js"]
     }
 }

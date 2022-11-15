@@ -256,9 +256,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
     })
 
     //TODO FOO
-    if (twpConfig.get("useOldPopup") == "yes" || twpConfig.get("popupPanelSection") <= 1) {
-        twpConfig.set("targetLanguage", twpConfig.get("targetLanguages")[0])
-    }
+    twpConfig.set("targetLanguage", twpConfig.get("targetLanguages")[0])
 
     // Pieces are a set of nodes separated by inline tags that form a sentence or paragraph.
     let piecesToTranslate = []
