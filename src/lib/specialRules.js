@@ -35,9 +35,16 @@ const specialRules = [
     "detectLanguage":true
   },
   {
+    "name":"oldRedditCompact",
+    "regex":"old\.reddit\.com.*\/\.compact$",
+    "selectors":[".title > a"],
+    "containerSelectors":[".usertext-body"],
+  },
+  {
+    "name":"oldReddit",
     "hostname": "old.reddit.com",
     "selectors": [
-      "a.title"
+      "p.title > a"
     ],
     "containerSelectors": [
       "[role=main] .md-container"
@@ -265,5 +272,9 @@ const specialRules = [
   {
     "hostname":"1paragraph.app",
     "selectors":["[xmlns='http://www.w3.org/1999/xhtml']"]
+  },{
+    "hostname":"www.nytimes.com",
+    "selectors":["h1"],
+    "containerSelectors":"[name=articleBody]"
   }
 ]

@@ -1,6 +1,12 @@
 # Change Log
 
 
+## 0.0.27
+
+- Support www.nytimes.com
+- Support https://old.reddit.com/.compact
+- Improve old.reddit.com title new line
+
 ## 0.0.25
 
 - Support gist.github.com

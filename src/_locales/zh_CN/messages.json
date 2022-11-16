@@ -17,6 +17,9 @@
   "lblTranslated": {
     "message": "已翻译"
   },
+  "lblTranslateButton":{
+    "message": "翻译"
+  },
   "lblError": {
     "message": "无法翻译此页面"
   },
