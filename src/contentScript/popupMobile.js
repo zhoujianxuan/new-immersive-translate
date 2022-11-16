@@ -89,10 +89,15 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
     pageTranslator.onPageLanguageStateChange(_pageLanguageState => {
         pageLanguageState = _pageLanguageState
         if(_pageLanguageState==='translated') {
-            getElemById("menuSelectLanguage").style.display = "none"
-            getElemById("menu").style.display = "none"
-            getElemById("btnOriginal").style.color = null
-            getElemById("btnTranslate").style.color = "#2196F3"
+            try{
+
+              getElemById("menuSelectLanguage").style.display = "none"
+              getElemById("menu").style.display = "none"
+              getElemById("btnOriginal").style.color = null
+              getElemById("btnTranslate").style.color = "#2196F3"
+            }catch(e){
+              // ignore
+            }
         }
     })
 
