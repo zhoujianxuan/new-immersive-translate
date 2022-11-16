@@ -1,5 +1,5 @@
 
-# Immersive Translate - 沉浸式翻译扩展
+# Immersive Translate - 沉浸式翻译扩展(双语对照）
 
 Let's experience immersive web translation, with bilingual simultaneous display and translation of only the important content. Think of the browser's reading mode, but in immersive translation.
 
