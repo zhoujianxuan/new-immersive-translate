@@ -350,6 +350,13 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
           const br = document.createElement("br");
           copyNode.appendChild(br);
         }
+      }else if(pageSpecialConfig && (pageSpecialConfig.name==='oldRedditCompact' || pageSpecialConfig.name==='oldReddit')){
+
+        // if class name includes title
+        if(node.parentNode && node.parentNode.className.includes("title")){
+          const br = document.createElement("br");
+          copyNode.appendChild(br);
+        }
       }
 
       if(inlineElements.includes(copyNode.nodeName.toLowerCase())){
