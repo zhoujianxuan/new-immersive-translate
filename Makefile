@@ -8,3 +8,8 @@ build:
 .Phony: watch
 watch:
 	watchexec -e js,json,html npm run chrome
+
+
+.Phony: icon
+icon:
+	deno run -A ./scripts/generate-icons.js

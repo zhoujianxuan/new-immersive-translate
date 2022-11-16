@@ -185,6 +185,7 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
   options = options || {};
   const pageSpecialConfig = getPageSpecialConfig(ctx);
   const twpConfig = ctx.twpConfig
+  const neverTranslateLangs = twpConfig.get('neverTranslateLangs');
   const isShowDualLanguage = twpConfig.get("isShowDualLanguage")==='no'?false:true;
   const allBlocksSelectors = pageSpecialConfig && pageSpecialConfig.selectors || []
   const noTranslateSelectors = pageSpecialConfig && pageSpecialConfig.noTranslateSelectors || []
@@ -232,7 +233,7 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
           // check language
           try{
             const lang = node.getAttribute("lang");
-            if(lang && checkIsSameLanguage(lang,currentTargetLanguage,ctx)){
+            if(lang && checkIsSameLanguage(lang,[currentTargetLanguage,...neverTranslateLangs],ctx)){
               continue;
             }
           }catch(e){
@@ -317,7 +318,7 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
         const nodeText = node.innerText;
         if(nodeText && nodeText.trim().length>0){
             const lang = await detectLanguage(nodeText);
-            if(lang && !checkIsSameLanguage(lang,currentTargetLanguage,ctx)){
+            if(lang && !checkIsSameLanguage(lang,[currentTargetLanguage,...neverTranslateLangs],ctx)){
               // only translate the clearly language
               newAllNodes.push(node);
             }
@@ -587,12 +588,13 @@ addStyle()
     })
 }
 
-function checkIsSameLanguage(lang,currentTargetLang,ctx){
+
+function checkIsSameLanguage(lang,langs,ctx){
   const finalLang = twpLang.fixTLanguageCode(lang);
   if(!finalLang){
     return false;
   }
-  if(finalLang === currentTargetLang){
+  if(langs.includes(finalLang)){
     return true;
   }
   
@@ -602,8 +604,9 @@ function checkIsSameLanguage(lang,currentTargetLang,ctx){
   // I think people will not use it to learn zh-TW to zh-CN
   // only is show dual language, we will treat zh-CN and zh-TW as same language
   if(ctx && ctx.twpConfig && ctx.twpConfig.get("isShowDualLanguage")==='yes'){
-    if(finalLang.startsWith("zh-") && currentTargetLang.startsWith('zh-')){
-      return true;
+    if(finalLang.startsWith("zh-")){
+      // if langs , includes any lang starts with zh- , we will treat it as same language
+      return langs.filter(lang=>lang.startsWith("zh-")).length>0;
     }else{
       return false
     }
