@@ -114,6 +114,18 @@ function getPageSpecialConfig(ctx){
       }
     }
   }
+
+
+  // handle mastondon
+  const mastodonId = document.querySelector('div#mastodon');
+  const mastonText = document.querySelector('div.status__content__text');
+  if(mastodonId){
+    specialConfig =  {
+      name:"mastodon",
+      containerSelectors:'div.status__content__text',
+      detectLanguage:true
+    }
+  }
   return specialConfig
 }
 
@@ -365,6 +377,12 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
 
         // if class name includes title
         if(node.parentNode && node.parentNode.className.includes("title")){
+          const br = document.createElement("br");
+          copyNode.appendChild(br);
+        }
+      }else if(pageSpecialConfig && pageSpecialConfig.name==='stackoverflow'){
+        // if parrent name is h1
+        if((node.parentNode && node.parentNode.nodeName.toLowerCase() === "h1") || (node.classList.contains("comment-copy"))){
           const br = document.createElement("br");
           copyNode.appendChild(br);
         }

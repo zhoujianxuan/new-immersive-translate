@@ -281,5 +281,10 @@ const specialRules = [
     "hostname":"reader.960960.xyz",
     "selectors":["body > *"],
     "iframeContainer": "iframe"
+  },{
+    "name":"stackoverflow",
+    "hostname":"stackoverflow.com",
+    "selectors":[".s-post-summary--content-title","h1 > a",".comment-copy"],
+    "containerSelectors":"[itemprop=text]"
   }
 ]

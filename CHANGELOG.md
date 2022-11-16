@@ -1,5 +1,14 @@
-# Change Log
+# ChangeLog
 
+## 0.0.31
+
+- support stackoverflow.com
+- Support mastondon
+
+## 0.0.30
+
+- Change icon
+- Support never translate some lang on twitter or discord
 
 ## 0.0.28
 
