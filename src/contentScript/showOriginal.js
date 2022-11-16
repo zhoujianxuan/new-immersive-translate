@@ -122,7 +122,8 @@ twpConfig.onReady(function () {
 
     showOriginal.enable = function (dontDeleteNodesToShowOriginal = false) {
         showOriginal.disable(dontDeleteNodesToShowOriginal)
-
+        // disable this function, cause we have dual language display now.
+        return;
         if (platformInfo.isMobile.any) return;
         if (divElement) return;
 
