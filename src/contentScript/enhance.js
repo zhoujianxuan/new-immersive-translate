@@ -214,8 +214,17 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
   if(pageSpecialConfig && pageSpecialConfig.blockElements){
     blockElements = pageSpecialConfig.blockElements;
   }
+  let isIframeContainer = false;
   // check sites
   if(allBlocksSelectors.length>0){
+    // check id iframe
+    if(pageSpecialConfig && pageSpecialConfig.iframeContainer){
+      const iframeContainer = root.querySelector(pageSpecialConfig.iframeContainer);
+      if(iframeContainer){
+        root = iframeContainer.contentDocument;
+        isIframeContainer = true;
+      }
+    }
     for(const selector of allBlocksSelectors){
       const nodes = root.querySelectorAll(selector);
       for(const node of nodes){
@@ -240,7 +249,8 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
   }
 
 
-  if((pageSpecialConfig && pageSpecialConfig.containerSelectors) || allBlocksSelectors.length === 0){
+  if(!isIframeContainer && ((pageSpecialConfig && pageSpecialConfig.containerSelectors) || allBlocksSelectors.length === 0)){
+    
     const originalRoot = root;
     const contentContainers = getContainers(root,pageSpecialConfig);
     let containers = []

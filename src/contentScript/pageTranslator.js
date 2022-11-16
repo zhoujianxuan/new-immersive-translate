@@ -872,7 +872,8 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         pageLanguageStateObservers.forEach(callback => callback(pageLanguageState))
         currentPageLanguage = currentTargetLanguage
 
-        translatePageTitle()
+        // do not translate title, it not need
+        // translatePageTitle()
 
         enableMutatinObserver()
 
@@ -986,16 +987,19 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
             },async  result => {
                 // if und, manual check
                 
-                if(result === 'und'){
+                if(result === 'und' || !result){
                     result = await detectPageLanguage()
-                }
-
+                }              
                 result = result || "und"
 
 
                 if (result === "und") {
                     originalTabLanguage = result
-                } else {
+                }
+
+                if (twpConfig.get("alwaysTranslateSites").indexOf(tabHostName) !== -1) {
+                    pageTranslator.translatePage()
+                }else if(result!=='und'){
                     const langCode = twpLang.fixTLanguageCode(result)
                     if (langCode) {
                         originalTabLanguage = langCode
@@ -1004,13 +1008,11 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
                         pageTranslator.translatePage()
                     } else {
                         if (location.hostname !== "translate.googleusercontent.com" && location.hostname !== "translate.google.com" && location.hostname !== "translate.yandex.com") {
-                            if (pageLanguageState === "original" && !platformInfo.isMobile.any && !chrome.extension.inIncognitoContext) {
+                            if (pageLanguageState === "original" && !chrome.extension.inIncognitoContext) {
                                 if (twpConfig.get("neverTranslateSites").indexOf(tabHostName) === -1) {
                                     if (langCode && langCode !== currentTargetLanguage && twpConfig.get("alwaysTranslateLangs").indexOf(langCode) !== -1) {
                                         pageTranslator.translatePage()
-                                    } else if (twpConfig.get("alwaysTranslateSites").indexOf(tabHostName) !== -1) {
-                                        pageTranslator.translatePage()
-                                    }
+                                    } 
                                 }
                             }
                         }

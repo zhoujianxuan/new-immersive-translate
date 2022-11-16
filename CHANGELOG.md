@@ -6,6 +6,8 @@
 - Support www.nytimes.com
 - Support https://old.reddit.com/.compact
 - Improve old.reddit.com title new line
+- Support Mobile Always translate from site or language
+- Support reader.960960.xyz
 
 ## 0.0.25
 

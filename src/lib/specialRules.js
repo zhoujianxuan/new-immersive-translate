@@ -276,5 +276,10 @@ const specialRules = [
     "hostname":"www.nytimes.com",
     "selectors":["h1"],
     "containerSelectors":"[name=articleBody]"
+  },
+  {
+    "hostname":"reader.960960.xyz",
+    "selectors":["body > *"],
+    "iframeContainer": "iframe"
   }
 ]

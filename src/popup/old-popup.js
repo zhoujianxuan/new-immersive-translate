@@ -60,6 +60,14 @@ twpConfig.onReady(function () {
         }
 
         langsSorted.sort(function (a, b) {
+            // en should be the first
+            if (a[0] === "en") return -1
+            if (b[0] === "en") return 1
+            // zh-CN and zh-TW should be the second and third
+            if (a[0] === "zh-CN") return -1
+            if (b[0] === "zh-CN") return 1
+            if (a[0] === "zh-TW") return -1
+            if (b[0] === "zh-TW") return 1
             return a[1].localeCompare(b[1]);
         })
 

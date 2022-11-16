@@ -18,7 +18,7 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
     <div id='main'>
         <img id="iconTranslate">
         <button id="btnOriginal" class="item button" data-i18n="btnMobileOriginal">Original</button>
-        <button id="btnTranslate" class="item button" data-i18n="lblTranslated">Translated</button>
+        <button id="btnTranslate" class="item button" data-i18n="lblTranslateButton">Translated</button>
         <button id="spin" class="item button">
             <div class="loader button"></div>
         </button>
@@ -26,6 +26,7 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
             <div class="dropup">
                 <div id="menu" class="dropup-content">
                     <a id="btnChangeLanguages" data-i18n="btnChangeLanguages">Change languages</a>
+                    <a id="btnAlwaysTranslateSite" data-i18n="btnAlwaysTranslate">Always translate this site</a>
                     <a id="btnNeverTranslate" data-i18n="btnNeverTranslate">Never translate this site</a>
                     <a id="neverTranslateThisLanguage" data-i18n="btnNeverTranslateThisLanguage" display="none">Never translate this language</a>
                     <a id="btnMoreOptions" data-i18n="btnMoreOptions">More options</a>
@@ -87,6 +88,12 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
     let pageLanguageState = "original"
     pageTranslator.onPageLanguageStateChange(_pageLanguageState => {
         pageLanguageState = _pageLanguageState
+        if(_pageLanguageState==='translated') {
+            getElemById("menuSelectLanguage").style.display = "none"
+            getElemById("menu").style.display = "none"
+            getElemById("btnOriginal").style.color = null
+            getElemById("btnTranslate").style.color = "#2196F3"
+        }
     })
 
     popupMobile.show = function (forceShow = false) {
@@ -194,6 +201,14 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
             }
 
             langsSorted.sort(function (a, b) {
+              // en should be the first
+              if (a[0] === "en") return -1
+              if (b[0] === "en") return 1
+              // zh-CN and zh-TW should be the second and third
+              if (a[0] === "zh-CN") return -1
+              if (b[0] === "zh-CN") return 1
+              if (a[0] === "zh-TW") return -1
+              if (b[0] === "zh-TW") return 1
                 return a[1].localeCompare(b[1]);
             })
 
@@ -265,6 +280,11 @@ Promise.all([twpConfig.onReady(), getTabHostName()])
             popupMobile.hide()
         }
 
+
+        getElemById("btnAlwaysTranslateSite").onclick = e => {
+            twpConfig.addSiteToAlwaysTranslate(tabHostName)
+            popupMobile.hide()
+        }
         getElemById("neverTranslateThisLanguage").onclick = e => {
             twpConfig.addLangToNeverTranslate(originalTabLanguage)
             popupMobile.hide()
