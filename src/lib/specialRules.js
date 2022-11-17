@@ -161,7 +161,9 @@ const specialRules = [
     "containerSelectors": "article"
   },
   {
+    "name":"seekingalpha",
     "hostname": "seekingalpha.com",
+    "selectors":["[data-test-id='post-list-item'] h3"],
     "containerSelectors": "div.wsb_section",
     "brToParagraph": true
   },
