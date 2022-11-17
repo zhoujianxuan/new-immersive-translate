@@ -12,8 +12,8 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 说明： 该扩展Fork自[TWP](https://github.com/FilipePS/Traduzir-paginas-web)扩展，我为其添加了以下功能：
 
 - 双语显示，按照段落分割
-- 只翻译网页里的内容区域，这极大的增强了翻译的阅读体验，而不是像之前那样网页的所有元素都被翻译，类似浏览器的阅读模式，所以该扩展被重新命名为“沉浸式翻译”
-- 为常用网站做了定制优化，比如Twitter，Reddit，Discord, Telegram, Youtube, Hacker News等，我希望这个扩展足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站在单独优化后体验更好，所以我们会对这类网站做单独适配，同时坏处就是可能随时网站的更新而失效，所以这里我会持续优化。如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/immersive-translate/immersive-translate/issues)或[Telegram群组](https://t.me/+rq848Z09nehlOTgx)中提出。
+- 只翻译网页里的内容区域，而不是把网页中的所有元素都翻译，这极大的增强了翻译后的网页阅读体验。类似浏览器的阅读模式，所以该扩展被重新命名为“沉浸式翻译”
+- 为常用网站做了定制优化，比如Twitter，Reddit，Discord, Telegram, Youtube, Hacker News等。我希望这个扩展足够通用，不需要为绝大多数网站做定制，但是往往有一些网站由于不规范，或者非内容类网站，这些网站在单独优化后体验更好，所以我们会对这类网站做单独适配，同时坏处就是可能随时因网站的更新而失效，所以这里我会持续优化。如果有常用的网站翻译显示不佳，欢迎在[Isuee](https://github.com/immersive-translate/immersive-translate/issues)或[Telegram群组](https://t.me/+rq848Z09nehlOTgx)中提出。
 - 支持PDF文件双语对照翻译（pdf文件翻译需要点击浏览器右上角的该扩展图标，弹出提示框后按提示框操作）
 - 配合epub在线阅读网站<https://1paragraph.app/> 即可实现双语阅读国外电子书
 
@@ -25,7 +25,8 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 
 
-沉浸式翻译和[原扩展](https://github.com/FilipePS/Traduzir-paginas-web)的目标不太一样，原扩展的目标是成为一个非常通用的翻译扩展，是浏览器自带翻译的良好替代品。但是此扩展更关注的用户群体是经常需要看外文的用户，希望这些群体在阅读外文页面时能有一个更好的体验（我想做这个扩展就是因为我经常需要在[Buzzing](https://www.buzzing.cc/)上浏览大量的外媒文章），所以该扩展的目标群体是：
+沉浸式翻译和[原扩展](https://github.com/FilipePS/Traduzir-paginas-web)的目标不太一样，原扩展的目标是成为一个非常通用的翻译扩展，是浏览器自带翻译的良好替代品。
+但是此扩展更关注的用户群体是经常需要看外文的用户，希望能帮助这些群体在阅读外文页面时有一个更好的体验（我想做这个扩展就是因为我经常需要在[Buzzing](https://www.buzzing.cc/)上浏览大量的外媒文章），所以该扩展的目标群体是：
 
 - 经常阅读国外长篇文章，论文
 - 阅读外文PDF，外语电子书
@@ -52,15 +53,15 @@ Chrome/Edge商店均已上架，可以直接下载
 - [Chrome商店地址](https://chrome.google.com/webstore/detail/immersive-translate/bpoadfkcbjbfhfodiogcnhhhpibjhbnh)
 - [Edge商店地址](https://microsoftedge.microsoft.com/addons/detail/immersive-translate/amkbmndfnliijdhojkpoglbnaaahippg)
 
-如果你想最快体验到新版，也可以直接在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)下载最新的版本：
+商店审核会有延迟，如果你想最快体验新版，可以直接在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)下载最新的版本：
 
 1. 在[这里](https://github.com/immersive-translate/immersive-translate/releases)下载chrome的压缩包
 2. 解压到一个以后不会删除的文件夹
 3. 打开扩展管理窗口，`chrome://extensions`
 4. 激活开发者模式
 5. 载入刚解压的扩展文件夹
-6. 安装后，target语言可以选中文
-7. 接下来可以设置为always自动翻译英文，或者右键手动点击翻译本页面，即可有双语显示，打开推特试试看！
+6. 安装后，target语言选中文（你的母语）
+7. 接下来可以设置为“always自动翻译英文”，或者右键手动点击“翻译本页面”，即可有双语显示，打开推特试试看！
 
 
 除了下载Release页面构建好的版本之外，你还可以通过Clone本项目，然后随着本项目的更新，每次都`git pull`最新代码，然后在本地手动构建: `npm run build`, 然后在扩展管理窗口，里加载 `dist/chrome`文件夹即可。点击[这里](https://github.com/immersive-translate/immersive-translate/wiki/Chrome-Firefox-%E6%89%8B%E5%8A%A8%E6%9E%84%E5%BB%BA%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)查看更详细的步骤。
@@ -68,15 +69,13 @@ Chrome/Edge商店均已上架，可以直接下载
 
 ### 中国用户谷歌翻译接口被墙说明
 
-Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/t?anno=3&client=te&v=1.0&format=html`，所以需要你的网络能访问google的这个网址。如果你使用代理，则需要将该域名加入代理名单：
-
-`translate.googleapis.com`
-
+Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/t?anno=3&client=te&v=1.0&format=html`，所以需要你的网络能访问google的这个网址。
+如果你使用代理，则需要将该域名加入代理名单：`translate.googleapis.com`
 如果你不使用代理，可以考虑使用[GoogleTranslate_IPFinder](https://github.com/GoodCoder666/GoogleTranslate_IPFinder)等工具获取Google域名的ip，然后将ip更新到电脑本机的host本文中。
 
 ## 项目状态
 
-目前依然处于Alpha阶段，但是常用内容网站在使用上已经没有问题，同时在[Telegram 沉浸式翻译扩展讨论组](https://t.me/+rq848Z09nehlOTgx)中经常得到很多有用的反馈，如果你有反馈，也可以在[群里](https://t.me/+rq848Z09nehlOTgx)提出。
+目前依然处于Alpha阶段，但在常用的内容网站上使用已经没有问题，同时在[Telegram 沉浸式翻译扩展讨论组](https://t.me/+rq848Z09nehlOTgx)中经常得到很多有用的反馈，如果你有反馈，也可以在[群里](https://t.me/+rq848Z09nehlOTgx)提出。
 
 在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)会有一个nightly版本被频繁的构建，建议喜欢体验最新版/或者想帮忙测试的同学，可以手动安装nightly版本，firefox的扩展包已签名，可以直接下载后作为扩展文件安装。
 
@@ -87,15 +86,15 @@ Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/
 
 ### 页面规则配置
 
-沉浸式翻译扩展会针对部分网站进行特殊适配，因为这些网站的实现要么不标准，要么是信息流/社交媒体网站，比如 twitter.com, reddit.com等，对这类网站不太容易有一个统一的规则去适配，所以此扩展使用特殊规则去实现对不同网站的适配，以实现更好的翻译体验。
+沉浸式翻译扩展会针对部分网站进行特殊适配，因为这些网站的实现要么不标准，要么是信息流/社交媒体网站，比如 twitter.com, reddit.com 等，对这类网站不太容易有一个统一的规则去适配，所以此扩展使用特殊规则去实现对此类网站的适配，以实现更好的翻译阅读体验。
 
 目前已有的规则见[这里](https://github.com/immersive-translate/immersive-translate/blob/main/src/lib/specialRules.js)
 
-你可以点击浏览器该扩展图标 -> 选项(进入扩展配置), 滑动到最后，即可看到特殊页面规则配置，
+你可以点击浏览器该扩展图标 -> 选项(进入扩展配置)，滑动到最后，即可看到特殊页面规则配置，
 
 一个基本的配置规则如下：
 
->  这是推特网站适配的真实规则，这个css选择器的意思是选中所有属性为`data-testid`,并且该属性的值为`tweetText`的元素集合，这就是所有推文所在的元素。
+这是推特网站适配的真实规则，这个css选择器的意思是选中所有属性为`data-testid`，并且该属性的值为 `tweetText` 的元素集合，这就是所有推文所在的元素。
 
 ```json
 {
@@ -110,17 +109,17 @@ Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/
 
 ### 双语显示样式配置
 
-默认的双语显示没有添加任何样式，但是我们提供了内置的几种样式可供选择，你可以从`配置->常用配置->双语显示主题配置`来更改样式，比如下划线样式长这样：
+默认的双语显示没有添加任何样式，但是我们提供了内置的几种样式可供选择，你可以从 `配置->常用配置->双语显示主题配置` 来更改样式，比如下划线样式：
 
 ![twitter](assets/twitter.png)
 
 
-模糊效果长这样：
+模糊效果样式：
 
 ![Twitter mask](assets/twitter-mask.png)
 
 
-如果你想针对不同页面，提供不同的样式，那需要在`插件配置页面->网站->特殊页面翻译规则`来配置`style`,比如我想让discord的翻译添加下划线样式，只需要添加一条这样的配置即可：
+如果你想对不同的页面应用不同的样式，那需要在 `插件配置页面->网站->特殊页面翻译规则` 来配置`style`，比如我想让 discord 的翻译添加下划线样式，只需要添加一条这样的配置即可：
 
 ```json
 {
