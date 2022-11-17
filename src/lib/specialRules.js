@@ -147,7 +147,7 @@ const specialRules = [
     "detectLanguage":true
   },
   {
-    "regex": ".substack.com/",
+    "regex": "\.substack\.com\/",
     "selectors": [
       ".post-preview-title",
       ".post-preview-description",

@@ -2,8 +2,12 @@
 
 ## 0.0.31
 
-- support stackoverflow.com
-- Support mastondon
+### New Sites
+
+- stackoverflow.com
+- mastondon
+- substack
+- seekingalpha
 
 ## 0.0.30
 
