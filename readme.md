@@ -63,6 +63,9 @@ Chrome/Edge商店均已上架，可以直接下载
 7. 接下来可以设置为always自动翻译英文，或者右键手动点击翻译本页面，即可有双语显示，打开推特试试看！
 
 
+除了下载Release页面构建好的版本之外，你还可以通过Clone本项目，然后随着本项目的更新，每次都`git pull`最新代码，然后在本地手动构建: `npm run build`, 然后在扩展管理窗口，里加载 `dist/chrome`文件夹即可。点击[这里](https://github.com/immersive-translate/immersive-translate/wiki/Chrome-Firefox-%E6%89%8B%E5%8A%A8%E6%9E%84%E5%BB%BA%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)查看更详细的步骤。
+
+
 ### 中国用户谷歌翻译接口被墙说明
 
 Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/t?anno=3&client=te&v=1.0&format=html`，所以需要你的网络能访问google的这个网址。如果你使用代理，则需要将该域名加入代理名单：
