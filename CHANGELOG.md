@@ -1,5 +1,11 @@
 # ChangeLog
 
+
+## 0.0.32
+
+- Fix popup More option, always translate site
+
+
 ## 0.0.31
 
 ### New Sites
