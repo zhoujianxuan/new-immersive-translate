@@ -40,6 +40,7 @@ const specialRules = [
     "regex":"old\.reddit\.com.*\/\.compact$",
     "selectors":[".title > a"],
     "containerSelectors":[".usertext-body"],
+    "detectLanguage":true
   },
   {
     "name":"oldReddit",
