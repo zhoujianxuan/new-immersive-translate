@@ -150,10 +150,12 @@ const specialRules = [
     "regex": ".substack.com/",
     "selectors": [
       ".post-preview-title",
-      ".post-preview-description"
+      ".post-preview-description",
+      
     ],
     "containerSelectors": [
-      ".post"
+      ".post",
+      ".comment-body"
     ]
   },
   {
