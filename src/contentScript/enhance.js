@@ -386,6 +386,11 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
           const br = document.createElement("br");
           copyNode.appendChild(br);
         }
+      }else if(pageSpecialConfig && pageSpecialConfig.name==='ycombinator'){
+        if(node.nodeName.toLowerCase() === "a" ){
+          const br = document.createElement("br");
+          copyNode.appendChild(br);
+        }
       }
 
       if(inlineElements.includes(copyNode.nodeName.toLowerCase())){

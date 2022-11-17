@@ -14,9 +14,10 @@ const specialRules = [
 
   },
   {
+    "name":"ycombinator",
     "hostname": "news.ycombinator.com",
     "selectors": [
-      ".titleline >a",
+      ".titleline > a",
       ".comment",
       ".toptext"
     ],

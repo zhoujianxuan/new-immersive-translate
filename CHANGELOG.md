@@ -9,6 +9,10 @@
 - substack
 - seekingalpha
 
+### Better Adapt
+
+- Hacker News
+
 ## 0.0.30
 
 - Change icon
