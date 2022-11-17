@@ -20,6 +20,9 @@
   "lblError": {
     "message": "無法翻譯此頁面"
   },
+  "lblTargetLanguageHelp":{
+    "message": "設置翻譯後的語言，也就是你的母語"
+  },
   "lblAlwaysTranslate": {
     "message": "始終從 $LANGUAGE_NAME$ 翻譯",
     "placeholders": {

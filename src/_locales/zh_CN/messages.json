@@ -33,13 +33,16 @@
     }
   },
   "lblTargetLanguage": {
-    "message": "目标语言 $TARGET_LANGUAGE_NUM$",
+    "message": "目标语言 $TARGET_LANGUAGE_NUM$ ",
     "placeholders": {
       "TARGET_LANGUAGE_NUM": {
         "content": "$1",
         "example": "2"
       }
     }
+  },
+  "lblTargetLanguageHelp":{
+    "message": "设置翻译后的语言，也就是你的母语"
   },
   "btnReset": {
     "message": "重置"
