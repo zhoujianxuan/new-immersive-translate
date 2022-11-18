@@ -294,6 +294,7 @@ const specialRules = [
     "containerSelectors":"[itemprop=text]"
   },{
     "hostname":"app.daily.dev",
-    "selectors":["h1",".typo-body","article h3"]
+    "selectors":["h1",".typo-body","article h3"],
+    "containerSelectors":"[class^=markdown_markdown]"
   }
 ]
