@@ -292,5 +292,8 @@ const specialRules = [
     "hostname":"stackoverflow.com",
     "selectors":[".s-post-summary--content-title","h1 > a",".comment-copy"],
     "containerSelectors":"[itemprop=text]"
+  },{
+    "hostname":"app.daily.dev",
+    "selectors":["h1",".typo-body","article h3"]
   }
 ]

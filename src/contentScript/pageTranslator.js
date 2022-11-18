@@ -646,6 +646,7 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
           }
         }
         fontNode.setAttribute("style", style)
+        // fontNode.setAttribute("_mstmutation", "1")
         // add class name 
         fontNode.textContent = node.textContent
 
