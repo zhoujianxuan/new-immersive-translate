@@ -4,6 +4,7 @@
 ## 0.0.32
 
 - Fix popup More option, always translate site
+- support app.daily.dev
 
 
 ## 0.0.31

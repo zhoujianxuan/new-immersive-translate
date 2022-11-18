@@ -63,28 +63,6 @@ This is a translation plugin, it may be requested by any host, so we need the pe
 
 ## description en
 
-Let's experience immersive web translation, with bilingual simultaneous display and translation of only the important content. 
-
-What makes this plugin different from other translation plugins is that:
-
-1. Bilingual display, split by paragraph
-2. Translation of only the content area of the page, which greatly enhances the reading experience of the translation, instead of the previous one where all elements of the page are translated, similar to the browser reading mode, so the plugin was named "Immersive Translation"
-3. I hope this plugin is universal enough that it does not need to be customized for most websites, but there are often some websites that are not standardized, or non-content websites, and these websites are better after separate optimization, so we will do separate adaptations for such websites, and the downside is that the website may not work at any time. The bad thing is that the website may fail at any time with the update of the website, so here I will continue to optimize. If you have a commonly used website that does not translate well, please feel free to ask in https://github.com/immersive-translate/immersive-translate/issues
-4. Support bilingual translation of PDF files
-5. Cooperate with epub online reading website like https://1paragraph.app/ , to realize bilingual reading of foreign e-books
-
-This plugin is more concerned about users who often need to read foreign languages to have a good experience when reading foreign language pages (I want to do this plugin because I often need to browse a lot of foreign media articles on https://www.buzzing.cc ), so the target group of this plugin is:
-
-1. You often read long articles, papers from abroad
-2. Read foreign language PDF, foreign language e-books
-3. You want to quickly browse Twitter, Reddit, Hacker News, Github Issue and other foreign forum sites
-4. You want to display both languages to learn the target language
-5. You hope to display bilingualism at the same time to balance the unknowingness of some machine translation
-6. You hope to get rid of this extension as soon as possible, which is an excessive assistant for users who are directly used to reading the original language
-
-The extension also supports (relies on) Google translation engine or Yandex translation engine, while supporting the use of Bing, Deepl for text selection translation, the plug-in is completely free, I hope we can all get knowledge as equally as possible, thanks to the original extension: https://github.com/FilipePS/Traduzir-paginas-weboriginal for the great effort he put into this project.
-
-
 Let's experience an immersive web translation with bilingual simultaneous display and translation of only important content.
 
 What makes this extension different from other translation extensions is:
@@ -92,20 +70,19 @@ What makes this extension different from other translation extensions is:
 1. Bilingual display, split by paragraph
 2. Only the content area of the page is translated, which greatly enhances the reading experience of translation, instead of all the elements of the page being translated like other similar products, the translation behavior of this extension is similar to the reading mode of a browser, so the extension is named "Immersive Translation"
 3. I hope this extension is universal enough that it does not need to be customized for most websites, but there are often websites that are unregulated or non-content websites that work better when optimized separately, so we will do separate adaptations for such websites, the bad thing is that the website may not work with translations. So we will keep optimizing to meet the user experience. So if you have a problem with the translation experience of a commonly used website, please feel free to post it at https://github.com/immersive-translate/immersive-translate/issues
-4. We also support bilingual translation of PDF files, just open the pdf file, then click the extension icon and follow the prompts.
-5. Cooperate with https://1paragraph.app/ and other epub online reading sites to achieve bilingual reading of foreign e-books
+4. We also support the bilingual translation of PDF files, just open the pdf file, then click the extension icon and follow the prompts.
+5. Cooperate with online epub reading sites to achieve a bilingual reading of foreign e-books
 
-This plug-in is more concerned about users who often need to read foreign languages, so that they can have a good experience when reading foreign language web pages, so the target group of this extension is.
+This extension is more concerned with users who often need to read foreign languages so that they can have a good experience when reading foreign language web pages, so the target group of this extension is.
 
-1. you often read long articles, papers from the second language.
-2. you read foreign language PDF, foreign language e-books
-3. you want to quickly browse Twitter, Reddit, Hacker News, Github Issue and other foreign forum sites
+1. you often read long articles, and papers in the second language.
+2. you read foreign language PDFs, foreign language e-books
+3. you want to quickly browse Twitter, Reddit, Hacker News, Github Issue, and other foreign forum sites
 4. you want to display two languages to learn the target language
 5. you want to display bilingualism at the same time to balance out some of the agnosticism of machine translation
-6. you want to get rid of this extension as soon as possible, which is an excessive helper for users who are directly used to reading the original text
+6. you want to get rid of this extension as soon as possible, which is an excessive helper for users who are directly used to read the original text
 
 The extension supports both Google and Yandex translation engines, is completely free, and wants everyone to have as equal access to knowledge as possible.
-
 
 ## Notes for review
 
