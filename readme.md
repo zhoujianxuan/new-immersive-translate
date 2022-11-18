@@ -17,7 +17,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 - 支持PDF文件双语对照翻译（pdf文件翻译需要点击浏览器右上角的该扩展图标，弹出提示框后按提示框操作）
 - 配合epub在线阅读网站<https://1paragraph.app/> 即可实现双语阅读国外电子书
 
-> 已删除原扩展选中文本翻译功能，此扩展现在仅 Focus 网页翻译。划词翻译功能请使用其他同类产品～
+> 已删除原扩展选中文本翻译功能，此扩展现在仅 Focus 网页翻译。划词翻译功能请使用其他同类产品～ 比如 [沙拉查词](https://saladict.crimx.com/)
 
 **视频介绍**
 
