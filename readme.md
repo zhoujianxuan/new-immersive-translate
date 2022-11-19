@@ -154,6 +154,9 @@ Google翻译会调用该接口： `https://translate.googleapis.com/translate_a/
 
 ![hackernews](assets/hn-details.png)
 
+
+你可以在本项目的[Wiki页面](https://github.com/immersive-translate/immersive-translate/wiki)查看更多文档以及常见问题。
+
 ---
 
 ## Install
