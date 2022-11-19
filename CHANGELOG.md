@@ -1,6 +1,10 @@
 # ChangeLog
 
 
+## 0.0.34 (not released)
+
+- Fix copy img node.
+
 ## 0.0.33
 
 - Support google.com

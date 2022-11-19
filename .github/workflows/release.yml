@@ -80,11 +80,13 @@ jobs:
           mv dist/chrome.zip dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
           mv ${{ steps.web-ext-self-sign.outputs.target }} dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi
       - name: release assets
-        uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        uses: "softprops/action-gh-release@v1"
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: "v${{ steps.set_var.outputs.version }}"
+          generate_release_notes: false
+          body: |
+            See [Changelog](https://github.com/immersive-translate/immersive-translate/blob/main/CHANGELOG.md) for more details.
           files: |
             dist/chrome-immersive_translate-${{ steps.set_var.outputs.version }}.zip
             dist/firefox-immersive_translate-${{ steps.set_var.outputs.version }}.xpi

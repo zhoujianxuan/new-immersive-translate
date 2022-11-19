@@ -151,6 +151,19 @@ function isValidNode(node){
   if(node.closest && node.closest(`[${enhanceMarkAttributeName}=copiedNode]`)){
     return false;
   }
+  // check is img node
+  if(node.nodeName==="P"){
+    // check all children nodes
+
+    const children = node.childNodes;
+    let isIncludeImg = node.querySelector('img');
+    if(isIncludeImg && node.childNodes.length<3){
+      // treat it as img node
+      return false;
+    }
+      
+
+  }
 
   // check is there is notranslate class
   return true;
