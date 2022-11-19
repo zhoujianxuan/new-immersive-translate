@@ -760,6 +760,11 @@ twpConfig.onReady(function () {
     }
     $("#showPopupMobile").value = twpConfig.get("showPopupMobile")
 
+    $("#isTranslateTitle").onchange = e => {
+        twpConfig.set("isTranslateTitle", e.target.value)
+    }
+    $("#isTranslateTitle").value = twpConfig.get("isTranslateTitle")
+
     $("#showTranslatePageContextMenu").onchange = e => {
         twpConfig.set("showTranslatePageContextMenu", e.target.value)
     }

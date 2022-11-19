@@ -296,5 +296,18 @@ const specialRules = [
     "hostname":"app.daily.dev",
     "selectors":["h1",".typo-body","article h3"],
     "containerSelectors":"[class^=markdown_markdown]"
+  },{
+    "name":"google",
+    "regex":"^https:\/\/www\.google\.",
+    "selectors":["h2","a h3","div[data-content-feature='1'] > div","a [aria-level='3']","a [aria-level='3'] + div",".Uroaid"],
+    "detectLanguage":true
+
+  },{
+    "hostname":"www.urbandictionary.com",
+    "selectors":["div.meaning","div.example"],
+  },{
+    "hostname":"answers.microsoft.com",
+    "selectors":["h1","div.thread-message-content div.thread-message-content-body-text"],
+    "containerSelectors":["div.thread-message-content-body-text",]
   }
 ]

@@ -13,6 +13,7 @@ const twpConfig = (function () {
     textTranslatorService: "google", // google yandex bing deepl
     ttsSpeed: 1.0,
     enableDeepL: "yes",
+    isTranslateTitle: "no",
     targetLanguage: null,
     targetLanguageTextTranslation: null,
     targetLanguages: [], // "en", "es", "de"

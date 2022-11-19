@@ -534,6 +534,8 @@
   },
   "msgCommon":{
     "message":"常用配置"
+  },
+  "optionIsTranslateTitle":{
+    "message":"是否翻译页面标题？"
   }
- 
 }

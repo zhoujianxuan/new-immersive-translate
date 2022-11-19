@@ -319,6 +319,7 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
   })
 
 
+
   // check node language is target language, if yes, remove it
 
   let newAllNodes = [];
@@ -366,7 +367,8 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
     if(!previousSibling || !previousSibling.hasAttribute || !previousSibling.hasAttribute(enhanceMarkAttributeName)){
       // add 
       let copyNode = node.cloneNode(true);
-
+      // get original display value
+      let originalDisplay = node.style.display;
       if(ctx.tabHostName==="www.reddit.com"){
         // append child <br>
         if(copyNode.nodeName.toLowerCase() === "h3" || copyNode.nodeName.toLowerCase() === "h1"){
@@ -391,7 +393,14 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
           const br = document.createElement("br");
           copyNode.appendChild(br);
         }
+      }else if(pageSpecialConfig && pageSpecialConfig.name==='google'){
+        if(node.nodeName.toLowerCase() === "h3" ){
+            // check copy node display to block
+            originalDisplay = "block";
+        }
+      
       }
+      
 
       if(inlineElements.includes(copyNode.nodeName.toLowerCase())){
         // add a space
@@ -403,8 +412,6 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
           copyNode.style.paddingBottom = "8px";
         }
       }
-      // get original display value
-      let originalDisplay = node.style.display;
       // if nitter
       if(pageSpecialConfig && pageSpecialConfig.name && pageSpecialConfig.name === "nitter"){
         // display to block

@@ -181,6 +181,7 @@ function resetBrowserAction(forceShow = false) {
 }
 
 if (typeof chrome.contextMenus !== "undefined") {
+    chrome.contextMenus.removeAll()
     chrome.contextMenus.create({
         id: "browserAction-showPopup",
         title: chrome.i18n.getMessage("btnShowPopup"),

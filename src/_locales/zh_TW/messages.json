@@ -528,7 +528,8 @@
   },
 "msgCommon":{
     "message":"常用設置"
+  },
+    "optionIsTranslateTitle":{
+    "message":"是否翻譯頁面標題?"
   }
-
-
 }

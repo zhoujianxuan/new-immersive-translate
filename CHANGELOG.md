@@ -1,6 +1,14 @@
 # ChangeLog
 
 
+## 0.0.33
+
+- Support google.com
+- Add Option for is translate page title in others panel
+- Fix chrome extension report errors in extension manager.
+- Support www.urbandictionary.com
+- Support answers.microsoft.com
+
 ## 0.0.32
 
 - Fix popup More option, always translate site

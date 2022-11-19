@@ -872,9 +872,10 @@ Promise.all([twpConfig.onReady(), getTabUrl()])
         })
         pageLanguageStateObservers.forEach(callback => callback(pageLanguageState))
         currentPageLanguage = currentTargetLanguage
-
-        // do not translate title, it not need
-        // translatePageTitle()
+        const isTranslateTitle = twpConfig.get("isTranslateTitle") == "yes" ? true : false
+        if (isTranslateTitle) {
+          translatePageTitle()
+        }
 
         enableMutatinObserver()
 

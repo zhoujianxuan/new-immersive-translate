@@ -1,6 +1,6 @@
 .Phony: start
 start:
-	web-ext run -s ./src
+	web-ext run -s ./src -f firefoxdeveloperedition
 
 .Phony: build
 build:
