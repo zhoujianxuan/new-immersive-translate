@@ -217,8 +217,11 @@ twpConfig.onReady(function () {
                 $("option[data-i18n=btnNeverTranslateThisLanguage]").textContent = "✔ " + neverTranslateLangText
             }
             $("option[data-i18n=btnNeverTranslateThisLanguage]").style.display = "block"
-
-            showAlwaysTranslateCheckbox = true
+            
+            // check is lang is equal to the target lang
+            if(originalTabLanguage !== selectTargetLanguage.value) {
+              showAlwaysTranslateCheckbox = true
+            }
         }
 
         btnRestore.className = btnRestore.className.replace(" w3-disabled", "")

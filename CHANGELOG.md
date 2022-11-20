@@ -1,9 +1,10 @@
 # ChangeLog
 
 
-## 0.0.34 (not released)
+## 0.0.34 
 
-- Fix copy img node.
+- Fix copy img node, if a block node is only contains img node, then do not copy that node.
+- Popup remove always translate lang, if lang is equal to the target lang.
 
 ## 0.0.33
 
