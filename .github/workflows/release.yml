@@ -84,7 +84,7 @@ jobs:
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          generate_release_notes: false
+          generate_release_notes: true
           body: |
             See [Changelog](https://github.com/immersive-translate/immersive-translate/blob/main/CHANGELOG.md) for more details.
           files: |
