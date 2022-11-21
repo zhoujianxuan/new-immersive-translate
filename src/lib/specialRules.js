@@ -8,7 +8,10 @@ const specialRules = [
     "selectors": [
       "[data-testid=\"tweetText\"]",
       ".tweet-text",
-      ".js-quoted-tweet-text"
+      ".js-quoted-tweet-text",
+      "[data-testid='card.layoutSmall.detail'] > div:nth-child(2)",
+      "[data-testid='developerBuiltCardContainer'] > div:nth-child(2)",
+      "[data-testid='card.layoutLarge.detail'] > div:nth-child(2)",
     ],
     "detectLanguage":true
 
@@ -293,7 +296,8 @@ const specialRules = [
     "iframeContainer": "iframe"
   },{
     "name":"stackoverflow",
-    "hostname":"stackoverflow.com",
+    "hostname":["stackoverflow.com","superuser.com","askubuntu.com","serverfault.com"],
+    "regex":"stackexchange\.com",
     "selectors":[".s-post-summary--content-title","h1 > a",".comment-copy"],
     "containerSelectors":"[itemprop=text]"
   },{
@@ -313,5 +317,9 @@ const specialRules = [
     "hostname":"answers.microsoft.com",
     "selectors":["h1","div.thread-message-content div.thread-message-content-body-text"],
     "containerSelectors":["div.thread-message-content-body-text",]
+  },
+  {
+    "hostname":"www.getrevue.co",
+    "selectors":[".item-header",".revue-p",".introduction-subject",".revue-ul > li",".header-text"]
   }
 ]

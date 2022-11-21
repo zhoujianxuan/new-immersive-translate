@@ -3,6 +3,9 @@
 ## 0.0.35
 
 - Support Hacker News Modern Extension
+- Support stackexchange sites
+- Support Twitter Card title translate
+- Support getrevue.co
 
 ## 0.0.34 
 

@@ -85,9 +85,9 @@ function getPageSpecialConfig(ctx){
       }
       if(enhance.hostname.indexOf(currentHostname) !== -1){
         return enhance;
-        break;
       }
-    }else if(enhance.regex){
+    }
+    if(enhance.regex){
       if(!Array.isArray(enhance.regex)){
         enhance.regex = [enhance.regex];
       }
