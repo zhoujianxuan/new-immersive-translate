@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 0.0.35
+
+- Support Hacker News Modern Extension
 
 ## 0.0.34 
 

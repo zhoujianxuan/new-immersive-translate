@@ -19,7 +19,11 @@ const specialRules = [
     "selectors": [
       ".titleline > a",
       ".comment",
-      ".toptext"
+      ".toptext",
+      "a.hn-item-title",
+      ".hn-comment-text",
+      ".hn-story-title"
+      
     ],
   },
   {

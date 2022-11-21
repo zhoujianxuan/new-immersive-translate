@@ -228,3 +228,4 @@ Some pages like [support.mozilla.org](https://support.mozilla.org/) and [addons.
 - [x] - better for github
 - [x] - check is target language, if so ,do not translate
 - [x] - read mode
+- [ ] - 如果是单独的纯网址，则不要翻译，检测 href === text
