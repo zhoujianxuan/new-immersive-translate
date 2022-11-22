@@ -412,6 +412,14 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
             originalDisplay = "block";
         }
       
+      }else if(pageSpecialConfig && pageSpecialConfig.selectors){
+        // check is inline element
+        if(inlineElements.includes(node.nodeName.toLowerCase())){
+          // originalDisplay = "block";
+          const br = document.createElement("br");
+          copyNode.appendChild(br);
+        }
+
       }
       
 

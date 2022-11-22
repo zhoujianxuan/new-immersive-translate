@@ -136,6 +136,7 @@ const specialRules = [
   },
   {
     "hostname": "github.com",
+    "selectors":[".markdown-title"],
     "containerSelectors": ".markdown-body",
     "detectLanguage":true
   },
@@ -324,9 +325,6 @@ const specialRules = [
   },
   {
     "regex":"www\.pixelmator\.com\/community\/",
-    "selectors":[".content",".topic-title",{
-      "selector":".topic-body",
-
-    }]
+    "selectors":[".content",".topic-title",".topictitle"]
   }
 ]

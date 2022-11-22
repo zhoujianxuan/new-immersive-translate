@@ -7,6 +7,7 @@
 - Support Twitter Card title translate
 - Support getrevue.co
 - Support https://www.pixelmator.com
+- Better for github issues list
 
 ## 0.0.34 
 
