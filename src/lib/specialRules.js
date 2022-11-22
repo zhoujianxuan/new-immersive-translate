@@ -321,5 +321,12 @@ const specialRules = [
   {
     "hostname":"www.getrevue.co",
     "selectors":[".item-header",".revue-p",".introduction-subject",".revue-ul > li",".header-text"]
+  },
+  {
+    "regex":"www\.pixelmator\.com\/community\/",
+    "selectors":[".content",".topic-title",{
+      "selector":".topic-body",
+
+    }]
   }
 ]

@@ -6,6 +6,7 @@
 - Support stackexchange sites
 - Support Twitter Card title translate
 - Support getrevue.co
+- Support https://www.pixelmator.com
 
 ## 0.0.34 
 
