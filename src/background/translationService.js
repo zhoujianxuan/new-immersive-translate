@@ -532,7 +532,11 @@ const translationService = (function () {
                   requests
                 )
               : ""),params)
-      return response.json()
+      if(response.ok){
+        return response.json()
+      }else{
+        throw new Error(response.statusText)
+      }
 
     }
     /**

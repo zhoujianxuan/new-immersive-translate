@@ -336,5 +336,9 @@ const specialRules = [
     "hostname":"lowendtalk.com",
     "selectors":["[role=heading]","h1"],
     "containerSelectors":".userContent"
+  },
+  {
+    "hostname":"zlibrary24tuxziyiyfr7zd46ytefdqbqd2axkmxm4o5374ptpc52fad.onion",
+    "selectors":[".blogText",".jscommentsCommentText"]
   }
 ]
