@@ -4,6 +4,7 @@
 
 - Support kyivindependent.com
 - Support lowendtalk.com/
+- Fix zh-CN rules description link break
 
 
 ## 0.0.36
