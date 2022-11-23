@@ -4,6 +4,7 @@ import * as fs from "https://deno.land/std@0.164.0/fs/mod.ts";
 import * as path from "https://deno.land/std@0.164.0/path/mod.ts";
 
 async function main(){
+  {
     const icon = await Deno.readFile(
       'assets/icon.png',
     );
@@ -11,7 +12,7 @@ async function main(){
     // copy icon to dist
     // await Deno.writeFile(getDistFilePath(siteIdentifier, "icon.png"), icon);
     // generate apple-touch-icon
-    const sizes = [16,32,64,128,512]
+    const sizes = [16,32,48,64,128,512]
     for (const size of sizes) {
       const appleTouchIcon = await resize(icon, {
         width: size,
@@ -25,6 +26,7 @@ async function main(){
         },
       );
     }
+  }
 }
 
 main();

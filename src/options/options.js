@@ -89,6 +89,11 @@ twpConfig.onReady(function () {
     fillLanguageList($("#addToNeverTranslateLangs"))
     fillLanguageList($("#addToAlwaysTranslateLangs"))
 
+  $("#darkMode").onchange = (e) => {
+    twpConfig.set("darkMode", e.target.value);
+    updateDarkMode();
+  };
+  $("#darkMode").value = twpConfig.get("darkMode");
     function enableDarkMode() {
         if (!$("#darkModeElement")) {
             const el = document.createElement("style")

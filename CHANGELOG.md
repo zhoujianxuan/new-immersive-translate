@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 0.0.36
+
+- Change Icon for adapting both light and dark mode
+- Add Dark Mode Option
+
 ## 0.0.35
 
 - Support Hacker News Modern Extension

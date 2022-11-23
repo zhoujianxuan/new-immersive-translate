@@ -23,6 +23,7 @@ chrome.webRequest.onHeadersReceived.addListener(function(details) {
     types: ['main_frame']
 }, ['responseHeaders']);
 
+let currentScheme = 'light'
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "getMainFramePageLanguageState") {
         chrome.tabs.sendMessage(sender.tab.id, {
