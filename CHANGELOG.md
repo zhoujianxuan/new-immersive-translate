@@ -3,6 +3,8 @@
 ## 0.0.37
 
 - Support kyivindependent.com
+- Support lowendtalk.com/
+
 
 ## 0.0.36
 

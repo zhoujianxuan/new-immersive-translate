@@ -331,5 +331,10 @@ const specialRules = [
     "hostname":"kyivindependent.com",
     "selectors":["[class^=CardFeaturedBlock_cardFeaturedBlock__title]","[class^=CardBasic_cardBasic__title]","[class^=CardExclusive_cardExclusive__title]","[class^=card-horizontal-small_cardHorizontalSmall__title]"],
     "containerSelectors":"article"
+  },
+  {
+    "hostname":"lowendtalk.com",
+    "selectors":["[role=heading]","h1"],
+    "containerSelectors":".userContent"
   }
 ]
