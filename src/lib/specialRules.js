@@ -326,5 +326,10 @@ const specialRules = [
   {
     "regex":"www\.pixelmator\.com\/community\/",
     "selectors":[".content",".topic-title",".topictitle"]
+  },
+  {
+    "hostname":"kyivindependent.com",
+    "selectors":["[class^=CardFeaturedBlock_cardFeaturedBlock__title]","[class^=CardBasic_cardBasic__title]","[class^=CardExclusive_cardExclusive__title]","[class^=card-horizontal-small_cardHorizontalSmall__title]"],
+    "containerSelectors":"article"
   }
 ]

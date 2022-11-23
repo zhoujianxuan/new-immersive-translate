@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.0.37
+
+- Support kyivindependent.com
+
 ## 0.0.36
 
 - Change Icon for adapting both light and dark mode

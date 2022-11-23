@@ -279,6 +279,7 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
     
     const originalRoot = root;
     const contentContainers = getContainers(root,pageSpecialConfig);
+    console.log("contentContainers", contentContainers)
     let containers = []
     if(pageSpecialConfig && pageSpecialConfig.containerSelectors){
       if(!Array.isArray(pageSpecialConfig.containerSelectors)){
