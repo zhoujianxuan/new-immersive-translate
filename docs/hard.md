@@ -18,3 +18,7 @@
 ## 4. div
 
 1. <https://www.craft.do/s/G3xvZyyZjKO4R3>
+
+## 5. detail page, title merge
+
+1. https://libreddit.de/
