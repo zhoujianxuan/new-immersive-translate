@@ -368,5 +368,13 @@ const specialRules = [
       ".content",
     ],
     "selectors":["h1",".feed-item__title-link"]
+  },{
+    "hostname":"libreddit.de",
+    "selectors":[
+      "h2.post_title"
+    ],
+    "containerSelectors":[
+      ".comment_body > .md"
+    ]
   }
 ]
