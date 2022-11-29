@@ -371,6 +371,9 @@
   "lblSwitchTranslatedAndOriginal": {
     "message": "在页面的译文和原文间切换"
   },
+  "lblSwitchDual":{
+    "message": "显示译文/显示双语"
+  },
   "lblRestorePageToOriginal": {
     "message": "恢复页面为原文"
   },

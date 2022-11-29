@@ -20,6 +20,9 @@
   "lblError": {
     "message": "無法翻譯此頁面"
   },
+  "lblSwitchDual":{
+    "message": "显示译文/显示双语"
+  },
   "lblTargetLanguageHelp":{
     "message": "設置翻譯後的語言，也就是你的母語"
   },

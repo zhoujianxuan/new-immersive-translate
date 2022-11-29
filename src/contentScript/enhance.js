@@ -252,23 +252,26 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
       }
     }
     for(const selector of allBlocksSelectors){
-      const nodes = root.querySelectorAll(selector);
-      for(const node of nodes){
-        if(currentHostname==="twitter.com" || currentHostname==="twitterdesk.twitter.com" || currentHostname==="mobile.twitter.com"){
-          // check language
-          try{
-            const lang = node.getAttribute("lang");
-            if(lang && checkIsSameLanguage(lang,[currentTargetLanguage,...neverTranslateLangs],ctx)){
-              continue;
-            }
-          }catch(e){
-            // ignore
-            // console.log("e", e)
-          }
-        }
 
-        if(isValidNode(node) && !isDuplicatedChild(allNodes,node)){
-          allNodes.push(node);
+      if(root && root.querySelectorAll){
+        const nodes = root.querySelectorAll(selector);
+        for(const node of nodes){
+          if(currentHostname==="twitter.com" || currentHostname==="twitterdesk.twitter.com" || currentHostname==="mobile.twitter.com"){
+            // check language
+            try{
+              const lang = node.getAttribute("lang");
+              if(lang && checkIsSameLanguage(lang,[currentTargetLanguage,...neverTranslateLangs],ctx)){
+                continue;
+              }
+            }catch(e){
+              // ignore
+              // console.log("e", e)
+            }
+          }
+
+          if(isValidNode(node) && !isDuplicatedChild(allNodes,node)){
+            allNodes.push(node);
+          }
         }
       }
     }
@@ -412,6 +415,13 @@ async function getNodesThatNeedToTranslate(root,ctx,options){
             originalDisplay = "block";
         }
       
+      }else if(pageSpecialConfig && pageSpecialConfig.name==='discord'){
+        if(node.nodeName.toLowerCase() === "h3" ){
+          // check copy node display to block
+          const br = document.createElement("br");
+          copyNode.appendChild(br);
+        }
+
       }else if(pageSpecialConfig && pageSpecialConfig.selectors){
         // check is inline element
         if(inlineElements.includes(node.nodeName.toLowerCase())){
@@ -479,18 +489,20 @@ function getContainers(root,pageSpecialConfig){
       if(pageSpecialConfig.containerSelectors.length >0){
         let containers =[];
         for(const selector of pageSpecialConfig.containerSelectors){
-            const allContainer = root.querySelectorAll(pageSpecialConfig.containerSelectors);
-            if(allContainer){
-              for(const container of allContainer){
-                // check if brToParagraph
-                if(pageSpecialConfig.brToParagraph){
-                    const pattern = new RegExp ("<br/?>[ \r\n\s]*<br/?>", "g");
-                    container.innerHTML = container.innerHTML.replace(pattern, "</p><p>");
-                }
+            if(root && root.querySelectorAll){
+              const allContainer = root.querySelectorAll(pageSpecialConfig.containerSelectors);
+              if(allContainer){
+                for(const container of allContainer){
+                  // check if brToParagraph
+                  if(pageSpecialConfig.brToParagraph){
+                      const pattern = new RegExp ("<br/?>[ \r\n\s]*<br/?>", "g");
+                      container.innerHTML = container.innerHTML.replace(pattern, "</p><p>");
+                  }
 
 
-                containers.push(container);
-              } 
+                  containers.push(container);
+                } 
+              }
             }
         }
         return containers.length>0?containers:null;

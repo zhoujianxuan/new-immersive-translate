@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 0.0.39
+
+- Support linkedin.com
+- Support discord discussion
+- Add shortcut for switch dual show
+
 ## 0.0.37
 
 - Support kyivindependent.com

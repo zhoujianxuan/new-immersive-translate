@@ -234,9 +234,15 @@ const specialRules = [
   {
     "hostname": "www.producthunt.com",
     "selectors": [
-      "a[data-test^='post-']",
       "h2",
-      "div.layoutCompact div[class^='styles_htmlText__']"
+      "div.layoutCompact div[class^='styles_htmlText__']",
+      ".fontWeight-400.fontSize-desktop-16.color-lighter-grey",
+      "a[href^='/discussions/'].fontWeight-600",
+      "div.color-darker-grey.fontSize-14.fontWeight-400.noOfLines-undefined",
+      "div.color-darker-grey.fontSize-16.fontWeight-400.noOfLines-undefined"
+    ],
+    "containerSelectors": [
+      "div[class^='styles_htmlText__']"
     ]
   },
   {
@@ -247,9 +253,11 @@ const specialRules = [
     ]
   },
   {
+    "name":"discord",
     "hostname": "discord.com",
     "selectors": [
-      "div[id^='message-content-']"
+      "div[id^='message-content-']",
+      "div[class^='header-']",
     ],
     "detectLanguage":true
   },
@@ -340,5 +348,25 @@ const specialRules = [
   {
     "hostname":"zlibrary24tuxziyiyfr7zd46ytefdqbqd2axkmxm4o5374ptpc52fad.onion",
     "selectors":[".blogText",".jscommentsCommentText"]
+  },
+  {
+    "hostname":"www.sciencedirect.com",
+    "selectors":["h1"],
+    "containerSelectors":"article"
+  },
+  {
+    "hostname":"www.linkedin.com",
+    "selectors":[
+      ".feed-shared-update-v2__description-wrapper",
+    ],
+    "containerSelectors":[
+      "article.jobs-description__container"
+    ]
+  },{
+    "hostname":"www.indiehackers.com",
+    "containerSelectors":[
+      ".content",
+    ],
+    "selectors":["h1",".feed-item__title-link"]
   }
 ]

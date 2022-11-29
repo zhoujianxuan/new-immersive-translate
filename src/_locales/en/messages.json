@@ -481,6 +481,9 @@
   "lblHotTranslatedSelectedText": {
     "message": "Replace selected text with translated text instantly"
   },
+  "lblSwitchDual":{
+    "message": "Show Translations/Show Dual"
+  },
   "msgIsShowDualLanguage":{
     "message": "Show dual language?"
    },
