@@ -446,9 +446,7 @@ twpConfig.onReady(function () {
                             })
                         } else { // google
                             chrome.tabs.create({
-                                url: `https://translate.google.${
-                                "zh-cn" == navigator.language.toLowerCase() ? "cn" : "com"
-                            }/translate?tl=${twpConfig.get("targetLanguage")}&u=${encodeURIComponent(tabs[0].url)}`
+                                url: `https://translate.google.com/translate?tl=${twpConfig.get("targetLanguage")}&u=${encodeURIComponent(tabs[0].url)}`
                             })
                         }
                     })
