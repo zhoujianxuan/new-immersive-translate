@@ -376,5 +376,11 @@ const specialRules = [
     "containerSelectors":[
       ".comment_body > .md"
     ]
+  },{
+    "hostname":"www.notion.so",
+    "regex":"notion\.site",
+    "selectors":[
+      "div[data-block-id]"
+    ]
   }
 ]

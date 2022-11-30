@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.0.40
+
+- Support Notion
+
 ## 0.0.39
 
 - Support linkedin.com
