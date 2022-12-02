@@ -3,6 +3,7 @@
 ## 0.0.40
 
 - Support Notion
+- Fix p tag with img
 
 ## 0.0.39
 

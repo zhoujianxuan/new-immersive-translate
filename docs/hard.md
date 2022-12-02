@@ -22,3 +22,10 @@
 ## 5. detail page, title merge
 
 1. https://libreddit.de/
+
+
+## 6. p img
+
+1. <https://www.atlantamagazine.com/dining-news/what-its-like-to-be-a-food-writer-when-you-can-taste-everything-you-see/>
+
+p标签，里有图片，并且有文字。

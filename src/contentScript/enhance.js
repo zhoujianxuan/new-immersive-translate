@@ -159,7 +159,13 @@ function isValidNode(node){
     let isIncludeImg = node.querySelector('img');
     if(isIncludeImg && node.childNodes.length<3){
       // treat it as img node
-      return false;
+      // check length
+      const innerText = node.innerText;
+      if(innerText.length<80){
+        return false;
+      }else{
+        return true;
+      }
     }
       
 
