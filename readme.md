@@ -53,7 +53,9 @@ Chrome/Edge商店均已上架，可以直接下载
 - [Chrome商店地址](https://chrome.google.com/webstore/detail/immersive-translate/bpoadfkcbjbfhfodiogcnhhhpibjhbnh)
 - [Edge商店地址](https://microsoftedge.microsoft.com/addons/detail/immersive-translate/amkbmndfnliijdhojkpoglbnaaahippg)
 
-商店审核会有延迟，如果你想最快体验新版，可以直接在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)下载最新的版本：
+### Chrome 手动安装
+
+Chrome商店审核会有延迟，如果你想最快体验新版，可以直接在[Release页面](https://github.com/immersive-translate/immersive-translate/releases)下载最新的版本：
 
 1. 在[这里](https://github.com/immersive-translate/immersive-translate/releases)下载chrome的压缩包
 2. 解压到一个以后不会删除的文件夹
