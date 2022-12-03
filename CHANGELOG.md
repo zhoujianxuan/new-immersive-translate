@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 0.0.41
+
+- Support start.me
+- Support newyorker.com
+
 ## 0.0.40
 
 - Support Notion

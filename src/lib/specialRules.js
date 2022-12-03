@@ -382,5 +382,12 @@ const specialRules = [
     "selectors":[
       "div[data-block-id]"
     ]
+  },{
+    "hostname":"www.newyorker.com",
+    "selectors":["h1","[data-testid=SummaryItemHed]"],
+    "containerSelectors":["[data-testid=BodyWrapper]"]
+  },{
+    "hostname":"start.me",
+    "selectors":[".rss-article__title"]
   }
 ]
