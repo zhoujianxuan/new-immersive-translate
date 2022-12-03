@@ -388,6 +388,6 @@ const specialRules = [
     "containerSelectors":["[data-testid=BodyWrapper]"]
   },{
     "hostname":"start.me",
-    "selectors":[".rss-article__title",".rss-articles-list__article",".rss-showcase__title",".rss-showcase__text"]
+    "selectors":[".rss-article__title",".rss-articles-list__article-link",".rss-showcase__title",".rss-showcase__text"]
   }
 ]
