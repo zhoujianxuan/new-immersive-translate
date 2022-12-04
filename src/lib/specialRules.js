@@ -176,7 +176,7 @@ const specialRules = [
     "name":"seekingalpha",
     "hostname": "seekingalpha.com",
     "selectors":["[data-test-id='post-list-item'] h3"],
-    "containerSelectors": "div.wsb_section",
+    "containerSelectors": ["div.wsb_section","[data-test-id=card-container]"],
     "brToParagraph": true
   },
   {
@@ -389,5 +389,8 @@ const specialRules = [
   },{
     "hostname":"start.me",
     "selectors":[".rss-article__title",".rss-articles-list__article-link",".rss-showcase__title",".rss-showcase__text"]
+  },{
+    "regex":"developer\.apple\.com\/documentation",
+    "selectors":[".contenttable .content","h3.title"]
   }
 ]
