@@ -98,7 +98,6 @@ const specialRules = [
   {
     "hostname": [
       "www.msdmanuals.com",
-      "localhost"
     ],
     "noTranslateSelectors": [
       ".d-none"
@@ -269,7 +268,7 @@ const specialRules = [
     "detectLanguage":true
   },
   {
-    "hostname":"gist.github.com/",
+    "hostname":"gist.github.com",
     "containerSelectors":[
       ".markdown-body",".readme"
     ],
