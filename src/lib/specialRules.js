@@ -39,7 +39,8 @@ const specialRules = [
     "containerSelectors": [
       "[data-testid=comment]",
       "[data-adclicklocation=media]",
-      ".Comment__body"
+      ".Comment__body",
+      "faceplate-batch .md"
     ],
     "detectLanguage":true
   },
