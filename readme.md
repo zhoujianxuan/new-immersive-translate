@@ -8,6 +8,11 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 [![GitHub issues](https://img.shields.io/github/issues/immersive-translate/immersive-translate?color=red)](https://github.com/immersive-translate/immersive-translate/issues)
 [![GitHub license](https://img.shields.io/github/license/immersive-translate/immersive-translate?color=lightgrey)](https://github.com/immersive-translate/immersive-translate/blob/master/LICENSE)
 
+---
+
+正在从零开始写一个新版的翻译扩展，支持更多引擎，更智能的识别主要内容，欢迎[点此](https://immersive-translate.owenyoung.com/)试用： 
+
+---
 
 说明： 该扩展Fork自[TWP](https://github.com/FilipePS/Traduzir-paginas-web)扩展，我为其添加了以下功能：
 
