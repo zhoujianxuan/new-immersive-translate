@@ -10,9 +10,11 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 ---
 
-正在从零开始写一个新版的翻译扩展，支持更多引擎，更智能的识别主要内容，欢迎[点此](https://immersive-translate.owenyoung.com/)试用： 
+> 正在从零开始写一个新版的翻译扩展，支持更多引擎，支持iOS safari，支持油猴脚本，以及更智能的识别主要内容，欢迎[点此](https://immersive-translate.owenyoung.com/)试用： 
 
 ---
+
+以下为旧版介绍：
 
 说明： 该扩展Fork自[TWP](https://github.com/FilipePS/Traduzir-paginas-web)扩展，我为其添加了以下功能：
 
