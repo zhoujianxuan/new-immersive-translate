@@ -10,7 +10,7 @@ Let's experience immersive web translation, with bilingual simultaneous display 
 
 ---
 
-> 正在从零开始写一个新版的翻译扩展，支持更多引擎，支持iOS safari，支持油猴脚本，以及更智能的识别主要内容，欢迎[点此](https://immersive-translate.owenyoung.com/)试用： 
+> 正在从零开始写一个新版的翻译扩展，支持更多引擎，支持iOS safari，支持油猴脚本，以及更智能的识别主要内容，欢迎[点此](https://immersive-translate.owenyoung.com/)试用, 欢迎加入[Telegram群组](https://t.me/+rq848Z09nehlOTgx)讨论。 
 
 ---
 
