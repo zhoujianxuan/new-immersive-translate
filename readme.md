@@ -1,20 +1,19 @@
 
 # Immersive Translate - 沉浸式翻译扩展(双语对照）
 
+
+说明：新版的沉浸式翻译扩展已经迁移到[这里](https://github.com/immersive-translate/immersive-translate)，新版全新架构，性能更好，支持更多的翻译引擎和浏览器平台（包括iOS Safari），以及拥有更好的pdf翻译体验，欢迎移步[新版](https://github.com/immersive-translate/immersive-translate)。旧版代码将存档。
+
+以下为原简介：
+
+---
+
 Let's experience immersive web translation, with bilingual simultaneous display and translation of only the important content. Think of the browser's reading mode, but in immersive translation.
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/immersive-translate/immersive-translate?label=latest%20version&sort=semver)](https://github.com/immersive-translate/releases)
 [![GitHub release date](https://img.shields.io/github/release-date/immersive-translate/immersive-translate?labely)](https://github.com/immersive-translate/immersive-translate/latest)
 [![GitHub issues](https://img.shields.io/github/issues/immersive-translate/immersive-translate?color=red)](https://github.com/immersive-translate/immersive-translate/issues)
 [![GitHub license](https://img.shields.io/github/license/immersive-translate/immersive-translate?color=lightgrey)](https://github.com/immersive-translate/immersive-translate/blob/master/LICENSE)
-
----
-
-> 正在从零开始写一个新版的翻译扩展，支持更多引擎，支持iOS safari，支持油猴脚本，以及更智能的识别主要内容，欢迎[点此](https://immersive-translate.owenyoung.com/)试用, 欢迎加入[Telegram群组](https://t.me/+rq848Z09nehlOTgx)讨论。 
-
----
-
-以下为旧版介绍：
 
 说明： 该扩展Fork自[TWP](https://github.com/FilipePS/Traduzir-paginas-web)扩展，我为其添加了以下功能：
 
