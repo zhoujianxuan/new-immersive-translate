@@ -2,7 +2,7 @@
 # Immersive Translate - 沉浸式翻译扩展(双语对照）
 
 
-说明：新版的沉浸式翻译扩展已经迁移到[这里](https://github.com/immersive-translate/immersive-translate)，新版全新架构，性能更好，支持更多的翻译引擎和浏览器平台（包括iOS Safari），以及拥有更好的pdf翻译体验，欢迎移步[新版](https://github.com/immersive-translate/immersive-translate)。旧版代码将存档。
+说明：沉浸式翻译扩展旧版代码。
 
 以下为原简介：
 
